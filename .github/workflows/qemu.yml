@@ -11,7 +11,7 @@ jobs:
       matrix:
         machine: [qemuarm64, qemux86-64]
     runs-on: ubuntu-latest
-    timeout-minutes: 350
+    timeout-minutes: 360
     steps:
       - uses: actions/checkout@v4
 
@@ -42,8 +42,9 @@ jobs:
           pip install --user kas pexpect
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
 
-      - name: Cache downloads and sstate
-        uses: actions/cache@v4
+      - name: Restore downloads and sstate
+        id: cache-restore
+        uses: actions/cache/restore@v4
         with:
           path: yocto-cache
           key: yocto-cache-${{ matrix.machine }}-${{ hashFiles('kas/*.yml') }}
@@ -52,6 +53,13 @@ jobs:
 
       - name: kas build
         run: kas build kas/${{ matrix.machine }}.yml:kas/ci.yml
+
+      - name: Save downloads and sstate
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: yocto-cache
+          key: yocto-cache-${{ matrix.machine }}-${{ hashFiles('kas/*.yml') }}-${{ github.run_id }}
 
       - name: Boot test (talker/listener)
         run: python3 tools/boot-test.py ${{ matrix.machine }}
