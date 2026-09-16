@@ -1,0 +1,18 @@
+# Phase 3 acceptance target: qemuarm64, ros-image-core + demo-nodes-cpp/py for the
+# talker/listener smoke test. Run with: kas build kas/qemuarm64.yml
+header:
+  version: 14
+  includes:
+    - kas/ros2-jazzy.yml
+    - kas/cache.yml
+
+machine: "qemuarm64"
+
+local_conf_header:
+  demo-nodes: |
+    IMAGE_INSTALL:append = " demo-nodes-cpp demo-nodes-py"
+  # passwordless root login on the serial console, for the automated boot test
+  # (tools/boot-test-qemuarm64.py) and for local debugging. qemu-only test image,
+  # never shipped/flashed to real hardware.
+  debug-tweaks: |
+    EXTRA_IMAGE_FEATURES += "debug-tweaks"

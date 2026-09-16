@@ -1,0 +1,10 @@
+# DL_DIR / SSTATE_DIR outside the build tree, and the public Yocto sstate mirror, per
+# CLAUDE.md "Long builds". Included by every machine-level kas file.
+header:
+  version: 14
+
+local_conf_header:
+  cache: |
+    DL_DIR = "/home/wafdy/yocto-cache/downloads"
+    SSTATE_DIR = "/home/wafdy/yocto-cache/sstate"
+    SSTATE_MIRRORS = "file://.* http://sstate.yoctoproject.org/all/PATH;downloadfilename=PATH"
