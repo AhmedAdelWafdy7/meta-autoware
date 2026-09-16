@@ -1,0 +1,26 @@
+# meta-ros (ROS 2 Jazzy on scarthgap), layered on kas/base.yml.
+# Adapted from ros/meta-ros's `build` branch kas/ros2/jazzy.yml
+# (https://github.com/ros/meta-ros/blob/build/kas/ros2/jazzy.yml). Fixes one gap versus
+# upstream's example: upstream leaves the meta-ros repo on a floating `branch: scarthgap`
+# with no commit pin. PLAN.md's hard rule is SHAs only, so this adds an explicit commit
+# (current scarthgap branch head, verified via `git ls-remote` this session).
+header:
+  version: 14
+  includes:
+    - kas/base.yml
+
+distro: "ros2"
+
+repos:
+  meta-ros:
+    url: "https://github.com/ros/meta-ros.git"
+    branch: "scarthgap"
+    commit: "633f7544b7c0ea829839244235771fb4337c77b5"
+    path: "layers/meta-ros"
+    layers:
+      meta-ros-common:
+      meta-ros2:
+      meta-ros2-jazzy:
+
+target:
+  - ros-image-core

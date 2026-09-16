@@ -1,0 +1,11 @@
+build/
+sstate-cache/
+downloads/
+layers/
+logs/
+
+# local kas virtualenv
+.venv-kas/
+
+__pycache__/
+*.pyc
