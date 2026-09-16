@@ -1,0 +1,65 @@
+name: qemu
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build-and-boot-test:
+    strategy:
+      fail-fast: false
+      matrix:
+        machine: [qemuarm64, qemux86-64]
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Allow unprivileged user namespaces (Ubuntu 24.04 AppArmor)
+        run: sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+
+      - name: Free up disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc \
+            /opt/hostedtoolcache/CodeQL /usr/local/.ghcup \
+            /usr/local/share/boost "$AGENT_TOOLSDIRECTORY" || true
+          sudo docker image prune -a -f || true
+          df -h /
+
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            gawk wget git diffstat unzip texinfo gcc build-essential chrpath \
+            socat cpio python3 python3-pip python3-pexpect xz-utils \
+            debianutils iputils-ping python3-git python3-jinja2 libegl1 \
+            libsdl1.2-dev python3-subunit mesa-common-dev zstd liblz4-tool \
+            file locales
+          sudo locale-gen en_US.UTF-8
+
+      - name: Install kas and pexpect
+        run: |
+          pip install --user kas pexpect
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: Restore downloads and sstate
+        id: cache-restore
+        uses: actions/cache/restore@v4
+        with:
+          path: yocto-cache
+          key: yocto-cache-${{ matrix.machine }}-${{ hashFiles('kas/*.yml') }}
+          restore-keys: |
+            yocto-cache-${{ matrix.machine }}-
+
+      - name: kas build
+        run: kas build kas/${{ matrix.machine }}.yml:kas/ci.yml
+
+      - name: Save downloads and sstate
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: yocto-cache
+          key: yocto-cache-${{ matrix.machine }}-${{ hashFiles('kas/*.yml') }}-${{ github.run_id }}
+
+      - name: Boot test (talker/listener)
+        run: python3 tools/boot-test.py ${{ matrix.machine }}
