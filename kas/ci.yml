@@ -1,0 +1,10 @@
+# CI-only overlay: keep local dev builds untouched, trim disk usage on the
+# hosted runner's limited disk. Use with: kas build kas/qemuarm64.yml:kas/ci.yml
+header:
+  version: 14
+
+local_conf_header:
+  ci: |
+    # drop per-recipe work directories once a task tree is done; keeps sstate
+    # (still reusable) but not the full unpacked/built source per recipe.
+    INHERIT += "rm_work"

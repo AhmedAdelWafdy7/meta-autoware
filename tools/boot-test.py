@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Phase 3 acceptance test: boot ros-image-core under qemuarm64 and confirm
-demo_nodes_cpp talker / demo_nodes_py listener exchange messages.
+"""Phase 3 acceptance test: boot ros-image-core under a given qemu MACHINE and
+confirm demo_nodes_cpp talker / demo_nodes_py listener exchange messages.
 
-Run from the repo root after `kas build kas/qemuarm64.yml`:
-    tools/boot-test-qemuarm64.py
+Run from the repo root after `kas build kas/<machine>.yml`:
+    tools/boot-test.py qemuarm64
+    tools/boot-test.py qemux86-64
 
 Exits 0 and prints PASS on success, non-zero and prints FAIL otherwise.
 """
@@ -17,7 +18,6 @@ import pexpect
 REPO_ROOT = Path(__file__).resolve().parent.parent
 BUILD_DIR = REPO_ROOT / "build"
 RUNQEMU = REPO_ROOT / "layers/openembedded-core/scripts/runqemu"
-DEPLOY_DIR = BUILD_DIR / "tmp-glibc/deploy/images/qemuarm64"
 
 BOOT_TIMEOUT = 240
 LOGIN_TIMEOUT = 60
@@ -29,27 +29,34 @@ def fail(msg):
     sys.exit(1)
 
 
-def find_qemuboot_conf():
-    # Passing bare "qemuarm64" to runqemu hits a bug in this runqemu version
+def find_qemuboot_conf(machine):
+    # Passing a bare machine name to runqemu hits a bug in this runqemu version
     # (self.bitbake_e ends up None -> TypeError in check_arg_machine). Passing
     # the built image's own qemuboot.conf sidesteps machine auto-detection
-    # entirely and is more precise anyway (unambiguous about which image).
-    matches = sorted(DEPLOY_DIR.glob("*.qemuboot.conf"))
-    matches = [m for m in matches if not m.is_symlink()]
+    # entirely and is more precise anyway (unambiguous about which image) --
+    # and it's what makes this script arch-agnostic: the qemuboot.conf already
+    # encodes the right qemu binary/CPU/machine flags for whatever MACHINE
+    # built it, so nothing here needs to special-case qemuarm64 vs qemux86-64.
+    deploy_dir = BUILD_DIR / "tmp-glibc/deploy/images" / machine
+    matches = sorted(p for p in deploy_dir.glob("*.qemuboot.conf") if not p.is_symlink())
     if not matches:
-        fail(f"no *.qemuboot.conf found under {DEPLOY_DIR} — did kas build kas/qemuarm64.yml run?")
+        fail(f"no *.qemuboot.conf found under {deploy_dir} — did kas build kas/{machine}.yml run?")
     return matches[-1]
 
 
 def main():
-    if not RUNQEMU.exists():
-        fail(f"runqemu not found at {RUNQEMU} — did kas build kas/qemuarm64.yml run?")
+    if len(sys.argv) != 2:
+        fail(f"usage: {sys.argv[0]} <machine>  (e.g. qemuarm64, qemux86-64)")
+    machine = sys.argv[1]
 
-    qemuboot_conf = find_qemuboot_conf()
+    if not RUNQEMU.exists():
+        fail(f"runqemu not found at {RUNQEMU} — did kas build kas/{machine}.yml run?")
+
+    qemuboot_conf = find_qemuboot_conf(machine)
     child = pexpect.spawn(
         str(RUNQEMU),
-        # default MACHINE RAM (256M) is tight for rclpy + DDS discovery with
-        # two nodes at once; bump it for headroom.
+        # default MACHINE RAM is tight for rclpy + DDS discovery with two
+        # nodes at once; bump it for headroom.
         [str(qemuboot_conf), "nographic", "nonetwork", "qemuparams=-m 512"],
         cwd=str(BUILD_DIR),
         timeout=BOOT_TIMEOUT,
@@ -121,7 +128,7 @@ def main():
             child.terminate(force=True)
 
     if re.search(r"I heard: \[Hello World", listener_output):
-        print("\nPASS: listener received talker messages")
+        print(f"\nPASS ({machine}): listener received talker messages")
         sys.exit(0)
     else:
         fail(f"listener log did not contain expected message:\n{listener_output}")

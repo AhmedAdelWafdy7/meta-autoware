@@ -3,6 +3,7 @@ sstate-cache/
 downloads/
 layers/
 logs/
+yocto-cache
 
 # local kas virtualenv
 .venv-kas/

@@ -1,11 +1,10 @@
-
 header:
   version: 14
   includes:
     - kas/ros2-jazzy.yml
     - kas/cache.yml
 
-machine: "qemuarm64"
+machine: "qemux86-64"
 
 local_conf_header:
   demo-nodes: |
