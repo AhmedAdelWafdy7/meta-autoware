@@ -10,7 +10,6 @@ Exits 0 and prints PASS on success, non-zero and prints FAIL otherwise.
 """
 import re
 import sys
-import time
 from pathlib import Path
 
 import pexpect
@@ -22,6 +21,7 @@ RUNQEMU = REPO_ROOT / "layers/openembedded-core/scripts/runqemu"
 BOOT_TIMEOUT = 240
 LOGIN_TIMEOUT = 60
 ROS_TIMEOUT = 30
+HEARD_TIMEOUT = 120  # x86-64 guest on an arm64 host has no KVM, so nodes start slowly
 
 
 def fail(msg):
@@ -102,8 +102,6 @@ def main():
         listener_pid = child.match.group(1)
         child.expect(r"[#\$]\s*$", timeout=ROS_TIMEOUT)
 
-        time.sleep(3)  # let the listener node finish coming up
-
         child.sendline(
             f"sh -c '{source_ros} ros2 run demo_nodes_cpp talker "
             "> /tmp/talker.log 2>&1 & echo TALKER_PID:$!'"
@@ -112,7 +110,13 @@ def main():
         talker_pid = child.match.group(1)
         child.expect(r"[#\$]\s*$", timeout=ROS_TIMEOUT)
 
-        time.sleep(6)  # let a few publish/receive cycles happen
+        # poll on the guest instead of a fixed sleep; the "" keeps the marker out of the echoed command
+        child.sendline(
+            f"i=0; while ! grep -q 'I heard' /tmp/listener.log && [ $i -lt {HEARD_TIMEOUT} ]; "
+            'do sleep 1; i=$((i+1)); done; echo WAIT_""DONE'
+        )
+        child.expect(r"WAIT_DONE", timeout=HEARD_TIMEOUT + ROS_TIMEOUT)
+        child.expect(r"[#\$]\s*$", timeout=ROS_TIMEOUT)
 
         child.sendline(f"kill {talker_pid} {listener_pid}; cat /tmp/listener.log")
         child.expect(r"[#\$]\s*$", timeout=ROS_TIMEOUT)

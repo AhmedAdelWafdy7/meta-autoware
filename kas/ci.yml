@@ -7,3 +7,5 @@ local_conf_header:
     # drop per-recipe work directories once a task tree is done; keeps sstate
     # (still reusable) but not the full unpacked/built source per recipe.
     INHERIT += "rm_work"
+    # runqemu needs this native sysroot for the boot test
+    RM_WORK_EXCLUDE += "qemu-helper-native"

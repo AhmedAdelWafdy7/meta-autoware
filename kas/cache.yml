@@ -6,4 +6,4 @@ local_conf_header:
   cache: |
     DL_DIR ?= "${TOPDIR}/../yocto-cache/downloads"
     SSTATE_DIR ?= "${TOPDIR}/../yocto-cache/sstate"
-    SSTATE_MIRRORS = "file://.* http://sstate.yoctoproject.org/all/PATH;downloadfilename=PATH"
+    SSTATE_MIRRORS = "file://.* https://sstate.yoctoproject.org/all/PATH;downloadfilename=PATH"

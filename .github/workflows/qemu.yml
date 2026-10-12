@@ -20,6 +20,8 @@ jobs:
     timeout-minutes: 720
     steps:
       - uses: actions/checkout@v4
+        with:
+          clean: false  # keep build/ and layers/ between runs
 
       - name: Check runner host prerequisites
         run: |
@@ -39,8 +41,13 @@ jobs:
           done
           df -h "$SSTATE_DIR" | tail -1
 
+      - name: Stop stale bitbake server
+        run: pkill -f "$GITHUB_WORKSPACE/layers/bitbake/bin/bitbake-server" || true  # left behind by a cancelled run
+
       - name: kas build
         run: kas build kas/${{ matrix.machine }}.yml:kas/ci.yml
 
       - name: Boot test (talker/listener)
-        run: python3 tools/boot-test.py ${{ matrix.machine }}
+        run: |
+          kas shell kas/${{ matrix.machine }}.yml:kas/ci.yml -c \
+            "bitbake qemu-helper-native:do_addto_recipe_sysroot && python3 $GITHUB_WORKSPACE/tools/boot-test.py ${{ matrix.machine }}"
