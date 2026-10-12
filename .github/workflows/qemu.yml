@@ -1,8 +1,14 @@
+# Self-hosted only: a cold Yocto build exceeds the hosted 6h limit. No pull_request triggers (public repo).
 name: qemu
 
 on:
   push:
+    branches: [main, ci]
   workflow_dispatch:
+
+concurrency:
+  group: qemu-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build-and-boot-test:
@@ -10,56 +16,31 @@ jobs:
       fail-fast: false
       matrix:
         machine: [qemuarm64, qemux86-64]
-    runs-on: ubuntu-latest
-    timeout-minutes: 360
+    runs-on: [self-hosted, Linux, ARM64]
+    timeout-minutes: 720
     steps:
       - uses: actions/checkout@v4
 
-      - name: Allow unprivileged user namespaces (Ubuntu 24.04 AppArmor)
-        run: sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
-
-      - name: Free up disk space
+      - name: Check runner host prerequisites
         run: |
-          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc \
-            /opt/hostedtoolcache/CodeQL /usr/local/.ghcup \
-            /usr/local/share/boost "$AGENT_TOOLSDIRECTORY" || true
-          sudo docker image prune -a -f || true
-          df -h /
-
-      - name: Install build dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends \
-            gawk wget git diffstat unzip texinfo gcc build-essential chrpath \
-            socat cpio python3 python3-pip python3-pexpect xz-utils \
-            debianutils iputils-ping python3-git python3-jinja2 libegl1 \
-            libsdl1.2-dev python3-subunit mesa-common-dev zstd liblz4-tool \
-            file locales
-          sudo locale-gen en_US.UTF-8
-
-      - name: Install kas and pexpect
-        run: |
-          pip install --user kas pexpect
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
-
-      - name: Restore downloads and sstate
-        id: cache-restore
-        uses: actions/cache/restore@v4
-        with:
-          path: yocto-cache
-          key: yocto-cache-${{ matrix.machine }}-${{ hashFiles('kas/*.yml') }}
-          restore-keys: |
-            yocto-cache-${{ matrix.machine }}-
+          export PATH="$HOME/.local/bin:$PATH"
+          command -v kas >/dev/null || { echo "::error::kas not found on runner host"; exit 1; }
+          python3 -c "import pexpect" || { echo "::error::python3-pexpect missing on runner host"; exit 1; }
+          if [ "$(sysctl -n kernel.apparmor_restrict_unprivileged_userns 2>/dev/null || echo 0)" != "0" ]; then
+            echo "::error::kernel.apparmor_restrict_unprivileged_userns must be 0 (bitbake needs unprivileged user namespaces)"
+            exit 1
+          fi
+          # DL_DIR/SSTATE_DIR come from the runner's .env so checkout doesn't wipe the cache
+          for v in DL_DIR SSTATE_DIR; do
+            [ -n "${!v}" ] || { echo "::error::$v not set in the runner's .env"; exit 1; }
+            mkdir -p "${!v}"
+            echo "$v=${!v}"
+          done
+          df -h "$SSTATE_DIR" | tail -1
 
       - name: kas build
         run: kas build kas/${{ matrix.machine }}.yml:kas/ci.yml
-
-      - name: Save downloads and sstate
-        if: always()
-        uses: actions/cache/save@v4
-        with:
-          path: yocto-cache
-          key: yocto-cache-${{ matrix.machine }}-${{ hashFiles('kas/*.yml') }}-${{ github.run_id }}
 
       - name: Boot test (talker/listener)
         run: python3 tools/boot-test.py ${{ matrix.machine }}

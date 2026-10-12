@@ -1,5 +1,4 @@
-# CI-only overlay: keep local dev builds untouched, trim disk usage on the
-# hosted runner's limited disk. Use with: kas build kas/qemuarm64.yml:kas/ci.yml
+# CI-only overlay. Use with: kas build kas/qemuarm64.yml:kas/ci.yml
 header:
   version: 14
 
