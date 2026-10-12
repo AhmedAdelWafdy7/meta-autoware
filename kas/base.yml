@@ -1,8 +1,5 @@
 # poky (openembedded-core + bitbake) + meta-openembedded, pinned to scarthgap.
-# Layer selection and pins adapted from ros/meta-ros's `build` branch
-# kas/yocto/scarthgap.yml (https://github.com/ros/meta-ros/blob/build/kas/yocto/scarthgap.yml),
-# trimmed to the meta-openembedded sub-layers PLAN.md Phase 3 names. Not a fork:
-# only the tiny kas pointer file is adapted, none of the layer source itself.
+
 header:
   version: 14
 

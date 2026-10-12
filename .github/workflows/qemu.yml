@@ -1,0 +1,53 @@
+# Self-hosted only: a cold Yocto build exceeds the hosted 6h limit. No pull_request triggers (public repo).
+name: qemu
+
+on:
+  push:
+    branches: [main, ci]
+  workflow_dispatch:
+
+concurrency:
+  group: qemu-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-boot-test:
+    strategy:
+      fail-fast: false
+      matrix:
+        machine: [qemuarm64, qemux86-64]
+    runs-on: [self-hosted, Linux, ARM64]
+    timeout-minutes: 720
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          clean: false  # keep build/ and layers/ between runs
+
+      - name: Check runner host prerequisites
+        run: |
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.local/bin:$PATH"
+          command -v kas >/dev/null || { echo "::error::kas not found on runner host"; exit 1; }
+          python3 -c "import pexpect" || { echo "::error::python3-pexpect missing on runner host"; exit 1; }
+          if [ "$(sysctl -n kernel.apparmor_restrict_unprivileged_userns 2>/dev/null || echo 0)" != "0" ]; then
+            echo "::error::kernel.apparmor_restrict_unprivileged_userns must be 0 (bitbake needs unprivileged user namespaces)"
+            exit 1
+          fi
+          # DL_DIR/SSTATE_DIR come from the runner's .env so checkout doesn't wipe the cache
+          for v in DL_DIR SSTATE_DIR; do
+            [ -n "${!v}" ] || { echo "::error::$v not set in the runner's .env"; exit 1; }
+            mkdir -p "${!v}"
+            echo "$v=${!v}"
+          done
+          df -h "$SSTATE_DIR" | tail -1
+
+      - name: Stop stale bitbake server
+        run: pkill -f "$GITHUB_WORKSPACE/layers/bitbake/bin/bitbake-server" || true  # left behind by a cancelled run
+
+      - name: kas build
+        run: kas build kas/${{ matrix.machine }}.yml:kas/ci.yml
+
+      - name: Boot test (talker/listener)
+        run: |
+          kas shell kas/${{ matrix.machine }}.yml:kas/ci.yml -c \
+            "bitbake qemu-helper-native:do_addto_recipe_sysroot && python3 $GITHUB_WORKSPACE/tools/boot-test.py ${{ matrix.machine }}"

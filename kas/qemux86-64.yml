@@ -1,0 +1,14 @@
+header:
+  version: 14
+  includes:
+    - kas/ros2-jazzy.yml
+    - kas/cache.yml
+
+machine: "qemux86-64"
+
+local_conf_header:
+  demo-nodes: |
+    IMAGE_INSTALL:append = " demo-nodes-cpp demo-nodes-py"
+  # passwordless root login on the serial console, for the automated boot test
+  debug-tweaks: |
+    EXTRA_IMAGE_FEATURES += "debug-tweaks"
