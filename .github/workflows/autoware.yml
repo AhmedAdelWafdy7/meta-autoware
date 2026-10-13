@@ -1,0 +1,38 @@
+# Build core-image-autoware on qemuarm64 and check an Autoware node runs on it.
+# Self-hosted only, see qemu.yml.
+name: autoware
+
+on:
+  push:
+    branches: [main, ci]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: autoware-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-boot-test:
+    # fork PRs would run untrusted code on the self-hosted runner
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: [self-hosted, Linux, ARM64]
+    timeout-minutes: 720
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          clean: false  # keep build/ and layers/ between runs
+
+      - name: Check runner host prerequisites
+        run: tools/ci-host-check.sh
+
+      - name: Stop stale bitbake server
+        run: pkill -f "$GITHUB_WORKSPACE/layers/bitbake/bin/bitbake-server" || true  # left behind by a cancelled run
+
+      - name: Build core-image-autoware
+        run: kas build kas/autoware.yml:kas/ci.yml
+
+      - name: Boot test (Autoware node)
+        run: |
+          kas shell kas/autoware.yml:kas/ci.yml -c \
+            "bitbake qemu-helper-native:do_addto_recipe_sysroot && python3 $GITHUB_WORKSPACE/tools/boot-test.py qemuarm64 --image core-image-autoware"

@@ -1,0 +1,24 @@
+# meta-autoware on qemuarm64. Use with: kas build kas/autoware.yml
+header:
+  version: 14
+  includes:
+    - kas/qemuarm64.yml
+
+repos:
+  # this repository itself, no url
+  project:
+    path: "."
+    layers:
+      meta-autoware:
+
+target:
+  - core-image-autoware
+
+local_conf_header:
+  autoware-fixups: |
+    INHERIT += "autoware-fixups"
+  autoware-threads: |
+    # 16 GB host: default 4 tasks x -j4 ran ~5 cc1plus at ~1.8 GB each and OOM-killed the build
+    BB_NUMBER_THREADS ?= "2"
+    PARALLEL_MAKE ?= "-j 2"
+    PARALLEL_MAKE:pn-opencv ?= "-j 1"
