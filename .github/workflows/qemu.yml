@@ -1,9 +1,10 @@
-# Self-hosted only: a cold Yocto build exceeds the hosted 6h limit. No pull_request triggers (public repo).
+# Self-hosted only: a cold Yocto build exceeds the hosted 6h limit. PRs from forks are skipped.
 name: qemu
 
 on:
   push:
     branches: [main, ci]
+  pull_request:
   workflow_dispatch:
 
 concurrency:
@@ -16,6 +17,8 @@ jobs:
       fail-fast: false
       matrix:
         machine: [qemuarm64, qemux86-64]
+    # fork PRs would run untrusted code on the self-hosted runner
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
     runs-on: [self-hosted, Linux, ARM64]
     timeout-minutes: 720
     steps:
@@ -24,22 +27,7 @@ jobs:
           clean: false  # keep build/ and layers/ between runs
 
       - name: Check runner host prerequisites
-        run: |
-          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
-          export PATH="$HOME/.local/bin:$PATH"
-          command -v kas >/dev/null || { echo "::error::kas not found on runner host"; exit 1; }
-          python3 -c "import pexpect" || { echo "::error::python3-pexpect missing on runner host"; exit 1; }
-          if [ "$(sysctl -n kernel.apparmor_restrict_unprivileged_userns 2>/dev/null || echo 0)" != "0" ]; then
-            echo "::error::kernel.apparmor_restrict_unprivileged_userns must be 0 (bitbake needs unprivileged user namespaces)"
-            exit 1
-          fi
-          # DL_DIR/SSTATE_DIR come from the runner's .env so checkout doesn't wipe the cache
-          for v in DL_DIR SSTATE_DIR; do
-            [ -n "${!v}" ] || { echo "::error::$v not set in the runner's .env"; exit 1; }
-            mkdir -p "${!v}"
-            echo "$v=${!v}"
-          done
-          df -h "$SSTATE_DIR" | tail -1
+        run: tools/ci-host-check.sh
 
       - name: Stop stale bitbake server
         run: pkill -f "$GITHUB_WORKSPACE/layers/bitbake/bin/bitbake-server" || true  # left behind by a cancelled run

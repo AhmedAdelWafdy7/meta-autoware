@@ -7,8 +7,9 @@ header:
 machine: "qemux86-64"
 
 local_conf_header:
+  # talker/listener for tools/boot-test.py
   demo-nodes: |
-    IMAGE_INSTALL:append = " demo-nodes-cpp demo-nodes-py"
-  # passwordless root login on the serial console, for the automated boot test
+    IMAGE_INSTALL:append:pn-ros-image-core = " demo-nodes-cpp demo-nodes-py"
+  # passwordless root login for tools/boot-test.py
   debug-tweaks: |
     EXTRA_IMAGE_FEATURES += "debug-tweaks"

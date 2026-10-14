@@ -1,0 +1,8 @@
+# Adds packagegroup-autoware-devtools; never part of a production image.
+# Use with: kas build kas/autoware.yml:kas/autoware-devtools.yml
+header:
+  version: 14
+
+local_conf_header:
+  autoware-devtools: |
+    IMAGE_INSTALL:append = " packagegroup-autoware-devtools"
