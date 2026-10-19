@@ -1,0 +1,27 @@
+# core-image-autoware for Raspberry Pi 5. Use with: kas build kas/raspberrypi5.yml
+header:
+  version: 14
+  includes:
+    - kas/autoware.yml
+
+machine: "raspberrypi5"
+
+repos:
+  meta-raspberrypi:
+    url: "https://github.com/agherzan/meta-raspberrypi.git"
+    branch: "scarthgap"
+    commit: "018d44467c4f09eb63f8ea5e86e85d755250cf89"
+    path: "layers/meta-raspberrypi"
+
+local_conf_header:
+  raspberrypi5: |
+    # serial console on the debug UART
+    ENABLE_UART = "1"
+    # Wi-Fi/Bluetooth firmware (Cypress/Synaptics binary licenses)
+    LICENSE_FLAGS_ACCEPTED += "synaptics-killswitch"
+    # the public mirror has nothing for cortexa76 or ROS, and with 2 threads checking it takes hours
+    SSTATE_MIRRORS = ""
+  measure: |
+    # for tools/measure-target.sh: ssh to copy it over, systemd-analyze for boot time
+    EXTRA_IMAGE_FEATURES += "ssh-server-dropbear"
+    IMAGE_INSTALL:append = " systemd-analyze"
