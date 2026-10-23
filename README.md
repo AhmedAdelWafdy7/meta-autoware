@@ -1,8 +1,7 @@
 # meta-autoware
 
 Building the Autoware autonomous driving stack with Yocto/OpenEmbedded instead of Docker.
-ROS 2 Jazzy on scarthgap, GPU-free, cross-compiled. Results and every fix are recorded in
-[FINDINGS.md](FINDINGS.md); pinned revisions are in [MANIFEST.md](MANIFEST.md).
+ROS 2 Jazzy on scarthgap, GPU-free, cross-compiled. 
 
 **Status:** `core-image-autoware` (243 Autoware packages) builds for qemuarm64 and runs
 Autoware nodes under qemu. The Autoware demo also runs on a **Raspberry Pi 5 (8 GB)** with
