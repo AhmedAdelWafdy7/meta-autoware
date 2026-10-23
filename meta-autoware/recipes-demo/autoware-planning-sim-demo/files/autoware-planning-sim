@@ -1,0 +1,16 @@
+#!/bin/sh
+# Autoware planning simulator on the Shinjuku map. Foxglove connects to port 8765.
+# Extra arguments are passed to the launch, e.g. motion_path_planner_type:=none
+set -e
+. /opt/ros/jazzy/setup.sh
+
+# the lane map and point-cloud map are single messages far above the 10 MB default buffer
+ros2 launch foxglove_bridge foxglove_bridge_launch.xml port:=8765 send_buffer_limit:=400000000 &
+
+exec ros2 launch autoware_launch planning_simulator.launch.xml \
+    map_path:=/opt/autoware/maps/shinjuku \
+    vehicle_model:=sample_vehicle \
+    sensor_model:=sample_sensor_kit \
+    rviz:=false \
+    motion_path_planner_type:=path_sampler \
+    "$@"

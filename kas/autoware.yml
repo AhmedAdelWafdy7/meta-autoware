@@ -22,3 +22,9 @@ local_conf_header:
     BB_NUMBER_THREADS ?= "2"
     PARALLEL_MAKE ?= "-j 2"
     PARALLEL_MAKE:pn-opencv ?= "-j 1"
+    PARALLEL_MAKE:pn-autoware-behavior-path-planner ?= "-j 1"
+  autoware-rm-work: |
+    # keeps tmp-glibc from growing to hundreds of GB; sstate still holds every result
+    INHERIT += "rm_work"
+    # runqemu needs this native sysroot for the boot test
+    RM_WORK_EXCLUDE += "qemu-helper-native"

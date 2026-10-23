@@ -1,0 +1,7 @@
+# Planning simulator demo image. Use on top of a machine config, e.g.
+# kas build kas/raspberrypi5.yml:kas/demo.yml
+header:
+  version: 14
+
+target:
+  - core-image-autoware-demo

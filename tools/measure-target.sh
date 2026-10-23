@@ -16,14 +16,16 @@ while ! systemctl is-system-running --quiet 2>/dev/null && [ $i -lt 300 ]; do
     [ "$(systemctl is-system-running 2>/dev/null)" = "degraded" ] && break
     sleep 1; i=$((i+1))
 done
-echo "boot: $(systemd-analyze 2>/dev/null | head -1)"
+echo "boot: $(systemd-analyze 2>/dev/null | head -n 1)"
 
 echo "rootfs_used_kb: $(df -k / | awk 'NR==2 {print $3}')"
 echo "mem_total_kb: $(awk '/MemTotal/ {print $2}' /proc/meminfo)"
 sleep "$SETTLE"
 echo "mem_available_idle_kb: $(awk '/MemAvailable/ {print $2}' /proc/meminfo)"
 
+set +u  # ROS setup.sh reads unset variables
 . /opt/ros/jazzy/setup.sh
+set -u
 ros2 run autoware_simple_pure_pursuit autoware_simple_pure_pursuit_exe --ros-args \
     --params-file "$ROS_SHARE/autoware_vehicle_info_utils/config/vehicle_info.param.yaml" \
     --params-file "$ROS_SHARE/autoware_simple_pure_pursuit/config/simple_pure_pursuit.param.yaml" \
@@ -33,7 +35,7 @@ RUN_PID=$!
 i=0
 pid=""
 while [ -z "$pid" ] && [ $i -lt 120 ]; do
-    pid=$(pgrep -f 'lib/autoware_simple_pure_pursuit/autoware_simple_pure_pursuit_exe' | head -1)
+    pid=$(pgrep -f 'lib/autoware_simple_pure_pursuit/autoware_simple_pure_pursuit_exe' | head -n 1)
     sleep 1; i=$((i+1))
 done
 if [ -z "$pid" ]; then

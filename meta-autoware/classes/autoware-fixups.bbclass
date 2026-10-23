@@ -79,9 +79,6 @@ python() {
         if 'generate-parameter-library' in depends.split():
             d.appendVar('CXXFLAGS', ' -Wno-deprecated-declarations')
 
-        # Public headers include <gtest/gtest.h>; gtest-vendor installs them under src/
-        if pn in ('autoware-fake-test-node', 'autoware-planning-test-manager'):
-            d.appendVar('CXXFLAGS', ' -I${RECIPE_SYSROOT}${ros_base_prefix}/src/gtest_vendor/include')
 
     # Interface packages need the typesupport libs in their own RDEPENDS for file-rdeps QA
     consumer_deps = ' '.join([depends, d.getVar('RDEPENDS:%s' % pn) or ''])
@@ -130,9 +127,21 @@ python() {
         'autoware-trajectory-selector': 'generate-parameter-library',
         'autoware-planning-validator-rear-collision-checker': 'magic-enum',
         'autoware-planning-validator-intersection-collision-checker': 'magic-enum',
+        # src/test_utils.cpp is part of the main library
+        'autoware-behavior-velocity-planner': 'autoware-planning-test-manager',
     }
     if pn in missing_plain_deps and missing_plain_deps[pn] not in depends.split():
         d.appendVar('DEPENDS', ' %s' % missing_plain_deps[pn])
+
+    # Public headers include <gtest/gtest.h>, for these packages and anything built against
+    # them; gtest-vendor installs the headers under src/
+    if is_mash_generated:
+        depends = d.getVar('DEPENDS') or ''
+        gtest_headers = ('autoware-fake-test-node', 'autoware-planning-test-manager')
+        if pn in gtest_headers or any(p in depends.split() for p in gtest_headers):
+            if 'gtest-vendor' not in depends.split():
+                d.appendVar('DEPENDS', ' gtest-vendor')
+            d.appendVar('CXXFLAGS', ' -I${RECIPE_SYSROOT}${ros_base_prefix}/src/gtest_vendor/include')
 
     # mash wrote "branch=HEAD" (ros-mash bug); SRCREV is correct
     ros_branch_fixes = {
@@ -148,16 +157,55 @@ python() {
     if 'range-v3' in current:
         d.setVar(rdep_key, ' '.join(v for v in current if v != 'range-v3'))
 
-    # Launch packages that unconditionally exec_depend on excluded CUDA packages
-    cuda_gated_rdepends_strip = {
-        'tier4-planning-launch': 'autoware-diffusion-planner',
-        'tier4-simulator-launch': 'tier4-perception-launch',
+    def strip_deps(names):
+        for key in ('DEPENDS', rdep_key):
+            current = (d.getVar(key) or '').split()
+            kept = [v for v in current if v not in names]
+            if len(kept) != len(current):
+                d.setVar(key, ' '.join(kept))
+
+    # Dependencies on excluded CUDA packages, kept when a BSP sets DISTRO_FEATURES:cuda
+    cuda_only_deps = {
+        'tier4-planning-launch': ['autoware-diffusion-planner'],
+        'tier4-perception-launch': [
+            'autoware-bevfusion', 'autoware-bytetrack', 'autoware-ground-segmentation-cuda',
+            'autoware-image-projection-based-fusion', 'autoware-lidar-apollo-instance-segmentation',
+            'autoware-lidar-centerpoint', 'autoware-lidar-transfusion', 'autoware-ptv3',
+            'autoware-shape-estimation', 'autoware-simpl-prediction', 'autoware-tensorrt-bevdet',
+            'autoware-tensorrt-yolox', 'autoware-traffic-light-classifier',
+            'autoware-traffic-light-fine-detector',
+        ],
+        'autoware-probabilistic-occupancy-grid-map': [
+            'autoware-cuda-dependency-meta', 'autoware-cuda-utils',
+        ],
     }
-    if pn in cuda_gated_rdepends_strip and not bb.utils.contains('DISTRO_FEATURES', 'cuda', True, False, d):
-        to_strip = cuda_gated_rdepends_strip[pn]
+    if pn in cuda_only_deps and not bb.utils.contains('DISTRO_FEATURES', 'cuda', True, False, d):
+        strip_deps(cuda_only_deps[pn])
+
+    # Runtime-only dependencies that cannot be built here (no recipe for acados, cgal,
+    # crypto++, libpng++; no Qt) and that the planning simulator does not start
+    unbuildable_rdepends = {
+        # trajectory optimizer and modifier need the path optimizer and are only used by
+        # the CUDA diffusion planner
+        'tier4-planning-launch': [
+            'autoware-path-optimizer', 'autoware-trajectory-optimizer', 'autoware-trajectory-modifier',
+        ],
+        'tier4-perception-launch': [
+            'autoware-pointcloud-preprocessor', 'autoware-ground-segmentation',
+            'autoware-compare-map-segmentation', 'autoware-euclidean-cluster',
+            'autoware-detection-by-tracker', 'autoware-occupancy-grid-map-outlier-filter',
+            'autoware-raindrop-cluster-filter', 'autoware-detected-object-validation',
+            'autoware-elevation-map-loader',
+        ],
+        'autoware-probabilistic-occupancy-grid-map': ['autoware-pointcloud-preprocessor'],
+        'tier4-simulator-launch': ['tier4-localization-launch', 'autoware-elevation-map-loader'],
+        'autoware-launch': ['rviz2', 'tier4-localization-launch'],
+        'autoware-dummy-diag-publisher': ['rqt-reconfigure', 'rqt-robot-monitor', 'rqt-runtime-monitor'],
+        'sample-sensor-kit-launch': ['autoware-pointcloud-preprocessor', 'common-sensor-launch', 'usb-cam'],
+    }
+    if pn in unbuildable_rdepends:
         current = (d.getVar(rdep_key) or '').split()
-        if to_strip in current:
-            d.setVar(rdep_key, ' '.join(v for v in current if v != to_strip))
+        d.setVar(rdep_key, ' '.join(v for v in current if v not in unbuildable_rdepends[pn]))
 
     # Unversioned .so in the runtime package (lanelet2*, glog)
     d.appendVar('INSANE_SKIP:%s' % pn, ' dev-so')
@@ -180,13 +228,13 @@ python() {
 
 # Map non-SPDX license names from package.xml to SPDX ids. Runs as an event
 # handler because base.bbclass checks the LICENSE format before any python().
-AUTOWARE_LICENSE_MAP = "Apache 2=Apache-2.0;Apache2=Apache-2.0;CC BY-SA 4.0=CC-BY-SA-4.0;BSD3=BSD-3-Clause;BSD-3-Clause-License=BSD-3-Clause;Boost=BSL-1.0"
+AUTOWARE_LICENSE_MAP = "Apache 2=Apache-2.0;Apache2=Apache-2.0;CC BY-SA 4.0=CC-BY-SA-4.0;BSD3=BSD-3-Clause;BSD-3-Clause-License=BSD-3-Clause;BSD-2=BSD-2-Clause;Boost=BSL-1.0"
 # plain "BSD" only where the upstream license text was checked and is BSD-3-Clause (lanelet2* too)
 AUTOWARE_LICENSE_BSD3 = " \
     autoware-ndt-scan-matcher \
     eagleye-can-velocity-converter eagleye-coordinate eagleye-msgs eagleye-navigation eagleye-rt eagleye-tf \
-    grid-map-core grid-map-cv grid-map-msgs grid-map-ros \
-    pointcloud-to-laserscan rtklib-msgs ublox-msgs ublox-serialization \
+    grid-map-core grid-map-costmap-2d grid-map-cv grid-map-msgs grid-map-ros \
+    pointcloud-to-laserscan rtklib-msgs ublox-gps ublox-msgs ublox-serialization \
     velodyne-description velodyne-driver velodyne-msgs velodyne-pointcloud \
 "
 
