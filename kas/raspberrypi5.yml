@@ -22,6 +22,6 @@ local_conf_header:
     # the public mirror has nothing for cortexa76 or ROS, and with 2 threads checking it takes hours
     SSTATE_MIRRORS = ""
   measure: |
-    # for tools/measure-target.sh: ssh to copy it over, systemd-analyze for boot time
+    # ssh and systemd-analyze for tools/measure-target.sh, connmanctl to set up Wi-Fi
     EXTRA_IMAGE_FEATURES += "ssh-server-dropbear"
-    IMAGE_INSTALL:append = " systemd-analyze"
+    IMAGE_INSTALL:append = " systemd-analyze connman-client"

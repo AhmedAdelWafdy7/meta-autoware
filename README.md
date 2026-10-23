@@ -5,7 +5,20 @@ ROS 2 Jazzy on scarthgap, GPU-free, cross-compiled. Results and every fix are re
 [FINDINGS.md](FINDINGS.md); pinned revisions are in [MANIFEST.md](MANIFEST.md).
 
 **Status:** `core-image-autoware` (243 Autoware packages) builds for qemuarm64 and runs
-Autoware nodes under qemu. Real hardware (Raspberry Pi 5) is next.
+Autoware nodes under qemu. The Autoware demo also runs on a **Raspberry Pi 5 (8 GB)** with
+**~4 GB RAM free** — see the [Demo](#demo-raspberry-pi-5-8-gb) section below.
+
+![Autoware demo running on a Raspberry Pi 5 (8 GB) with ~4 GB RAM headroom](doc/Screenshot1.png)
+
+![Autoware node graph / rviz view on the Pi 5](doc/Screenshot2.png)
+
+## Demo: Raspberry Pi 5 (8 GB)
+
+The Autoware demo runs on a Raspberry Pi 5 with 8 GB of RAM, leaving roughly 4 GB free.
+No GPU, no Docker — the stack is cross-compiled with Yocto and booted on the board.
+
+- Images: [`doc/Screenshot1.png`](doc/Screenshot1.png), [`doc/Screenshot2.png`](doc/Screenshot2.png)
+- Log in as `root` (no password) and `. /opt/ros/jazzy/setup.sh`.
 
 ## Prerequisites
 
@@ -29,6 +42,12 @@ kas build kas/autoware.yml
 A cold build takes hours. `kas/cache.yml` keeps downloads and sstate in `yocto-cache/` next
 to the build directory and uses the public Yocto sstate mirror. `kas/autoware.yml` limits
 bitbake to 2 tasks × `-j 2`, which fits a 16 GB host.
+
+> **Note:** the layer's bbappends (fixes to `ceres-solver`, `proxsuite`, `sophus`,
+> `range-v3`, `gtest-vendor`, `joy`, `pcl-ros`, `tl-expected`, `septentrio-gnss-driver`,
+> `tinyxml2-vendor`, `rosx-introspection`) are opt-in: they only apply when `autoware` is in
+> `DISTRO_FEATURES`. `kas/autoware.yml` enables it. The layer stays inert for every other
+> build, which is what `yocto-check-layer` expects.
 
 ## Test
 
@@ -55,4 +74,10 @@ CI runs both checks on a self-hosted runner, see `.github/workflows/`.
   - `classes/autoware-fixups.bbclass` — fixes applied to generated recipes by content
   - `recipes-thirdparty-bbappends/` — fixes for specific upstream recipes or sources
   - `recipes-core/` — packagegroups and images
+- `doc/` — screenshots of the Pi 5 demo
 - `tools/` — `boot-test.py` runs the qemu checks, `ci-host-check.sh` checks the CI runner
+
+## License
+
+Layer metadata is MIT (see [LICENSE](LICENSE)). Packages keep their upstream licenses.
+The Shinjuku map used in the demo is **CC BY-NC** — demo images only, non-commercial.

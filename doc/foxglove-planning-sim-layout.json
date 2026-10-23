@@ -1,0 +1,193 @@
+{
+  "configById": {
+    "3D!autoware": {
+      "followMode": "follow-none",
+      "followTf": "map",
+      "cameraState": {
+        "distance": 900,
+        "perspective": true,
+        "phi": 30,
+        "thetaOffset": 0,
+        "target": [
+          81724,
+          50313,
+          0
+        ],
+        "targetOffset": [
+          0,
+          0,
+          0
+        ],
+        "targetOrientation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "fovy": 45,
+        "near": 0.5,
+        "far": 10000
+      },
+      "scene": {
+        "transforms": {
+          "showLabel": false,
+          "axisScale": 1
+        }
+      },
+      "transforms": {},
+      "topics": {
+        "/map/vector_map_marker": {
+          "visible": true
+        },
+        "/planning/mission_planning/route_marker": {
+          "visible": true
+        },
+        "/planning/mission_planning/echo_back_goal_pose": {
+          "visible": true
+        },
+        "/planning/scenario_planning/lane_driving/behavior_planning/path": {
+          "visible": true,
+          "lineWidth": 0.3
+        },
+        "/planning/path_candidate/lane_change_left": {
+          "visible": true,
+          "lineWidth": 0.3
+        },
+        "/planning/path_candidate/lane_change_right": {
+          "visible": true,
+          "lineWidth": 0.3
+        },
+        "/planning/path_candidate/static_obstacle_avoidance": {
+          "visible": true,
+          "lineWidth": 0.3
+        },
+        "/planning/path_candidate/start_planner": {
+          "visible": true,
+          "lineWidth": 0.3
+        },
+        "/planning/path_candidate/goal_planner": {
+          "visible": true,
+          "lineWidth": 0.3
+        },
+        "/planning/scenario_planning/velocity_smoother/virtual_wall": {
+          "visible": true
+        },
+        "/planning/planning_validator/virtual_wall": {
+          "visible": true
+        },
+        "/control/autonomous_emergency_braking/virtual_wall": {
+          "visible": true
+        },
+        "/control/trajectory_follower/controller_node_exe/virtual_wall": {
+          "visible": true
+        },
+        "/perception/occupancy_grid_map/map": {
+          "visible": true
+        },
+        "/planning/scenario_planning/lane_driving/behavior_planning/behavior_velocity_planner/debug/crosswalk": {
+          "visible": true
+        },
+        "/planning/scenario_planning/lane_driving/behavior_planning/behavior_velocity_planner/debug/intersection": {
+          "visible": true
+        },
+        "/planning/scenario_planning/lane_driving/behavior_planning/behavior_velocity_planner/debug/stop_line": {
+          "visible": true
+        },
+        "/planning/scenario_planning/lane_driving/behavior_planning/behavior_velocity_planner/debug/traffic_light": {
+          "visible": true
+        },
+        "/planning/scenario_planning/lane_driving/behavior_planning/behavior_velocity_planner/debug/detection_area": {
+          "visible": true
+        },
+        "/planning/scenario_planning/lane_driving/behavior_planning/behavior_velocity_planner/debug/no_stopping_area": {
+          "visible": true
+        },
+        "/planning/scenario_planning/lane_driving/motion_planning/motion_velocity_planner/obstacle_stop/debug_markers": {
+          "visible": true
+        },
+        "/planning/scenario_planning/lane_driving/motion_planning/motion_velocity_planner/obstacle_slow_down/debug_markers": {
+          "visible": true
+        },
+        "/planning/scenario_planning/lane_driving/motion_planning/motion_velocity_planner/obstacle_cruise/debug_markers": {
+          "visible": true
+        },
+        "/planning/scenario_planning/lane_driving/motion_planning/motion_velocity_planner/out_of_lane/debug_markers": {
+          "visible": true
+        },
+        "/planning/scenario_planning/lane_driving/motion_planning/motion_velocity_planner/run_out/debug_markers": {
+          "visible": true
+        },
+        "/map/pointcloud_map": {
+          "visible": false,
+          "pointSize": 1.5,
+          "colorMode": "colormap",
+          "colorField": "z"
+        }
+      },
+      "layers": {
+        "vehicle-urdf": {
+          "layerId": "foxglove.Urdf",
+          "instanceId": "vehicle-urdf",
+          "label": "Vehicle",
+          "visible": true,
+          "order": 1,
+          "sourceType": "topic",
+          "topic": "/robot_description",
+          "displayMode": "auto",
+          "fallbackColor": "#ffffff",
+          "showAxis": false,
+          "axisScale": 1,
+          "showOutlines": true,
+          "opacity": 1
+        }
+      },
+      "publish": {
+        "type": "pose_estimate",
+        "poseEstimateTopic": "/initialpose",
+        "poseTopic": "/planning/mission_planning/goal",
+        "pointTopic": "/clicked_point",
+        "poseEstimateXDeviation": 0.5,
+        "poseEstimateYDeviation": 0.5,
+        "poseEstimateThetaDeviation": 0.26179939
+      },
+      "imageMode": {}
+    },
+    "CallService!engage": {
+      "serviceName": "/api/operation_mode/change_to_autonomous",
+      "requestPayload": "{}",
+      "layout": "vertical",
+      "buttonText": "Engage (autonomous)",
+      "buttonColor": "#00a871"
+    },
+    "Plot!speed": {
+      "paths": [
+        {
+          "value": "/vehicle/status/velocity_status.longitudinal_velocity",
+          "enabled": true,
+          "timestampMethod": "receiveTime",
+          "label": "speed (m/s)"
+        }
+      ],
+      "showLegend": true,
+      "isSynced": true,
+      "xAxisVal": "timestamp",
+      "followingViewWidth": 60
+    }
+  },
+  "globalVariables": {},
+  "userNodes": {},
+  "playbackConfig": {
+    "speed": 1
+  },
+  "layout": {
+    "direction": "row",
+    "first": "3D!autoware",
+    "second": {
+      "direction": "column",
+      "first": "CallService!engage",
+      "second": "Plot!speed",
+      "splitPercentage": 25
+    },
+    "splitPercentage": 75
+  }
+}
