@@ -289,3 +289,20 @@ python autoware_license_handler() {
     if new != lic:
         d.setVar('LICENSE', new)
 }
+
+# wrynose unpacks into ${UNPACKDIR} and has no ${WORKDIR}/git, which every generated recipe's
+# S still names. Stands in for the S fix in ros-mash; drop it once the recipes are regenerated.
+# pybind11 3 strips the modules it builds, so they reach do_package already stripped.
+python() {
+    file_path = d.getVar('FILE') or ''
+    if '/generated-recipes/' not in file_path or bb.utils.get_file_layer(file_path, d) != 'autoware-core':
+        return
+    s = d.getVar('S', False) or ''
+    if s.startswith('${WORKDIR}/git'):
+        d.setVar('BB_GIT_DEFAULT_DESTSUFFIX', 'git')
+        # insane.bbclass rejects a literal ${UNPACKDIR}/git
+        d.setVar('S', s.replace('${WORKDIR}/git', '${UNPACKDIR}/${BB_GIT_DEFAULT_DESTSUFFIX}', 1)
+                 if s == '${WORKDIR}/git' else s.replace('${WORKDIR}/git', '${UNPACKDIR}/git', 1))
+    if 'pybind11' in (d.getVar('DEPENDS') or ''):
+        d.appendVar('INSANE_SKIP:%s' % d.getVar('PN'), ' already-stripped')
+}

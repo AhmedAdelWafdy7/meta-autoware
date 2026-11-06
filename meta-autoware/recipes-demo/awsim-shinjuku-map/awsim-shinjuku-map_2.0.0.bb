@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=24261b1e6e19ba3a6dcb80b1899632fd"
 SRC_URI = "https://github.com/autowarefoundation/AWSIM/releases/download/v${PV}/Shinjuku-Map.zip"
 SRC_URI[sha256sum] = "f545e05d5ff3df2c7f51c57a8252003bee5777c055482e04dface02b93b579be"
 
-S = "${WORKDIR}/Shinjuku-Map"
+S = "${UNPACKDIR}/Shinjuku-Map"
 
 inherit allarch
 

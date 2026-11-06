@@ -2,7 +2,7 @@
 header:
   version: 14
   includes:
-    - kas/releases/scarthgap.yml
+    - kas/releases/wrynose.yml
 
 local_conf_header:
   distro: |

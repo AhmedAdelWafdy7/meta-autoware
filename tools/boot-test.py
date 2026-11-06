@@ -42,7 +42,9 @@ def fail(msg):
 def find_qemuboot_conf(machine, image):
     # The image's qemuboot.conf carries the right qemu flags for any MACHINE.
     # One optional name segment (the ROS distro) so core-image-autoware-dev doesn't match.
-    deploy_dir = BUILD_DIR / "tmp-glibc/deploy/images" / machine
+    # scarthgap's TMPDIR is tmp-glibc; from styhead it is tmp
+    tmp = next((d for d in ("tmp-glibc", "tmp") if (BUILD_DIR / d).is_dir()), "tmp")
+    deploy_dir = BUILD_DIR / tmp / "deploy/images" / machine
     pattern = re.compile(rf"{re.escape(image)}(-[a-z0-9]+)?-{re.escape(machine)}\.rootfs\.qemuboot\.conf")
     matches = [p for p in deploy_dir.glob("*.qemuboot.conf") if pattern.fullmatch(p.name)]
     if not matches:
