@@ -1,0 +1,25 @@
+From: Ahmed Adel Wafdy <fandes99@gmail.com>
+Subject: [PATCH] fix(autoware_multi_object_tracker): include the boost::hash header
+
+boost::hash is declared in boost/container_hash/hash.hpp. Boost.Uuid 1.86
+stopped including it from uuid_hash.hpp, so "hash is not a member of
+boost". boost/functional/hash.hpp forwards to it in every Boost release.
+
+Upstream-Status: Pending
+Signed-off-by: Ahmed Adel Wafdy <fandes99@gmail.com>
+---
+ src/debugger/debug_object.hpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/debugger/debug_object.hpp b/src/debugger/debug_object.hpp
+index 00779dd7d0..5c8baf6c42 100644
+--- a/src/debugger/debug_object.hpp
++++ b/src/debugger/debug_object.hpp
+@@ -23,6 +23,7 @@
+ #include <geometry_msgs/msg/point.hpp>
+ #include <visualization_msgs/msg/marker_array.hpp>
+ 
++#include <boost/functional/hash.hpp>
+ #include <boost/uuid/uuid.hpp>
+ #include <boost/uuid/uuid_hash.hpp>
+ 

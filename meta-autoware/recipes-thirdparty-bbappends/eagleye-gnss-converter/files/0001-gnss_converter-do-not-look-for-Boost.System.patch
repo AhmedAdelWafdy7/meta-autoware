@@ -1,0 +1,26 @@
+From: Ahmed Adel Wafdy <fandes99@gmail.com>
+Subject: [PATCH] fix(gnss_converter): do not look for Boost.System
+
+Boost.System is header-only since Boost 1.69, and Boost 1.89 removed the
+stub library, so find_package(Boost COMPONENTS system) fails there.
+Nothing links Boost::system, so drop the component.
+
+Upstream-Status: Pending
+Signed-off-by: Ahmed Adel Wafdy <fandes99@gmail.com>
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 66a1672..4337e5d 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -19,7 +19,7 @@ find_package(ament_cmake_auto REQUIRED)
+ ament_auto_find_build_dependencies()
+ 
+ include_directories(include)
+-find_package(Boost REQUIRED COMPONENTS system thread regex chrono)
++find_package(Boost REQUIRED COMPONENTS thread regex chrono)
+ 
+ ament_auto_add_executable(gnss_converter
+   src/nmea2fix_core.cpp

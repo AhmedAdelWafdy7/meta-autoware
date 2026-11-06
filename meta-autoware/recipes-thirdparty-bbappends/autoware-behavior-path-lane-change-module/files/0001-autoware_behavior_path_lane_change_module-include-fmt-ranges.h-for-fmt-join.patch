@@ -1,0 +1,24 @@
+From: Ahmed Adel Wafdy <fandes99@gmail.com>
+Subject: [PATCH] fix(autoware_behavior_path_lane_change_module): include fmt/ranges.h for fmt::join
+
+fmt 11 moved fmt::join from fmt/format.h to fmt/ranges.h. fmt/ranges.h
+exists in fmt 9 and 10 too, so including it works with all of them.
+
+Upstream-Status: Pending
+Signed-off-by: Ahmed Adel Wafdy <fandes99@gmail.com>
+---
+ src/interface.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/interface.cpp b/src/interface.cpp
+index 51a9cd6bee..457562ebf2 100644
+--- a/src/interface.cpp
++++ b/src/interface.cpp
+@@ -25,6 +25,7 @@
+ #include <autoware_utils/system/time_keeper.hpp>
+ 
+ #include <fmt/format.h>
++#include <fmt/ranges.h>
+ 
+ #include <algorithm>
+ #include <limits>

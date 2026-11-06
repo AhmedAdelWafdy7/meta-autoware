@@ -1,0 +1,78 @@
+From: Ahmed Adel Wafdy <fandes99@gmail.com>
+Subject: [PATCH] fix(io_context): build with Boost 1.87 and later
+
+Boost 1.87 removed io_service, io_service::work and io_context::post().
+Use io_context, executor_work_guard and boost::asio::post(), which all
+exist since Boost 1.66. io_service was an alias of io_context there, so
+ios() keeps the same type for callers.
+
+Upstream-Status: Pending
+Signed-off-by: Ahmed Adel Wafdy <fandes99@gmail.com>
+---
+ include/boost_io_context/io_context.hpp | 8 ++++----
+ src/io_context.cpp                      | 9 +++++----
+ 2 files changed, 9 insertions(+), 8 deletions(-)
+
+diff --git a/include/boost_io_context/io_context.hpp b/include/boost_io_context/io_context.hpp
+index 9200a02..3c5e01a 100644
+--- a/include/boost_io_context/io_context.hpp
++++ b/include/boost_io_context/io_context.hpp
+@@ -66,7 +66,7 @@ public:
+   IoContext(const IoContext &) = delete;
+   IoContext & operator=(const IoContext &) = delete;
+ 
+-  boost::asio::io_service & ios() const;
++  boost::asio::io_context & ios() const;
+ 
+   bool isServiceStopped();
+   uint32_t serviceThreadCount();
+@@ -76,12 +76,12 @@ public:
+   template<class F>
+   void post(F f)
+   {
+-    ios().post(f);
++    boost::asio::post(ios(), f);
+   }
+ 
+ private:
+-  std::shared_ptr<boost::asio::io_service> m_ios;
+-  std::shared_ptr<boost::asio::io_service::work> m_work;
++  std::shared_ptr<boost::asio::io_context> m_ios;
++  std::shared_ptr<boost::asio::executor_work_guard<boost::asio::io_context::executor_type>> m_work;
+   std::shared_ptr<drivers::common::thread_group> m_ios_thread_workers;
+ };
+ 
+diff --git a/src/io_context.cpp b/src/io_context.cpp
+index a50e3bb..2ff423b 100644
+--- a/src/io_context.cpp
++++ b/src/io_context.cpp
+@@ -30,8 +30,9 @@ IoContext::IoContext()
+ : IoContext(std::thread::hardware_concurrency()) {}
+ 
+ IoContext::IoContext(size_t threads_count)
+-: m_ios(new boost::asio::io_service()),
+-  m_work(new boost::asio::io_service::work(ios())),
++: m_ios(new boost::asio::io_context()),
++  m_work(new boost::asio::executor_work_guard<boost::asio::io_context::executor_type>(
++      ios().get_executor())),
+   m_ios_thread_workers(new drivers::common::thread_group())
+ {
+   for (size_t i = 0; i < threads_count; ++i) {
+@@ -51,7 +52,7 @@ IoContext::~IoContext()
+   waitForExit();
+ }
+ 
+-boost::asio::io_service & IoContext::ios() const
++boost::asio::io_context & IoContext::ios() const
+ {
+   return *m_ios;
+ }
+@@ -69,7 +70,7 @@ uint32_t IoContext::serviceThreadCount()
+ void IoContext::waitForExit()
+ {
+   if (!ios().stopped()) {
+-    ios().post([&]() {m_work.reset();});
++    boost::asio::post(ios(), [&]() {m_work.reset();});
+   }
+ 
+   ios().stop();

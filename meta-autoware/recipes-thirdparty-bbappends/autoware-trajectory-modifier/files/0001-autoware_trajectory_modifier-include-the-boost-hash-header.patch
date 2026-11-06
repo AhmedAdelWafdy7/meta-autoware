@@ -1,0 +1,25 @@
+From: Ahmed Adel Wafdy <fandes99@gmail.com>
+Subject: [PATCH] fix(autoware_trajectory_modifier): include the boost::hash header
+
+boost::hash is declared in boost/container_hash/hash.hpp. Boost.Uuid 1.86
+stopped including it from uuid_hash.hpp, so "hash is not a member of
+boost". boost/functional/hash.hpp forwards to it in every Boost release.
+
+Upstream-Status: Pending
+Signed-off-by: Ahmed Adel Wafdy <fandes99@gmail.com>
+---
+ .../trajectory_modifier_utils/obstacle_stop_utils.hpp            | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/include/autoware/trajectory_modifier/trajectory_modifier_utils/obstacle_stop_utils.hpp b/include/autoware/trajectory_modifier/trajectory_modifier_utils/obstacle_stop_utils.hpp
+index 3a58ebd148..fd9ef4adee 100644
+--- a/include/autoware/trajectory_modifier/trajectory_modifier_utils/obstacle_stop_utils.hpp
++++ b/include/autoware/trajectory_modifier/trajectory_modifier_utils/obstacle_stop_utils.hpp
+@@ -24,6 +24,7 @@
+ #include <autoware_planning_msgs/msg/trajectory_point.hpp>
+ #include <sensor_msgs/msg/point_cloud2.hpp>
+ 
++#include <boost/functional/hash.hpp>
+ #include <boost/uuid/uuid.hpp>
+ #include <boost/uuid/uuid_generators.hpp>
+ #include <boost/uuid/uuid_hash.hpp>
