@@ -143,7 +143,7 @@ def main():
     try:
         child.expect(r"login:", timeout=BOOT_TIMEOUT)
         child.sendline("root")
-        # debug-tweaks: either a shell straight away or an empty password
+        # empty root password: either a shell straight away or an empty password
         if child.expect([r"Password:", PROMPT], timeout=LOGIN_TIMEOUT) == 0:
             child.sendline("")
             child.expect(PROMPT, timeout=LOGIN_TIMEOUT)
