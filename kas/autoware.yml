@@ -15,8 +15,6 @@ target:
   - core-image-autoware
 
 local_conf_header:
-  autoware-fixups: |
-    INHERIT += "autoware-fixups"
   autoware-threads: |
     # 16 GB host: default 4 tasks x -j4 ran ~5 cc1plus at ~1.8 GB each and OOM-killed the build
     BB_NUMBER_THREADS ?= "2"
