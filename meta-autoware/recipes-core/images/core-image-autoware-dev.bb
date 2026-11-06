@@ -7,8 +7,8 @@ LICENSE = "MIT"
 inherit ros_distro_${ROS_DISTRO}
 inherit ${ROS_DISTRO_TYPE}_image
 
-# Passwordless root login
-EXTRA_IMAGE_FEATURES += "debug-tweaks"
+# Passwordless root login; wrynose dropped debug-tweaks, these three replace it
+EXTRA_IMAGE_FEATURES += "allow-empty-password allow-root-login empty-root-password"
 
 IMAGE_INSTALL:append = " \
     ros-core \

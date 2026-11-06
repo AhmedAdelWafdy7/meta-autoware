@@ -1,0 +1,349 @@
+From: Ahmed Adel Wafdy <fandes99@gmail.com>
+Subject: [PATCH] fix(autoware_system_monitor): build with Boost 1.87 and later
+
+Boost 1.88 made Boost.Process v2 the default: boost/process.hpp now
+declares the v2 API, and v1 lives in boost/process/v1.hpp. Code written
+against v1 stops compiling ("pipe is not a member of bp").
+
+When the v1 headers exist (Boost 1.86 and later), set
+BOOST_PROCESS_VERSION=1, which makes v1 the inline namespace again so
+boost::process:: names keep resolving to the v1 API, and include
+boost/process/v1.hpp. Boost 1.88 has the v1 headers but not v1.hpp, so
+there the headers v1.hpp would include are listed one by one. Older
+Boost (Ubuntu 24.04 has 1.83) takes the #else branch and is unchanged.
+
+The selection lives in one new header, system_monitor/boost_process.hpp,
+included by every file that used boost/process.hpp.
+
+Boost 1.87 also removed the io_service alias of io_context (an alias since
+Boost 1.66) and io_context::run(error_code &). run() reports the same
+errors by throwing boost::system::system_error, so catch that and log
+the same message.
+
+Tested by cross-compiling with Boost 1.90 and GCC 15 (Yocto wrynose).
+
+Upstream-Status: Pending
+Signed-off-by: Ahmed Adel Wafdy <fandes99@gmail.com>
+---
+ include/system_monitor/boost_process.hpp      | 54 +++++++++++++++++++
+ .../net_monitor/net_monitor.hpp               |  2 +-
+ .../traffic_reader/traffic_reader_service.hpp |  2 +-
+ reader/hdd_reader/hdd_reader.cpp              |  2 +-
+ .../traffic_reader/traffic_reader_service.cpp | 10 ++--
+ src/hdd_monitor/hdd_monitor.cpp               |  2 +-
+ src/mem_monitor/mem_monitor.cpp               |  2 +-
+ src/net_monitor/net_monitor.cpp               |  8 +--
+ src/ntp_monitor/ntp_monitor.cpp               |  2 +-
+ src/voltage_monitor/voltage_monitor.cpp       |  2 +-
+ test/src/cpu_monitor/test_arm_cpu_monitor.cpp |  2 +-
+ .../cpu_monitor/test_intel_cpu_monitor.cpp    |  2 +-
+ .../cpu_monitor/test_raspi_cpu_monitor.cpp    |  2 +-
+ .../cpu_monitor/test_tegra_cpu_monitor.cpp    |  2 +-
+ test/src/hdd_monitor/test_hdd_monitor.cpp     |  2 +-
+ test/src/mem_monitor/test_mem_monitor.cpp     |  2 +-
+ test/src/ntp_monitor/test_ntp_monitor.cpp     |  2 +-
+ .../process_monitor/test_process_monitor.cpp  |  2 +-
+ 18 files changed, 78 insertions(+), 24 deletions(-)
+
+diff --git a/include/system_monitor/boost_process.hpp b/include/system_monitor/boost_process.hpp
+new file mode 100644
+index 0000000000..cd0255a1b3
+--- /dev/null
++++ b/include/system_monitor/boost_process.hpp
+@@ -0,0 +1,54 @@
++// Copyright 2026 The Autoware Contributors
++//
++// Licensed under the Apache License, Version 2.0 (the "License");
++// you may not use this file except in compliance with the License.
++// You may obtain a copy of the License at
++//
++//     http://www.apache.org/licenses/LICENSE-2.0
++//
++// Unless required by applicable law or agreed to in writing, software
++// distributed under the License is distributed on an "AS IS" BASIS,
++// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++// See the License for the specific language governing permissions and
++// limitations under the License.
++
++/**
++ * @file boost_process.hpp
++ * @brief Boost.Process v1 API on every Boost version
++ */
++
++#ifndef SYSTEM_MONITOR__BOOST_PROCESS_HPP_
++#define SYSTEM_MONITOR__BOOST_PROCESS_HPP_
++
++// Boost 1.88 made Boost.Process v2 the default; v1 stays available under boost/process/v1/
++#if __has_include(<boost/process/v1/child.hpp>)
++#ifndef BOOST_PROCESS_VERSION
++#define BOOST_PROCESS_VERSION 1
++#endif
++#if __has_include(<boost/process/v1.hpp>)
++#include <boost/process/v1.hpp>
++#else  // Boost 1.88 has the v1 headers but not v1.hpp
++#include <boost/process/v1/args.hpp>
++#include <boost/process/v1/async.hpp>
++#include <boost/process/v1/async_system.hpp>
++#include <boost/process/v1/group.hpp>
++#include <boost/process/v1/child.hpp>
++#include <boost/process/v1/cmd.hpp>
++#include <boost/process/v1/env.hpp>
++#include <boost/process/v1/environment.hpp>
++#include <boost/process/v1/error.hpp>
++#include <boost/process/v1/exe.hpp>
++#include <boost/process/v1/handles.hpp>
++#include <boost/process/v1/io.hpp>
++#include <boost/process/v1/pipe.hpp>
++#include <boost/process/v1/shell.hpp>
++#include <boost/process/v1/search_path.hpp>
++#include <boost/process/v1/spawn.hpp>
++#include <boost/process/v1/system.hpp>
++#include <boost/process/v1/start_dir.hpp>
++#endif
++#else
++#include <boost/process.hpp>
++#endif
++
++#endif  // SYSTEM_MONITOR__BOOST_PROCESS_HPP_
+diff --git a/include/system_monitor/net_monitor/net_monitor.hpp b/include/system_monitor/net_monitor/net_monitor.hpp
+index 5908477ebe..4015011e78 100644
+--- a/include/system_monitor/net_monitor/net_monitor.hpp
++++ b/include/system_monitor/net_monitor/net_monitor.hpp
+@@ -392,7 +392,7 @@ protected:
+   bool enable_traffic_monitor_;         //!< @brief enable nethogs
+   std::string monitor_program_;         //!< @brief nethogs monitor program name
+   std::string socket_path_;             //!< @brief Path of UNIX domain socket
+-  boost::asio::io_service io_service_;  //!< @brief Core I/O functionality
++  boost::asio::io_context io_service_;  //!< @brief Core I/O functionality
+   std::unique_ptr<local::stream_protocol::acceptor> acceptor_;  //!< @brief UNIX domain acceptor
+   std::unique_ptr<local::stream_protocol::socket> socket_;      //!< @brief UNIX domain socket
+ 
+diff --git a/include/system_monitor/traffic_reader/traffic_reader_service.hpp b/include/system_monitor/traffic_reader/traffic_reader_service.hpp
+index 2b2f0de4a1..6a7c87738b 100644
+--- a/include/system_monitor/traffic_reader/traffic_reader_service.hpp
++++ b/include/system_monitor/traffic_reader/traffic_reader_service.hpp
+@@ -99,7 +99,7 @@ protected:
+   void execute_nethogs();
+ 
+   std::string socket_path_;             //!< @brief Path of UNIX domain socket
+-  boost::asio::io_service io_service_;  //!< @brief Core I/O functionality
++  boost::asio::io_context io_service_;  //!< @brief Core I/O functionality
+   std::unique_ptr<local::stream_protocol::acceptor> acceptor_;  //!< @brief UNIX domain acceptor
+   std::unique_ptr<local::stream_protocol::socket> socket_;      //!< @brief UNIX domain socket
+   std::thread thread_;                                          //!< @brief Thread to run nethogs
+diff --git a/reader/hdd_reader/hdd_reader.cpp b/reader/hdd_reader/hdd_reader.cpp
+index acddc54799..da12701e1d 100644
+--- a/reader/hdd_reader/hdd_reader.cpp
++++ b/reader/hdd_reader/hdd_reader.cpp
+@@ -24,7 +24,7 @@
+ #include <boost/archive/text_oarchive.hpp>
+ #include <boost/filesystem.hpp>
+ #include <boost/lexical_cast.hpp>
+-#include <boost/process.hpp>
++#include "system_monitor/boost_process.hpp"
+ #include <boost/serialization/vector.hpp>
+ 
+ #include <fcntl.h>
+diff --git a/reader/traffic_reader/traffic_reader_service.cpp b/reader/traffic_reader/traffic_reader_service.cpp
+index a0f8e45f5a..9acf1d14ef 100644
+--- a/reader/traffic_reader/traffic_reader_service.cpp
++++ b/reader/traffic_reader/traffic_reader_service.cpp
+@@ -20,7 +20,7 @@
+ #include "system_monitor/traffic_reader/traffic_reader_service.hpp"
+ 
+ #include <boost/archive/text_oarchive.hpp>
+-#include <boost/process.hpp>
++#include "system_monitor/boost_process.hpp"
+ 
+ #include <fmt/format.h>
+ #include <signal.h>
+@@ -51,10 +51,10 @@ bool TrafficReaderService::initialize()
+   acceptor_ = std::make_unique<local::stream_protocol::acceptor>(io_service_, endpoint);
+ 
+   // Run I/O service processing loop
+-  boost::system::error_code error_code;
+-  io_service_.run(error_code);
+-  if (error_code) {
+-    syslog(LOG_ERR, "Failed to run I/O service. %s\n", error_code.message().c_str());
++  try {
++    io_service_.run();
++  } catch (const boost::system::system_error & e) {
++    syslog(LOG_ERR, "Failed to run I/O service. %s\n", e.code().message().c_str());
+     return false;
+   }
+ 
+diff --git a/src/hdd_monitor/hdd_monitor.cpp b/src/hdd_monitor/hdd_monitor.cpp
+index 221e3922a3..55200c3e4e 100644
+--- a/src/hdd_monitor/hdd_monitor.cpp
++++ b/src/hdd_monitor/hdd_monitor.cpp
+@@ -25,7 +25,7 @@
+ #include <boost/algorithm/string.hpp>
+ #include <boost/archive/text_iarchive.hpp>
+ #include <boost/archive/text_oarchive.hpp>
+-#include <boost/process.hpp>
++#include "system_monitor/boost_process.hpp"
+ #include <boost/serialization/vector.hpp>
+ 
+ #include <fmt/format.h>
+diff --git a/src/mem_monitor/mem_monitor.cpp b/src/mem_monitor/mem_monitor.cpp
+index 3c0bf07fe6..153568b34b 100644
+--- a/src/mem_monitor/mem_monitor.cpp
++++ b/src/mem_monitor/mem_monitor.cpp
+@@ -21,7 +21,7 @@
+ 
+ #include "system_monitor/system_monitor_utility.hpp"
+ 
+-#include <boost/process.hpp>
++#include "system_monitor/boost_process.hpp"
+ 
+ #include <fmt/format.h>
+ 
+diff --git a/src/net_monitor/net_monitor.cpp b/src/net_monitor/net_monitor.cpp
+index 859328ce33..4d4515f41c 100644
+--- a/src/net_monitor/net_monitor.cpp
++++ b/src/net_monitor/net_monitor.cpp
+@@ -78,10 +78,10 @@ NetMonitor::NetMonitor(const rclcpp::NodeOptions & options)
+   nl80211_.init();
+ 
+   // Run I/O service processing loop
+-  boost::system::error_code error_code;
+-  io_service_.run(error_code);
+-  if (error_code) {
+-    RCLCPP_WARN(get_logger(), "Failed to run I/O service. %s", error_code.message().c_str());
++  try {
++    io_service_.run();
++  } catch (const boost::system::system_error & e) {
++    RCLCPP_WARN(get_logger(), "Failed to run I/O service. %s", e.code().message().c_str());
+   }
+ 
+   // Update list of network information
+diff --git a/src/ntp_monitor/ntp_monitor.cpp b/src/ntp_monitor/ntp_monitor.cpp
+index 02516b9e9d..113455e3df 100644
+--- a/src/ntp_monitor/ntp_monitor.cpp
++++ b/src/ntp_monitor/ntp_monitor.cpp
+@@ -22,7 +22,7 @@
+ #include <autoware_utils/system/stop_watch.hpp>
+ 
+ #include <boost/filesystem.hpp>
+-#include <boost/process.hpp>
++#include "system_monitor/boost_process.hpp"
+ 
+ #include <fmt/format.h>
+ 
+diff --git a/src/voltage_monitor/voltage_monitor.cpp b/src/voltage_monitor/voltage_monitor.cpp
+index f7771fb9f4..70707c7772 100644
+--- a/src/voltage_monitor/voltage_monitor.cpp
++++ b/src/voltage_monitor/voltage_monitor.cpp
+@@ -25,7 +25,7 @@
+ #include <boost/algorithm/string.hpp>
+ #include <boost/archive/text_iarchive.hpp>
+ #include <boost/filesystem.hpp>
+-#include <boost/process.hpp>
++#include "system_monitor/boost_process.hpp"
+ 
+ #include <fmt/format.h>
+ #include <netinet/in.h>
+diff --git a/test/src/cpu_monitor/test_arm_cpu_monitor.cpp b/test/src/cpu_monitor/test_arm_cpu_monitor.cpp
+index 294ee0df3e..c15ff2bbc4 100644
+--- a/test/src/cpu_monitor/test_arm_cpu_monitor.cpp
++++ b/test/src/cpu_monitor/test_arm_cpu_monitor.cpp
+@@ -17,7 +17,7 @@
+ #include <rclcpp/rclcpp.hpp>
+ 
+ #include <boost/algorithm/string.hpp>
+-#include <boost/process.hpp>
++#include "system_monitor/boost_process.hpp"
+ 
+ #include <fmt/format.h>
+ #include <gtest/gtest.h>
+diff --git a/test/src/cpu_monitor/test_intel_cpu_monitor.cpp b/test/src/cpu_monitor/test_intel_cpu_monitor.cpp
+index ac534a95ba..a66cdc93c5 100644
+--- a/test/src/cpu_monitor/test_intel_cpu_monitor.cpp
++++ b/test/src/cpu_monitor/test_intel_cpu_monitor.cpp
+@@ -19,7 +19,7 @@
+ 
+ #include <boost/algorithm/string.hpp>
+ #include <boost/archive/text_oarchive.hpp>
+-#include <boost/process.hpp>
++#include "system_monitor/boost_process.hpp"
+ 
+ #include <fmt/format.h>
+ #include <gtest/gtest.h>
+diff --git a/test/src/cpu_monitor/test_raspi_cpu_monitor.cpp b/test/src/cpu_monitor/test_raspi_cpu_monitor.cpp
+index d4dde545a9..2ee1947386 100644
+--- a/test/src/cpu_monitor/test_raspi_cpu_monitor.cpp
++++ b/test/src/cpu_monitor/test_raspi_cpu_monitor.cpp
+@@ -17,7 +17,7 @@
+ #include <rclcpp/rclcpp.hpp>
+ 
+ #include <boost/algorithm/string.hpp>
+-#include <boost/process.hpp>
++#include "system_monitor/boost_process.hpp"
+ 
+ #include <fmt/format.h>
+ #include <gtest/gtest.h>
+diff --git a/test/src/cpu_monitor/test_tegra_cpu_monitor.cpp b/test/src/cpu_monitor/test_tegra_cpu_monitor.cpp
+index cdd1d1b0d8..77cf67f79f 100644
+--- a/test/src/cpu_monitor/test_tegra_cpu_monitor.cpp
++++ b/test/src/cpu_monitor/test_tegra_cpu_monitor.cpp
+@@ -18,7 +18,7 @@
+ 
+ #include <boost/algorithm/string.hpp>
+ #include <boost/format.hpp>
+-#include <boost/process.hpp>
++#include "system_monitor/boost_process.hpp"
+ 
+ #include <fmt/format.h>
+ #include <gtest/gtest.h>
+diff --git a/test/src/hdd_monitor/test_hdd_monitor.cpp b/test/src/hdd_monitor/test_hdd_monitor.cpp
+index aa5359ba1c..6614a8aaee 100644
+--- a/test/src/hdd_monitor/test_hdd_monitor.cpp
++++ b/test/src/hdd_monitor/test_hdd_monitor.cpp
+@@ -20,7 +20,7 @@
+ #include <boost/algorithm/string.hpp>
+ #include <boost/archive/text_oarchive.hpp>
+ #include <boost/filesystem.hpp>
+-#include <boost/process.hpp>
++#include "system_monitor/boost_process.hpp"
+ 
+ #include <fmt/format.h>
+ #include <gtest/gtest.h>
+diff --git a/test/src/mem_monitor/test_mem_monitor.cpp b/test/src/mem_monitor/test_mem_monitor.cpp
+index 201e2cabab..e07e4c8262 100644
+--- a/test/src/mem_monitor/test_mem_monitor.cpp
++++ b/test/src/mem_monitor/test_mem_monitor.cpp
+@@ -19,7 +19,7 @@
+ #include <boost/algorithm/string.hpp>
+ #include <boost/filesystem.hpp>
+ #include <boost/format.hpp>
+-#include <boost/process.hpp>
++#include "system_monitor/boost_process.hpp"
+ 
+ #include <fmt/format.h>
+ #include <gtest/gtest.h>
+diff --git a/test/src/ntp_monitor/test_ntp_monitor.cpp b/test/src/ntp_monitor/test_ntp_monitor.cpp
+index 0b0b98127e..9cc7fa8c8f 100644
+--- a/test/src/ntp_monitor/test_ntp_monitor.cpp
++++ b/test/src/ntp_monitor/test_ntp_monitor.cpp
+@@ -18,7 +18,7 @@
+ 
+ #include <boost/algorithm/string.hpp>
+ #include <boost/filesystem.hpp>
+-#include <boost/process.hpp>
++#include "system_monitor/boost_process.hpp"
+ 
+ #include <fmt/format.h>
+ #include <gtest/gtest.h>
+diff --git a/test/src/process_monitor/test_process_monitor.cpp b/test/src/process_monitor/test_process_monitor.cpp
+index e36b9edd1b..752dc03f3a 100644
+--- a/test/src/process_monitor/test_process_monitor.cpp
++++ b/test/src/process_monitor/test_process_monitor.cpp
+@@ -18,7 +18,7 @@
+ 
+ #include <boost/algorithm/string.hpp>
+ #include <boost/filesystem.hpp>
+-#include <boost/process.hpp>
++#include "system_monitor/boost_process.hpp"
+ 
+ #include <fmt/format.h>
+ #include <gtest/gtest.h>

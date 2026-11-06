@@ -1,0 +1,41 @@
+From: Ahmed Adel Wafdy <fandes99@gmail.com>
+Subject: [PATCH] CMakeLists.txt: keep the compiler flags passed in
+
+Unsetting the cached CMAKE_CXX_FLAGS* throws away every flag the build
+passes in. Under Yocto, which sets no CMAKE_BUILD_TYPE, the library was
+compiled with only "-fopenmp -Wall -Wextra -pedantic-errors -Werror
+-std=c++14": no optimisation, no target CPU, no hardening and no
+-ffile-prefix-map, so build paths ended up in .rodata. The flags set
+below already append to CMAKE_CXX_FLAGS, so there is nothing to reset.
+
+The OpenMP flags were added with list(APPEND), which joins with ';' and
+only produced a valid command line while the flags were empty. Use
+string(APPEND).
+
+Upstream-Status: Pending
+Signed-off-by: Ahmed Adel Wafdy <fandes99@gmail.com>
+---
+ CMakeLists.txt | 7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index eb445e6..3b9fbe2 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -2,14 +2,11 @@ cmake_minimum_required(VERSION 3.5)
+ 
+ project(mussp)
+ 
+-unset(CMAKE_CXX_FLAGS CACHE)
+-unset(CMAKE_CXX_FLAGS_RELEASE CACHE)
+-unset(CMAKE_CXX_FLAGS_DEBUG CACHE)
+ 
+ find_package(OpenMP)
+ if (OPENMP_FOUND)
+-    list(APPEND CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
+-    list(APPEND CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
++    string(APPEND CMAKE_C_FLAGS " ${OpenMP_C_FLAGS}")
++    string(APPEND CMAKE_CXX_FLAGS " ${OpenMP_CXX_FLAGS}")
+ endif()
+ 
+ set(CMAKE_CXX_STANDARD 14)

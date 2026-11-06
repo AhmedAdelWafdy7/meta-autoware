@@ -1,0 +1,24 @@
+From: Ahmed Adel Wafdy <fandes99@gmail.com>
+Subject: [PATCH] fix(autoware_mission_planner_universe): remove unused using-declaration
+
+GCC 15 reports unused using-declarations under -Wunused-variable, which
+this package builds with -Werror. _2 is never used in this function.
+
+Upstream-Status: Pending
+Signed-off-by: Ahmed Adel Wafdy <fandes99@gmail.com>
+---
+ src/mission_planner/route_selector.cpp | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/src/mission_planner/route_selector.cpp b/src/mission_planner/route_selector.cpp
+index 4db2bfa5b7..ed7dc68679 100644
+--- a/src/mission_planner/route_selector.cpp
++++ b/src/mission_planner/route_selector.cpp
+@@ -90,7 +90,6 @@ RouteSelector::RouteSelector(const rclcpp::NodeOptions & options)
+ : Node("route_selector", options), main_(get_clock()), mrm_(get_clock())
+ {
+   using std::placeholders::_1;
+-  using std::placeholders::_2;
+   const auto service_qos = AUTOWARE_DEFAULT_SERVICES_QOS_PROFILE();
+   const auto durable_qos = rclcpp::QoS(1).transient_local();
+ 

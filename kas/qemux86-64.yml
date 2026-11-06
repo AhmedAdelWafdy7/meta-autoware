@@ -10,6 +10,6 @@ local_conf_header:
   # talker/listener for tools/boot-test.py
   demo-nodes: |
     IMAGE_INSTALL:append:pn-ros-image-core = " demo-nodes-cpp demo-nodes-py"
-  # passwordless root login for tools/boot-test.py
-  debug-tweaks: |
-    EXTRA_IMAGE_FEATURES += "debug-tweaks"
+  # passwordless root login for tools/boot-test.py; wrynose dropped debug-tweaks, these three replace it
+  root-login: |
+    EXTRA_IMAGE_FEATURES += "allow-empty-password allow-root-login empty-root-password"

@@ -1,0 +1,40 @@
+From: Ahmed Adel Wafdy <fandes99@gmail.com>
+Subject: [PATCH] fix(udp_driver): build with Boost 1.87 and later
+
+Boost 1.87 removed ip::address::from_string(). Use ip::make_address(),
+which exists since Boost 1.66.
+
+Upstream-Status: Pending
+Signed-off-by: Ahmed Adel Wafdy <fandes99@gmail.com>
+---
+ src/udp_socket.cpp | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/src/udp_socket.cpp b/src/udp_socket.cpp
+index 6d6b073..626b3a9 100644
+--- a/src/udp_socket.cpp
++++ b/src/udp_socket.cpp
+@@ -41,18 +41,18 @@ UdpSocket::UdpSocket(
+   const size_t recv_buffer_size)
+ : m_ctx(ctx),
+   m_udp_socket(ctx.ios()),
+-  m_remote_endpoint(boost::asio::ip::address::from_string(remote_ip), remote_port),
+-  m_host_endpoint(boost::asio::ip::address::from_string(host_ip), host_port),
+-  m_any_endpoint(boost::asio::ip::address::from_string("0.0.0.0"), host_port),
++  m_remote_endpoint(boost::asio::ip::make_address(remote_ip), remote_port),
++  m_host_endpoint(boost::asio::ip::make_address(host_ip), host_port),
++  m_any_endpoint(boost::asio::ip::make_address("0.0.0.0"), host_port),
+   m_recv_buffer_size(recv_buffer_size),
+   m_use_multicast(false)
+ {
+   m_remote_endpoint = remote_ip.empty() ?
+     boost::asio::ip::udp::endpoint{boost::asio::ip::udp::v4(), remote_port} :
+-  boost::asio::ip::udp::endpoint{boost::asio::ip::address::from_string(remote_ip), remote_port};
++  boost::asio::ip::udp::endpoint{boost::asio::ip::make_address(remote_ip), remote_port};
+   m_host_endpoint = host_ip.empty() ?
+     boost::asio::ip::udp::endpoint{boost::asio::ip::udp::v4(), host_port} :
+-  boost::asio::ip::udp::endpoint{boost::asio::ip::address::from_string(host_ip), host_port};
++  boost::asio::ip::udp::endpoint{boost::asio::ip::make_address(host_ip), host_port};
+   m_recv_buffer.resize(recv_buffer_size);
+ }
+ 

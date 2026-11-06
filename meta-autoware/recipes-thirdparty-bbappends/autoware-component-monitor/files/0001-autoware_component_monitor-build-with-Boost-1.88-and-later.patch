@@ -1,0 +1,105 @@
+From: Ahmed Adel Wafdy <fandes99@gmail.com>
+Subject: [PATCH] fix(autoware_component_monitor): build with Boost 1.88 and later
+
+Boost 1.88 made Boost.Process v2 the default: boost/process.hpp now
+declares the v2 API, and v1 lives in boost/process/v1.hpp. Code written
+against v1 stops compiling ("pipe is not a member of bp").
+
+When the v1 headers exist (Boost 1.86 and later), set
+BOOST_PROCESS_VERSION=1, which makes v1 the inline namespace again so
+boost::process:: names keep resolving to the v1 API, and include
+boost/process/v1.hpp. Boost 1.88 has the v1 headers but not v1.hpp, so
+there the headers v1.hpp would include are listed one by one. Older
+Boost (Ubuntu 24.04 has 1.83) takes the #else branch and is unchanged.
+
+Tested by cross-compiling with Boost 1.90 and GCC 15 (Yocto wrynose).
+
+Upstream-Status: Pending
+Signed-off-by: Ahmed Adel Wafdy <fandes99@gmail.com>
+---
+ src/component_monitor_node.cpp | 29 +++++++++++++++++++++++++++++
+ src/component_monitor_node.hpp | 29 +++++++++++++++++++++++++++++
+ 2 files changed, 58 insertions(+)
+
+diff --git a/src/component_monitor_node.cpp b/src/component_monitor_node.cpp
+index ab234f7fd6..5f9ed5ef6f 100644
+--- a/src/component_monitor_node.cpp
++++ b/src/component_monitor_node.cpp
+@@ -20,7 +20,36 @@
+ 
+ #include <autoware_internal_msgs/msg/resource_usage_report.hpp>
+ 
++// Boost 1.88 made Boost.Process v2 the default; v1 stays available under boost/process/v1/
++#if __has_include(<boost/process/v1/child.hpp>)
++#ifndef BOOST_PROCESS_VERSION
++#define BOOST_PROCESS_VERSION 1
++#endif
++#if __has_include(<boost/process/v1.hpp>)
++#include <boost/process/v1.hpp>
++#else  // Boost 1.88 has the v1 headers but not v1.hpp
++#include <boost/process/v1/args.hpp>
++#include <boost/process/v1/async.hpp>
++#include <boost/process/v1/async_system.hpp>
++#include <boost/process/v1/group.hpp>
++#include <boost/process/v1/child.hpp>
++#include <boost/process/v1/cmd.hpp>
++#include <boost/process/v1/env.hpp>
++#include <boost/process/v1/environment.hpp>
++#include <boost/process/v1/error.hpp>
++#include <boost/process/v1/exe.hpp>
++#include <boost/process/v1/handles.hpp>
++#include <boost/process/v1/io.hpp>
++#include <boost/process/v1/pipe.hpp>
++#include <boost/process/v1/shell.hpp>
++#include <boost/process/v1/search_path.hpp>
++#include <boost/process/v1/spawn.hpp>
++#include <boost/process/v1/system.hpp>
++#include <boost/process/v1/start_dir.hpp>
++#endif
++#else
+ #include <boost/process.hpp>
++#endif
+ 
+ #include <cctype>
+ #include <cstdint>
+diff --git a/src/component_monitor_node.hpp b/src/component_monitor_node.hpp
+index 70a486eb82..e4ec075395 100644
+--- a/src/component_monitor_node.hpp
++++ b/src/component_monitor_node.hpp
+@@ -19,7 +19,36 @@
+ 
+ #include <autoware_internal_msgs/msg/resource_usage_report.hpp>
+ 
++// Boost 1.88 made Boost.Process v2 the default; v1 stays available under boost/process/v1/
++#if __has_include(<boost/process/v1/child.hpp>)
++#ifndef BOOST_PROCESS_VERSION
++#define BOOST_PROCESS_VERSION 1
++#endif
++#if __has_include(<boost/process/v1.hpp>)
++#include <boost/process/v1.hpp>
++#else  // Boost 1.88 has the v1 headers but not v1.hpp
++#include <boost/process/v1/args.hpp>
++#include <boost/process/v1/async.hpp>
++#include <boost/process/v1/async_system.hpp>
++#include <boost/process/v1/group.hpp>
++#include <boost/process/v1/child.hpp>
++#include <boost/process/v1/cmd.hpp>
++#include <boost/process/v1/env.hpp>
++#include <boost/process/v1/environment.hpp>
++#include <boost/process/v1/error.hpp>
++#include <boost/process/v1/exe.hpp>
++#include <boost/process/v1/handles.hpp>
++#include <boost/process/v1/io.hpp>
++#include <boost/process/v1/pipe.hpp>
++#include <boost/process/v1/shell.hpp>
++#include <boost/process/v1/search_path.hpp>
++#include <boost/process/v1/spawn.hpp>
++#include <boost/process/v1/system.hpp>
++#include <boost/process/v1/start_dir.hpp>
++#endif
++#else
+ #include <boost/process.hpp>
++#endif
+ 
+ #include <cstdint>
+ #include <sstream>
