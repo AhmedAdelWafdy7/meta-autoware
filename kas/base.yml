@@ -6,6 +6,5 @@ header:
 
 local_conf_header:
   distro: |
-    WARN_QA:remove = "license-exists"
     # as in meta-ros's kas/common.yml: do_create_spdx fails on license ids without license text
     INHERIT_DISTRO:remove = "create-spdx"

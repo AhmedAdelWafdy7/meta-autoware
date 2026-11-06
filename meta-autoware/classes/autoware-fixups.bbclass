@@ -10,8 +10,12 @@ python() {
     file_path = d.getVar('FILE') or ''
     depends = d.getVar('DEPENDS') or ''
     ros_build_depends = d.getVar('ROS_BUILD_DEPENDS') or ''
-    # meta-ros2-jazzy also has a generated-recipes/ dir; match our layer only
-    is_mash_generated = '/meta-autoware/generated-recipes/' in file_path
+    # meta-ros2-jazzy also has a generated-recipes/ dir; match our layer only, by collection
+    # since integrators can check the layer out under any directory name
+    is_mash_generated = (
+        '/generated-recipes/' in file_path
+        and bb.utils.get_file_layer(file_path, d) == 'autoware-core'
+    )
     # meta-ros2-jazzy recipes with the same rosidl generator tag bug
     known_thirdparty_generator_tag_recipes = {
         'udp-msgs', 'septentrio-gnss-driver', 'grid-map-msgs',
@@ -78,6 +82,10 @@ python() {
         # generate_parameter_library's own generated code calls the deprecated parameter_traits OK()
         if 'generate-parameter-library' in depends.split():
             d.appendVar('CXXFLAGS', ' -Wno-deprecated-declarations')
+
+        if pn in (d.getVar('AUTOWARE_RELOCATE_CMAKE_EXPORTS') or '').split() \
+                and not bb.data.inherits_class('native', d):
+            d.appendVarFlag('do_install', 'postfuncs', ' autoware_relocate_cmake_exports')
 
 
     # Interface packages need the typesupport libs in their own RDEPENDS for file-rdeps QA
@@ -226,6 +234,22 @@ python() {
         ))
 }
 
+# Packages whose exported CMake files keep absolute paths into their own recipe sysroot,
+# which is wrong for every consumer and fatal buildpaths QA on wrynose. Listed rather than
+# applied to all, so the other recipes keep their task hashes.
+AUTOWARE_RELOCATE_CMAKE_EXPORTS = "agnocastlib autoware-osqp-interface sync-tooling-msgs"
+
+# CMAKE_SYSROOT is the consumer's sysroot when OE or its SDK cross-compiles, and empty on
+# target. The braces are escaped so BitBake leaves ${CMAKE_SYSROOT} for CMake.
+autoware_relocate_cmake_exports() {
+    files=$(grep -rlF --include='*.cmake' '${RECIPE_SYSROOT}/' ${D} || true)
+    if [ -z "$files" ]; then
+        bbwarn "No ${RECIPE_SYSROOT} paths in ${PN}'s CMake files; drop it from AUTOWARE_RELOCATE_CMAKE_EXPORTS"
+        return
+    fi
+    echo "$files" | xargs sed -i "s#${RECIPE_SYSROOT}/#$\{CMAKE_SYSROOT\}/#g"
+}
+
 # Map non-SPDX license names from package.xml to SPDX ids. Runs as an event
 # handler because base.bbclass checks the LICENSE format before any python().
 AUTOWARE_LICENSE_MAP = "Apache 2=Apache-2.0;Apache2=Apache-2.0;CC BY-SA 4.0=CC-BY-SA-4.0;BSD3=BSD-3-Clause;BSD-3-Clause-License=BSD-3-Clause;BSD-2=BSD-2-Clause;Boost=BSL-1.0"
@@ -233,10 +257,13 @@ AUTOWARE_LICENSE_MAP = "Apache 2=Apache-2.0;Apache2=Apache-2.0;CC BY-SA 4.0=CC-B
 AUTOWARE_LICENSE_BSD3 = " \
     autoware-ndt-scan-matcher \
     eagleye-can-velocity-converter eagleye-coordinate eagleye-msgs eagleye-navigation eagleye-rt eagleye-tf \
-    grid-map-core grid-map-costmap-2d grid-map-cv grid-map-msgs grid-map-ros \
+    eigen-stl-containers geodesy geometric-shapes random-numbers \
+    grid-map-cmake-helpers grid-map-core grid-map-costmap-2d grid-map-cv grid-map-msgs grid-map-ros \
     pointcloud-to-laserscan rtklib-msgs ublox-gps ublox-msgs ublox-serialization \
     velodyne-description velodyne-driver velodyne-msgs velodyne-pointcloud \
 "
+# plain "BSD" with no license text upstream at all; BSD-3-Clause is the ROS convention, not checked
+AUTOWARE_LICENSE_BSD3_INFERRED = "autoware-image-object-locator geographic-info geographic-msgs nmea-msgs"
 
 addhandler autoware_license_handler
 autoware_license_handler[eventmask] = "bb.event.RecipePostKeyExpansion"
@@ -245,12 +272,15 @@ python autoware_license_handler() {
     d = e.data
     pn = d.getVar('PN') or ''
     file_path = d.getVar('FILE') or ''
-    if '/meta-autoware/generated-recipes/' not in file_path and '/meta-ros/' not in file_path:
+    layer = bb.utils.get_file_layer(file_path, d)
+    is_generated = layer == 'autoware-core' and '/generated-recipes/' in file_path
+    if not is_generated and layer not in ('ros-common-layer', 'ros2-layer', 'ros2-jazzy-layer'):
         return
     lic = d.getVar('LICENSE') or ''
     new = lic
     pairs = (d.getVar('AUTOWARE_LICENSE_MAP') or '').split(';')
-    if pn.startswith('lanelet2') or pn in (d.getVar('AUTOWARE_LICENSE_BSD3') or '').split():
+    bsd3 = ((d.getVar('AUTOWARE_LICENSE_BSD3') or '') + ' ' + (d.getVar('AUTOWARE_LICENSE_BSD3_INFERRED') or '')).split()
+    if pn.startswith('lanelet2') or pn in bsd3:
         pairs.append('BSD=BSD-3-Clause')
     for pair in pairs:
         old, _, spdx = pair.partition('=')
