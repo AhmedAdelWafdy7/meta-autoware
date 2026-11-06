@@ -3,7 +3,7 @@ name: qemu
 
 on:
   push:
-    branches: [main, ci]
+    branches: [master, scarthgap, wrynose, ci]
   pull_request:
   workflow_dispatch:
 
@@ -16,7 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        machine: [qemuarm64, qemux86-64]
+        machine: [qemuarm64]
     # fork PRs would run untrusted code on the self-hosted runner
     if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
     runs-on: [self-hosted, Linux, ARM64]
