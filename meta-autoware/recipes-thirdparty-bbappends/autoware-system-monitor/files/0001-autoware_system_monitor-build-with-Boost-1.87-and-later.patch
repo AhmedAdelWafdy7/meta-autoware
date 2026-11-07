@@ -22,7 +22,7 @@ the same message.
 
 Tested by cross-compiling with Boost 1.90 and GCC 15 (Yocto wrynose).
 
-Upstream-Status: Pending
+Upstream-Status: Submitted [https://github.com/autowarefoundation/autoware_universe/pull/13591]
 Signed-off-by: Ahmed Adel Wafdy <fandes99@gmail.com>
 ---
  include/system_monitor/boost_process.hpp      | 54 +++++++++++++++++++

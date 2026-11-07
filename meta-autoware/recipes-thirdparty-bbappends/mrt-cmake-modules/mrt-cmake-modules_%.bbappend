@@ -1,7 +1,10 @@
 # meta-ros's jazzy add-lanelet2.patch has no Upstream-Status, which wrynose's patch-status
-# QA rejects; its copies for the other ROS distros have one. Drop once meta-ros adds it.
+# QA rejects; its copies for the other ROS distros have one. Drop once meta-ros adds it
+# (https://github.com/ros/meta-ros/pull/1886).
 ERROR_QA:remove = "patch-status"
 WARN_QA:append = " patch-status"
+
+# The fixes below are submitted as https://github.com/KIT-MRT/mrt_cmake_modules/pull/45
 
 # cmake_minimum_required is older than CMake 4 (wrynose) accepts; CMake 3 ignores this
 EXTRA_OECMAKE += "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"
