@@ -1,4 +1,4 @@
-# meta-ros (ROS 2 Jazzy on scarthgap).
+# meta-ros (ROS 2 Jazzy on wrynose).
 header:
   version: 14
   includes:
@@ -9,8 +9,8 @@ distro: "ros2"
 repos:
   meta-ros:
     url: "https://github.com/ros/meta-ros.git"
-    branch: "scarthgap"
-    commit: "633f7544b7c0ea829839244235771fb4337c77b5"
+    branch: "wrynose"
+    commit: "0ecfd176e806536bdd3d203a86b05cbc4fdd43ed"
     path: "layers/meta-ros"
     layers:
       meta-ros-common:

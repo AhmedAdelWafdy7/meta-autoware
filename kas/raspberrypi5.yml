@@ -9,8 +9,8 @@ machine: "raspberrypi5"
 repos:
   meta-raspberrypi:
     url: "https://github.com/agherzan/meta-raspberrypi.git"
-    branch: "scarthgap"
-    commit: "018d44467c4f09eb63f8ea5e86e85d755250cf89"
+    branch: "wrynose"
+    commit: "919588393f41b48cb6c5d832aa35e58a19b6762d"
     path: "layers/meta-raspberrypi"
 
 local_conf_header:

@@ -12,6 +12,7 @@ Exits 0 and prints PASS on success, non-zero and prints FAIL otherwise.
 """
 import argparse
 import re
+import subprocess
 import sys
 from pathlib import Path
 
@@ -42,7 +43,14 @@ def fail(msg):
 def find_qemuboot_conf(machine, image):
     # The image's qemuboot.conf carries the right qemu flags for any MACHINE.
     # One optional name segment (the ROS distro) so core-image-autoware-dev doesn't match.
-    deploy_dir = BUILD_DIR / "tmp-glibc/deploy/images" / machine
+    # Ask BitBake: TMPDIR is tmp-glibc on scarthgap and tmp from styhead, and a reused
+    # build directory can hold both
+    getvar = subprocess.run(["bitbake-getvar", "--value", "-q", "DEPLOY_DIR"],
+                            cwd=BUILD_DIR, capture_output=True, text=True)
+    lines = getvar.stdout.strip().splitlines()
+    if getvar.returncode != 0 or not lines:
+        fail(f"bitbake-getvar DEPLOY_DIR failed; run inside kas shell\n{getvar.stderr}")
+    deploy_dir = Path(lines[-1]) / "images" / machine
     pattern = re.compile(rf"{re.escape(image)}(-[a-z0-9]+)?-{re.escape(machine)}\.rootfs\.qemuboot\.conf")
     matches = [p for p in deploy_dir.glob("*.qemuboot.conf") if pattern.fullmatch(p.name)]
     if not matches:
@@ -80,7 +88,8 @@ def check_talker_listener(child):
     env = (
         "export AMENT_PREFIX_PATH=/opt/ros/jazzy;"
         "export PATH=/opt/ros/jazzy/bin:$PATH;"
-        "export PYTHONPATH=/opt/ros/jazzy/lib/python3.12/site-packages:$PYTHONPATH;"
+        # python3.12 on scarthgap, python3.14 on wrynose
+        "export PYTHONPATH=$(echo /opt/ros/jazzy/lib/python3.*/site-packages):$PYTHONPATH;"
         "export LD_LIBRARY_PATH=/opt/ros/jazzy/lib:$LD_LIBRARY_PATH;"
         # otherwise the listener's redirected stdout is block-buffered
         "export PYTHONUNBUFFERED=1;"
