@@ -4,7 +4,7 @@ Subject: [PATCH] fix(udp_driver): build with Boost 1.87 and later
 Boost 1.87 removed ip::address::from_string(). Use ip::make_address(),
 which exists since Boost 1.66.
 
-Upstream-Status: Pending
+Upstream-Status: Submitted [https://github.com/autowarefoundation/transport_drivers/pull/6]
 Signed-off-by: Ahmed Adel Wafdy <fandes99@gmail.com>
 ---
  src/udp_socket.cpp | 10 +++++-----

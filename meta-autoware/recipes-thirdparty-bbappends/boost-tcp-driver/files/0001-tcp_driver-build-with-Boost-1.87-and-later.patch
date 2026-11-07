@@ -17,7 +17,7 @@ boost::system::system_error where run(ec) set ec. One difference: a
 system_error thrown by a completion handler is now returned too, where
 it used to propagate.
 
-Upstream-Status: Pending
+Upstream-Status: Submitted [https://github.com/autowarefoundation/transport_drivers/pull/6]
 Signed-off-by: Ahmed Adel Wafdy <fandes99@gmail.com>
 ---
  include/boost_tcp_driver/tcp_socket.hpp |  4 ++--

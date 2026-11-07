@@ -4,7 +4,7 @@ Subject: [PATCH] fix(yabloc_common): remove unused using-declaration
 GCC 15 reports unused using-declarations under -Wunused-variable, which
 this package builds with -Werror. _2 is never used in this function.
 
-Upstream-Status: Pending
+Upstream-Status: Submitted [https://github.com/autowarefoundation/autoware_universe/pull/13595]
 Signed-off-by: Ahmed Adel Wafdy <fandes99@gmail.com>
 ---
  src/ground_server/ground_server_core.cpp | 1 -
