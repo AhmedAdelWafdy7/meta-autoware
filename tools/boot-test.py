@@ -88,7 +88,8 @@ def check_talker_listener(child):
     env = (
         "export AMENT_PREFIX_PATH=/opt/ros/jazzy;"
         "export PATH=/opt/ros/jazzy/bin:$PATH;"
-        "export PYTHONPATH=/opt/ros/jazzy/lib/python3.12/site-packages:$PYTHONPATH;"
+        # python3.12 on scarthgap, python3.14 on wrynose
+        "export PYTHONPATH=$(echo /opt/ros/jazzy/lib/python3.*/site-packages):$PYTHONPATH;"
         "export LD_LIBRARY_PATH=/opt/ros/jazzy/lib:$LD_LIBRARY_PATH;"
         # otherwise the listener's redirected stdout is block-buffered
         "export PYTHONUNBUFFERED=1;"
