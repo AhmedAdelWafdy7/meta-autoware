@@ -6,7 +6,7 @@ Use io_context, executor_work_guard and boost::asio::post(), which all
 exist since Boost 1.66. io_service was an alias of io_context there, so
 ios() keeps the same type for callers.
 
-Upstream-Status: Pending
+Upstream-Status: Submitted [https://github.com/autowarefoundation/transport_drivers/pull/6]
 Signed-off-by: Ahmed Adel Wafdy <fandes99@gmail.com>
 ---
  include/boost_io_context/io_context.hpp | 8 ++++----
