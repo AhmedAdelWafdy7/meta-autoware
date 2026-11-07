@@ -1,82 +1,95 @@
 # meta-autoware
 
-Building the Autoware autonomous driving stack with Yocto/OpenEmbedded instead of Docker.
-ROS 2 Jazzy on scarthgap, GPU-free, cross-compiled. 
+Builds the [Autoware](https://autoware.org) autonomous driving stack with Yocto instead of
+Docker. Autoware runs on ROS 2 Jazzy, cross-compiled into a regular embedded Linux image,
+with no GPU needed.
 
-**Status:** `core-image-autoware` (243 Autoware packages) builds for qemuarm64 and runs
-Autoware nodes under qemu. The Autoware demo also runs on a **Raspberry Pi 5 (8 GB)** with
-**~4 GB RAM free** — see the [Demo](#demo-raspberry-pi-5-8-gb) section below.
+The layer itself is in [`meta-autoware/`](meta-autoware/README.md). This page covers the kas
+setup used to build and test it.
 
-![Autoware demo running on a Raspberry Pi 5 (8 GB) with ~4 GB RAM headroom](doc/Screenshot1.png)
+![Autoware demo on a Raspberry Pi 5 (8 GB)](doc/Screenshot1.png)
 
-![Autoware node graph / rviz view on the Pi 5](doc/Screenshot2.png)
+![Autoware node graph on the Pi 5](doc/Screenshot2.png)
 
-## Demo: Raspberry Pi 5 (8 GB)
+## Branches
 
-The Autoware demo runs on a Raspberry Pi 5 with 8 GB of RAM, leaving roughly 4 GB free.
-No GPU, no Docker — the stack is cross-compiled with Yocto and booted on the board.
+| Branch | Yocto release | Status |
+|---|---|---|
+| `master` | wrynose (6.0) | development |
+| `wrynose` | wrynose (6.0) | stable |
+| `scarthgap` | scarthgap (5.0) | stable |
 
-- Images: [`doc/Screenshot1.png`](doc/Screenshot1.png), [`doc/Screenshot2.png`](doc/Screenshot2.png)
-- Log in as `root` (no password) and `. /opt/ros/jazzy/setup.sh`.
+On each branch, CI builds `core-image-autoware` for qemuarm64 and boots it under QEMU.
 
-## Prerequisites
+## What runs
 
-- Linux x86-64 or aarch64 build host (cross-compiling; never build on the target board
-  itself), 250 GB free disk, 16 GB RAM, the usual Poky host packages
-  (`gcc`, `g++`, `make`, `git`, `wget`, `cpio`, `diffstat`, `chrpath`, `rsync`, `file`).
+- `core-image-autoware` starts Autoware nodes under QEMU on qemuarm64.
+- The planning simulator demo runs on a Raspberry Pi 5 with 8 GB of RAM, leaving about 4 GB
+  free. See [doc/raspberrypi5.md](doc/raspberrypi5.md). It has been tested on scarthgap
+  only; the wrynose Pi 5 build is not tested yet.
+
+## Requirements
+
+- A Linux build host, x86-64 or aarch64, with about 250 GB of free disk and 16 GB of RAM.
+  Build on the host and flash the board; don't build on the board.
+- The usual Yocto host packages: `gcc`, `g++`, `make`, `git`, `wget`, `cpio`, `diffstat`,
+  `chrpath`, `rsync`, `file`.
 - `kas` and `pexpect`: `pip install --user kas pexpect`
 
 ## Build
 
-ROS 2 base image:
 ```sh
-kas build kas/qemuarm64.yml
+kas build kas/qemuarm64.yml                        # ROS 2 base image
+kas build kas/autoware.yml                         # Autoware image
+kas build kas/raspberrypi5.yml                     # Autoware image for the Pi 5
+kas build kas/raspberrypi5.yml:kas/demo.yml        # planning simulator demo for the Pi 5
 ```
 
-Autoware image:
-```sh
-kas build kas/autoware.yml
-```
-
-A cold build takes hours. `kas/cache.yml` keeps downloads and sstate in `yocto-cache/` next
-to the build directory and uses the public Yocto sstate mirror. `kas/autoware.yml` limits
-bitbake to 2 tasks × `-j 2`, which fits a 16 GB host.
-
-> **Note:** the layer's bbappends (fixes to `ceres-solver`, `proxsuite`, `sophus`,
-> `range-v3`, `gtest-vendor`, `joy`, `pcl-ros`, `tl-expected`, `septentrio-gnss-driver`,
-> `tinyxml2-vendor`, `rosx-introspection`) are opt-in: they only apply when `autoware` is in
-> `DISTRO_FEATURES`. `kas/autoware.yml` enables it. The layer stays inert for every other
-> build, which is what `yocto-check-layer` expects.
+A first build takes hours. `kas/cache.yml` keeps downloads and sstate in `yocto-cache/`, next
+to the build directory, and pulls from the public Yocto sstate mirror. `kas/autoware.yml`
+runs two tasks at `-j 2`, which fits in 16 GB. One pcl source file needs about 6 GB on its own.
 
 ## Test
 
+Run the checks inside a kas shell so `runqemu` can find BitBake:
+
 ```sh
-python3 tools/boot-test.py qemuarm64                                # talker/listener on ros-image-core
-python3 tools/boot-test.py qemuarm64 --image core-image-autoware    # Autoware node starts
+kas shell kas/qemuarm64.yml -c "python3 tools/boot-test.py qemuarm64"
+kas shell kas/autoware.yml -c "python3 tools/boot-test.py qemuarm64 --image core-image-autoware"
 ```
 
-Run them inside `kas shell kas/autoware.yml -c "..."` so `runqemu` finds bitbake.
+The first one checks that a talker and a listener exchange messages on `ros-image-core`.
+The second one starts `autoware_simple_pure_pursuit` and waits for its control command topic.
+CI runs both on a self-hosted aarch64 runner; see `.github/workflows/`.
 
-To use the Autoware image by hand:
+To boot the Autoware image yourself:
+
 ```sh
-kas shell kas/autoware.yml -c "runqemu $PWD/build/tmp-glibc/deploy/images/qemuarm64/core-image-autoware-jazzy-qemuarm64.rootfs.qemuboot.conf nographic slirp qemuparams=\"-m 4096 -smp 4\""
+kas shell kas/autoware.yml -c 'runqemu core-image-autoware nographic slirp qemuparams="-m 4096 -smp 4"'
 ```
-Log in as `root` (no password) and `. /opt/ros/jazzy/setup.sh`.
 
-CI runs both checks on a self-hosted runner, see `.github/workflows/`.
+Log in as `root` (no password), then run `. /opt/ros/jazzy/setup.sh`.
 
 ## Layout
 
-- `kas/` — build configs; release pins in `kas/releases/`
-- `meta-autoware/` — the layer
-  - `generated-recipes/` — recipes generated by `ros-mash`, never edited by hand
-  - `classes/autoware-fixups.bbclass` — fixes applied to generated recipes by content
-  - `recipes-thirdparty-bbappends/` — fixes for specific upstream recipes or sources
-  - `recipes-core/` — packagegroups and images
-- `doc/` — screenshots of the Pi 5 demo
-- `tools/` — `boot-test.py` runs the qemu checks, `ci-host-check.sh` checks the CI runner
+| Path | Contents |
+|---|---|
+| `kas/` | build configs; Yocto release pins are in `kas/releases/` |
+| `meta-autoware/generated-recipes/` | recipes generated by `ros-mash`; never edit them by hand |
+| `meta-autoware/classes/autoware-fixups.bbclass` | fixes applied to the generated recipes |
+| `meta-autoware/recipes-thirdparty-bbappends/` | patches and fixes for specific packages |
+| `meta-autoware/recipes-core/` | images and packagegroups |
+| `meta-autoware/recipes-demo/` | the planning simulator demo and its map |
+| `doc/` | Pi 5 notes and screenshots |
+| `tools/` | `boot-test.py` for the QEMU checks, `ci-host-check.sh` for the CI runner |
+
+## Contributing
+
+Open a pull request against `master` and sign off every commit (`git commit -s`). Fixes for
+a release branch go to `master` first and are then cherry-picked.
 
 ## License
 
-Layer metadata is MIT (see [LICENSE](LICENSE)). Packages keep their upstream licenses.
-The Shinjuku map used in the demo is **CC BY-NC** — demo images only, non-commercial.
+The layer metadata is MIT; see [LICENSE](LICENSE). Packages keep their upstream licenses.
+The Shinjuku map in the demo image is CC BY-NC, so the demo image is for non-commercial use
+only.
