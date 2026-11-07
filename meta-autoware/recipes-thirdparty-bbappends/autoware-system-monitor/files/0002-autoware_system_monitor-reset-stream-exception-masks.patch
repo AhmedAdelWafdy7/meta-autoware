@@ -10,7 +10,7 @@ Pass std::ios::goodbit, which is what the comments describe. Every one of
 these streams is local and is not read again after the reset, so runtime
 behaviour does not change.
 
-Upstream-Status: Pending
+Upstream-Status: Submitted [https://github.com/autowarefoundation/autoware_universe/pull/13591]
 Signed-off-by: Ahmed Adel Wafdy <fandes99@gmail.com>
 ---
  src/process_monitor/process_monitor.cpp | 14 +++++++-------

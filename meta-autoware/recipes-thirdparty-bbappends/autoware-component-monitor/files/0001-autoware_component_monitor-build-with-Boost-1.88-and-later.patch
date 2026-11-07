@@ -14,7 +14,7 @@ Boost (Ubuntu 24.04 has 1.83) takes the #else branch and is unchanged.
 
 Tested by cross-compiling with Boost 1.90 and GCC 15 (Yocto wrynose).
 
-Upstream-Status: Pending
+Upstream-Status: Submitted [https://github.com/autowarefoundation/autoware_component_monitor/pull/4]
 Signed-off-by: Ahmed Adel Wafdy <fandes99@gmail.com>
 ---
  src/component_monitor_node.cpp | 29 +++++++++++++++++++++++++++++

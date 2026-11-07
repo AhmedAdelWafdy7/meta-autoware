@@ -17,7 +17,7 @@ old boost/process.hpp happened to include it.
 
 Tested by cross-compiling with Boost 1.90 and GCC 15 (Yocto wrynose).
 
-Upstream-Status: Pending
+Upstream-Status: Submitted [https://github.com/autowarefoundation/autoware_bluetooth_monitor/pull/5]
 Signed-off-by: Ahmed Adel Wafdy <fandes99@gmail.com>
 ---
  service/l2ping.cpp         | 30 ++++++++++++++++++++++++++++++
