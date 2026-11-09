@@ -51,54 +51,61 @@ VENDOR_SPECIFIC_NAMES = {
     "continental-msgs", "continental-srvs",
 }
 
-# Depend, directly or transitively, on something with no OE recipe
-# (cgal, crypto++, libpng++, openblas, python3-scipy, rviz2, acados).
-# Found with tools/find-reverse-closure.py and real do_rootfs failures.
+# Depend, directly or transitively, on something with no recipe in the layers used. Each
+# entry is what `bitbake -g <pn>` reports missing, so recheck with it when a recipe is added
+# (the planners were left here for a python3-scipy dependency proxsuite no longer has).
 MISSING_OE_RECIPE_CHAIN_NAMES = {
-    "autoware-accel-brake-map-calibrator", "autoware-compare-map-segmentation",
-    "autoware-detection-by-tracker", "autoware-euclidean-cluster",
-    "autoware-ground-segmentation", "autoware-launch", "autoware-lidar-marker-localizer",
-    "autoware-occupancy-grid-map-outlier-filter", "autoware-pointcloud-preprocessor",
-    "autoware-smart-mpc-trajectory-follower", "autoware-velodyne-monitor",
-    "awsim-labs-sensor-kit-launch", "awsim-sensor-kit-launch", "common-sensor-launch",
-    "nebula-core-decoders", "sample-sensor-kit-launch", "single-lidar-common-launch",
-    "single-lidar-sensor-kit-launch", "tier4-localization-launch",
-    # via rviz2, or autoware-velocity-smoother -> proxsuite -> python3-scipy
-    "autoware-core", "autoware-core-planning", "autoware-qp-interface",
-    "autoware-velocity-smoother", "autoware-trajectory-optimizer",
-    "autoware-elevation-map-loader",
-    "autoware-behavior-velocity-blind-spot-module",
-    "autoware-behavior-velocity-crosswalk-module",
-    "autoware-behavior-velocity-detection-area-module",
-    "autoware-behavior-velocity-intersection-module",
-    "autoware-behavior-velocity-no-drivable-lane-module",
-    "autoware-behavior-velocity-no-stopping-area-module",
-    "autoware-behavior-velocity-occlusion-spot-module",
-    "autoware-behavior-velocity-planner",
-    "autoware-behavior-velocity-planner-common",
-    "autoware-behavior-velocity-roundabout-module",
-    "autoware-behavior-velocity-rtc-interface",
-    "autoware-behavior-velocity-speed-bump-module",
-    "autoware-behavior-velocity-stop-line-module",
-    "autoware-behavior-velocity-template-module",
-    "autoware-behavior-velocity-traffic-light-module",
-    "autoware-behavior-velocity-virtual-traffic-light-module",
-    "autoware-behavior-velocity-walkway-module",
-    "autoware-motion-velocity-boundary-departure-prevention-module",
-    "autoware-motion-velocity-dynamic-obstacle-stop-module",
-    "autoware-motion-velocity-obstacle-cruise-module",
-    "autoware-motion-velocity-obstacle-slow-down-module",
-    "autoware-motion-velocity-obstacle-stop-module",
-    "autoware-motion-velocity-obstacle-velocity-limiter-module",
-    "autoware-motion-velocity-out-of-lane-module",
-    "autoware-motion-velocity-planner",
-    "autoware-motion-velocity-planner-common",
-    "autoware-motion-velocity-road-user-stop-module",
-    "autoware-motion-velocity-run-out-module",
-    # RDEPENDS on autoware-probabilistic-occupancy-grid-map (CUDA, excluded)
+    # cgal, via autoware-pointcloud-preprocessor
+    "autoware-pointcloud-preprocessor", "autoware-compare-map-segmentation",
+    "autoware-ground-segmentation", "autoware-lidar-marker-localizer",
+    "autoware-occupancy-grid-map-outlier-filter", "tier4-localization-launch",
+    # python3-scipy
+    "autoware-accel-brake-map-calibrator", "autoware-smart-mpc-trajectory-follower",
+    # crypto++ and cpprest, via autoware-velodyne-monitor
+    "autoware-velodyne-monitor", "common-sensor-launch", "single-lidar-common-launch",
+    # libpng++
+    "nebula-core-decoders",
+    # autoware-shape-estimation (CUDA, excluded)
+    "autoware-euclidean-cluster", "autoware-detection-by-tracker",
+    # rviz2, qtbase
+    "autoware-core", "autoware-elevation-map-loader",
+    # usb-cam
+    "awsim-labs-sensor-kit-launch", "awsim-sensor-kit-launch", "single-lidar-sensor-kit-launch",
+    # find_package(acados) at configure time, which bitbake -g cannot see; the trajectory
+    # optimizer and modifier need the path optimizer
+    "autoware-path-optimizer", "autoware-trajectory-optimizer", "autoware-trajectory-modifier",
+}
+
+# Vehicle and sensor kits for the reference vehicle and the simulators. An integrator replaces
+# them with their own; the planning simulator demo installs the sample kit itself.
+VEHICLE_SENSOR_KIT_NAMES = {
+    "sample-vehicle-description", "sample-vehicle-launch",
+    "sample-sensor-kit-description", "sample-sensor-kit-launch",
+    "autoware-sample-vehicle-description", "autoware-sample-sensor-kit-description",
+    "autoware-awsim-sensor-kit-description", "awsim-labs-vehicle-description",
+    "awsim-labs-vehicle-launch", "awsim-labs-sensor-kit-description",
+    "awsim-sensor-kit-description", "common-awsim-labs-sensor-launch",
+    "carla-sensor-kit-description", "carla-sensor-kit-launch",
+    # RDEPENDS on autoware-sample-sensor-kit-description
+    "single-lidar-sensor-kit-description",
+}
+
+# Perception packages that build on CPU once the class strips their CUDA dependencies.
+# Out of the production groups until perception comes with the ai distro feature.
+PERCEPTION_NAMES = {
     "autoware-detected-object-validation", "autoware-raindrop-cluster-filter",
-    # find_package(acados), no OE recipe
-    "autoware-path-optimizer", "autoware-trajectory-modifier",
+}
+
+# Tests, test helpers and samples; anything a production package needs from them still
+# comes in through its RDEPENDS
+TEST_NAMES = {
+    "agnocast-e2e-test", "agnocast-sample-application", "agnocast-sample-interfaces",
+    "autoware-diagnostic-graph-test-examples", "autoware-planning-validator-test-utils",
+    "autoware-fake-test-node", "autoware-test-node", "autoware-test-utils", "autoware-testing",
+    "autoware-planning-test-manager",
+    # the agnocast metapackage, which RDEPENDS on its samples; its libraries match the
+    # planning rule one by one
+    "agnocast",
 }
 
 # Dev-only groups, checked before the Tier 1 rules
@@ -124,6 +131,8 @@ SIMULATION_NAMES = {
 PLANNING_SIMULATOR_DEMO_NAMES = {
     "tier4-planning-launch",
     "tier4-control-launch",
+    # starts the whole stack, simulators included
+    "autoware-launch",
     # perception, with its CUDA dependencies stripped; the demo starts them
     "tier4-perception-launch",
     "autoware-probabilistic-occupancy-grid-map",
@@ -218,8 +227,12 @@ RULES = [
 
 
 def categorize(pn):
-    if pn in VENDOR_SPECIFIC_NAMES:
+    if pn in VENDOR_SPECIFIC_NAMES or pn in VEHICLE_SENSOR_KIT_NAMES:
         return "tier2-vendor-example"
+    if pn in TEST_NAMES:
+        return "test"
+    if pn in PERCEPTION_NAMES:
+        return "perception"
     if pn in QT5_GAP_NAMES:
         return "excluded-qt5-gap"
     if pn in MISSING_OE_RECIPE_CHAIN_NAMES:
