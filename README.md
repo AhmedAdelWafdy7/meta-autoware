@@ -103,6 +103,22 @@ same Autoware version gives the same recipes. Every package left out is listed w
 in `results/universe-<version>/skipped-packages.json`. `--no-mash` reuses the last generator
 output, for when only the class or the scripts changed.
 
+## Compare with Autoware's images
+
+`results/parity/` has a table for each of Autoware's container images: every ROS package in the
+image, whether `core-image-autoware` has it, and if not, why. CI writes the same tables for each
+build. To refresh the upstream lists, pinned by digest in `results/upstream/`, and compare:
+
+```sh
+tools/upstream-package-list.py ghcr.io/autowarefoundation/autoware:universe-jazzy-2.0.0 \
+    results/upstream/universe-jazzy-2.0.0.json
+tools/compare-upstream.py --upstream results/upstream/universe-jazzy-2.0.0.json \
+    --manifest core-image-autoware=<deploy dir>/core-image-autoware-jazzy-qemuarm64.rootfs.manifest \
+    --output results/parity/universe-jazzy-2.0.0
+```
+
+The first reads only the package index from each image layer, so nothing is pulled.
+
 ## Contributing
 
 Open a pull request against `master` and sign off every commit (`git commit -s`). Fixes for

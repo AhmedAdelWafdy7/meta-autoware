@@ -1,0 +1,4836 @@
+{
+  "upstream": {
+    "image": "ghcr.io/autowarefoundation/autoware:universe-cuda-jazzy-2.0.0",
+    "index_digest": "sha256:20e5b7902012b4ff87a6a7c3a87f7c2f2f7a78492e83fb7adb2243aab0fb8052",
+    "arm64_manifest_digest": "sha256:8d0776d3d3241b6cf798cf5a489f79bf6322d39a6ead289abb3555bbe4a54393"
+  },
+  "autoware_ref": "1.9.0",
+  "images": [
+    "core-image-autoware",
+    "core-image-autoware-demo"
+  ],
+  "counts": {
+    "in-image": 521,
+    "build-tool": 31,
+    "missing-oe-recipe": 26,
+    "qt": 42,
+    "in-other-image": 61,
+    "cuda": 27,
+    "not-in-autoware-ref": 30,
+    "simulation": 4,
+    "meta-ros-not-installed": 25,
+    "vendor-example": 30,
+    "shadows-oe-recipe": 1,
+    "license-todo": 2
+  },
+  "packages": [
+    {
+      "package": "action_msgs",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "actionlib_msgs",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "agnocast",
+      "prefix": "/opt/autoware/agnocast",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "agnocast_cie_config_msgs",
+      "prefix": "/opt/autoware/agnocast_cie_config_msgs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "agnocast_cie_thread_configurator",
+      "prefix": "/opt/autoware/agnocast_cie_thread_configurator",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "agnocast_components",
+      "prefix": "/opt/autoware/agnocast_components",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "agnocast_e2e_test",
+      "prefix": "/opt/autoware/agnocast_e2e_test",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "agnocast_ioctl_wrapper",
+      "prefix": "/opt/autoware/agnocast_ioctl_wrapper",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "agnocast_sample_application",
+      "prefix": "/opt/autoware/agnocast_sample_application",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "agnocast_sample_interfaces",
+      "prefix": "/opt/autoware/agnocast_sample_interfaces",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "agnocastlib",
+      "prefix": "/opt/autoware/agnocastlib",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ament_cmake",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ament_cmake_auto",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ament_cmake_copyright",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ament_cmake_core",
+      "prefix": "/opt/ros/jazzy",
+      "status": "build-tool",
+      "detail": ""
+    },
+    {
+      "package": "ament_cmake_cppcheck",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ament_cmake_cpplint",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ament_cmake_export_definitions",
+      "prefix": "/opt/ros/jazzy",
+      "status": "build-tool",
+      "detail": ""
+    },
+    {
+      "package": "ament_cmake_export_dependencies",
+      "prefix": "/opt/ros/jazzy",
+      "status": "build-tool",
+      "detail": ""
+    },
+    {
+      "package": "ament_cmake_export_include_directories",
+      "prefix": "/opt/ros/jazzy",
+      "status": "build-tool",
+      "detail": ""
+    },
+    {
+      "package": "ament_cmake_export_interfaces",
+      "prefix": "/opt/ros/jazzy",
+      "status": "build-tool",
+      "detail": ""
+    },
+    {
+      "package": "ament_cmake_export_libraries",
+      "prefix": "/opt/ros/jazzy",
+      "status": "build-tool",
+      "detail": ""
+    },
+    {
+      "package": "ament_cmake_export_link_flags",
+      "prefix": "/opt/ros/jazzy",
+      "status": "build-tool",
+      "detail": ""
+    },
+    {
+      "package": "ament_cmake_export_targets",
+      "prefix": "/opt/ros/jazzy",
+      "status": "build-tool",
+      "detail": ""
+    },
+    {
+      "package": "ament_cmake_flake8",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ament_cmake_gen_version_h",
+      "prefix": "/opt/ros/jazzy",
+      "status": "build-tool",
+      "detail": ""
+    },
+    {
+      "package": "ament_cmake_gmock",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ament_cmake_gtest",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ament_cmake_include_directories",
+      "prefix": "/opt/ros/jazzy",
+      "status": "build-tool",
+      "detail": ""
+    },
+    {
+      "package": "ament_cmake_libraries",
+      "prefix": "/opt/ros/jazzy",
+      "status": "build-tool",
+      "detail": ""
+    },
+    {
+      "package": "ament_cmake_lint_cmake",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ament_cmake_pep257",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ament_cmake_pytest",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ament_cmake_python",
+      "prefix": "/opt/ros/jazzy",
+      "status": "build-tool",
+      "detail": ""
+    },
+    {
+      "package": "ament_cmake_ros",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ament_cmake_target_dependencies",
+      "prefix": "/opt/ros/jazzy",
+      "status": "build-tool",
+      "detail": ""
+    },
+    {
+      "package": "ament_cmake_test",
+      "prefix": "/opt/ros/jazzy",
+      "status": "build-tool",
+      "detail": ""
+    },
+    {
+      "package": "ament_cmake_uncrustify",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ament_cmake_version",
+      "prefix": "/opt/ros/jazzy",
+      "status": "build-tool",
+      "detail": ""
+    },
+    {
+      "package": "ament_cmake_xmllint",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ament_copyright",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ament_cppcheck",
+      "prefix": "/opt/ros/jazzy",
+      "status": "build-tool",
+      "detail": ""
+    },
+    {
+      "package": "ament_cpplint",
+      "prefix": "/opt/ros/jazzy",
+      "status": "build-tool",
+      "detail": ""
+    },
+    {
+      "package": "ament_flake8",
+      "prefix": "/opt/ros/jazzy",
+      "status": "build-tool",
+      "detail": ""
+    },
+    {
+      "package": "ament_index_cpp",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ament_index_python",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ament_lint",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ament_lint_auto",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ament_lint_cmake",
+      "prefix": "/opt/ros/jazzy",
+      "status": "build-tool",
+      "detail": ""
+    },
+    {
+      "package": "ament_lint_common",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ament_package",
+      "prefix": "/opt/ros/jazzy",
+      "status": "build-tool",
+      "detail": ""
+    },
+    {
+      "package": "ament_pep257",
+      "prefix": "/opt/ros/jazzy",
+      "status": "build-tool",
+      "detail": ""
+    },
+    {
+      "package": "ament_uncrustify",
+      "prefix": "/opt/ros/jazzy",
+      "status": "build-tool",
+      "detail": ""
+    },
+    {
+      "package": "ament_xmllint",
+      "prefix": "/opt/ros/jazzy",
+      "status": "build-tool",
+      "detail": ""
+    },
+    {
+      "package": "angles",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "aruco",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_accel_brake_map_calibrator",
+      "prefix": "/opt/autoware/autoware_accel_brake_map_calibrator",
+      "status": "missing-oe-recipe",
+      "detail": ""
+    },
+    {
+      "package": "autoware_adapi_adaptors",
+      "prefix": "/opt/autoware/autoware_adapi_adaptors",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_adapi_specs",
+      "prefix": "/opt/autoware/autoware_adapi_specs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_adapi_v1_msgs",
+      "prefix": "/opt/autoware/autoware_adapi_v1_msgs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_adapi_version_msgs",
+      "prefix": "/opt/autoware/autoware_adapi_version_msgs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_adapi_visualizers",
+      "prefix": "/opt/autoware/autoware_adapi_visualizers",
+      "status": "qt",
+      "detail": ""
+    },
+    {
+      "package": "autoware_agnocast_wrapper",
+      "prefix": "/opt/autoware/autoware_agnocast_wrapper",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_ar_tag_based_localizer",
+      "prefix": "/opt/autoware/autoware_ar_tag_based_localizer",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_autonomous_emergency_braking",
+      "prefix": "/opt/autoware/autoware_autonomous_emergency_braking",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_awsim_sensor_kit_description",
+      "prefix": "/opt/autoware/autoware_awsim_sensor_kit_description",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_bag_time_manager_rviz_plugin",
+      "prefix": "/opt/autoware/autoware_bag_time_manager_rviz_plugin",
+      "status": "qt",
+      "detail": ""
+    },
+    {
+      "package": "autoware_behavior_path_avoidance_by_lane_change_module",
+      "prefix": "/opt/autoware/autoware_behavior_path_avoidance_by_lane_change_module",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_behavior_path_bidirectional_traffic_module",
+      "prefix": "/opt/autoware/autoware_behavior_path_bidirectional_traffic_module",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_behavior_path_direction_change_module",
+      "prefix": "/opt/autoware/autoware_behavior_path_direction_change_module",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_behavior_path_dynamic_obstacle_avoidance_module",
+      "prefix": "/opt/autoware/autoware_behavior_path_dynamic_obstacle_avoidance_module",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_behavior_path_external_request_lane_change_module",
+      "prefix": "/opt/autoware/autoware_behavior_path_external_request_lane_change_module",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_behavior_path_goal_planner_module",
+      "prefix": "/opt/autoware/autoware_behavior_path_goal_planner_module",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_behavior_path_lane_change_module",
+      "prefix": "/opt/autoware/autoware_behavior_path_lane_change_module",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_behavior_path_planner",
+      "prefix": "/opt/autoware/autoware_behavior_path_planner",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_behavior_path_planner_common",
+      "prefix": "/opt/autoware/autoware_behavior_path_planner_common",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_behavior_path_sampling_planner_module",
+      "prefix": "/opt/autoware/autoware_behavior_path_sampling_planner_module",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_behavior_path_side_shift_module",
+      "prefix": "/opt/autoware/autoware_behavior_path_side_shift_module",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_behavior_path_start_planner_module",
+      "prefix": "/opt/autoware/autoware_behavior_path_start_planner_module",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_behavior_path_static_obstacle_avoidance_module",
+      "prefix": "/opt/autoware/autoware_behavior_path_static_obstacle_avoidance_module",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_behavior_velocity_blind_spot_module",
+      "prefix": "/opt/autoware/autoware_behavior_velocity_blind_spot_module",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "autoware_behavior_velocity_crosswalk_module",
+      "prefix": "/opt/autoware/autoware_behavior_velocity_crosswalk_module",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "autoware_behavior_velocity_detection_area_module",
+      "prefix": "/opt/autoware/autoware_behavior_velocity_detection_area_module",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "autoware_behavior_velocity_intersection_module",
+      "prefix": "/opt/autoware/autoware_behavior_velocity_intersection_module",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "autoware_behavior_velocity_no_drivable_lane_module",
+      "prefix": "/opt/autoware/autoware_behavior_velocity_no_drivable_lane_module",
+      "status": "missing-oe-recipe",
+      "detail": ""
+    },
+    {
+      "package": "autoware_behavior_velocity_no_stopping_area_module",
+      "prefix": "/opt/autoware/autoware_behavior_velocity_no_stopping_area_module",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "autoware_behavior_velocity_occlusion_spot_module",
+      "prefix": "/opt/autoware/autoware_behavior_velocity_occlusion_spot_module",
+      "status": "missing-oe-recipe",
+      "detail": ""
+    },
+    {
+      "package": "autoware_behavior_velocity_planner",
+      "prefix": "/opt/autoware/autoware_behavior_velocity_planner",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "autoware_behavior_velocity_planner_common",
+      "prefix": "/opt/autoware/autoware_behavior_velocity_planner_common",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "autoware_behavior_velocity_roundabout_module",
+      "prefix": "/opt/autoware/autoware_behavior_velocity_roundabout_module",
+      "status": "missing-oe-recipe",
+      "detail": ""
+    },
+    {
+      "package": "autoware_behavior_velocity_rtc_interface",
+      "prefix": "/opt/autoware/autoware_behavior_velocity_rtc_interface",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "autoware_behavior_velocity_speed_bump_module",
+      "prefix": "/opt/autoware/autoware_behavior_velocity_speed_bump_module",
+      "status": "missing-oe-recipe",
+      "detail": ""
+    },
+    {
+      "package": "autoware_behavior_velocity_stop_line_module",
+      "prefix": "/opt/autoware/autoware_behavior_velocity_stop_line_module",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "autoware_behavior_velocity_template_module",
+      "prefix": "/opt/autoware/autoware_behavior_velocity_template_module",
+      "status": "missing-oe-recipe",
+      "detail": ""
+    },
+    {
+      "package": "autoware_behavior_velocity_traffic_light_module",
+      "prefix": "/opt/autoware/autoware_behavior_velocity_traffic_light_module",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "autoware_behavior_velocity_virtual_traffic_light_module",
+      "prefix": "/opt/autoware/autoware_behavior_velocity_virtual_traffic_light_module",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "autoware_behavior_velocity_walkway_module",
+      "prefix": "/opt/autoware/autoware_behavior_velocity_walkway_module",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "autoware_bevfusion",
+      "prefix": "/opt/autoware/autoware_bevfusion",
+      "status": "cuda",
+      "detail": ""
+    },
+    {
+      "package": "autoware_bezier_sampler",
+      "prefix": "/opt/autoware/autoware_bezier_sampler",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_bluetooth_monitor",
+      "prefix": "/opt/autoware/autoware_bluetooth_monitor",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_boundary_departure_checker",
+      "prefix": "/opt/autoware/autoware_boundary_departure_checker",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_bytetrack",
+      "prefix": "/opt/autoware/autoware_bytetrack",
+      "status": "cuda",
+      "detail": ""
+    },
+    {
+      "package": "autoware_calibration_status_classifier",
+      "prefix": "/opt/autoware/autoware_calibration_status_classifier",
+      "status": "cuda",
+      "detail": ""
+    },
+    {
+      "package": "autoware_camera_streampetr",
+      "prefix": "/opt/autoware/autoware_camera_streampetr",
+      "status": "cuda",
+      "detail": ""
+    },
+    {
+      "package": "autoware_carla_interface",
+      "prefix": "/opt/autoware/autoware_carla_interface",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "autoware_cluster_merger",
+      "prefix": "/opt/autoware/autoware_cluster_merger",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_cmake",
+      "prefix": "/opt/autoware/autoware_cmake",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_collision_detector",
+      "prefix": "/opt/autoware/autoware_collision_detector",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_command_gate",
+      "prefix": "/opt/autoware/autoware_command_gate",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_command_mode_decider",
+      "prefix": "/opt/autoware/autoware_command_mode_decider",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_command_mode_decider_plugins",
+      "prefix": "/opt/autoware/autoware_command_mode_decider_plugins",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_command_mode_switcher",
+      "prefix": "/opt/autoware/autoware_command_mode_switcher",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_command_mode_switcher_plugins",
+      "prefix": "/opt/autoware/autoware_command_mode_switcher_plugins",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_command_mode_types",
+      "prefix": "/opt/autoware/autoware_command_mode_types",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_common_msgs",
+      "prefix": "/opt/autoware/autoware_common_msgs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_compare_map_segmentation",
+      "prefix": "/opt/autoware/autoware_compare_map_segmentation",
+      "status": "missing-oe-recipe",
+      "detail": ""
+    },
+    {
+      "package": "autoware_component_interface_admission",
+      "prefix": "/opt/autoware/autoware_component_interface_admission",
+      "status": "not-in-autoware-ref",
+      "detail": ""
+    },
+    {
+      "package": "autoware_component_interface_specs",
+      "prefix": "/opt/autoware/autoware_component_interface_specs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_component_interface_specs_universe",
+      "prefix": "/opt/autoware/autoware_component_interface_specs_universe",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_component_interface_utils",
+      "prefix": "/opt/autoware/autoware_component_interface_utils",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_component_monitor",
+      "prefix": "/opt/autoware/autoware_component_monitor",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_component_state_monitor",
+      "prefix": "/opt/autoware/autoware_component_state_monitor",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_control_command_gate",
+      "prefix": "/opt/autoware/autoware_control_command_gate",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_control_config",
+      "prefix": "/opt/autoware/autoware_control_config",
+      "status": "not-in-autoware-ref",
+      "detail": ""
+    },
+    {
+      "package": "autoware_control_evaluator",
+      "prefix": "/opt/autoware/autoware_control_evaluator",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_control_launch",
+      "prefix": "/opt/autoware/autoware_control_launch",
+      "status": "not-in-autoware-ref",
+      "detail": ""
+    },
+    {
+      "package": "autoware_control_msgs",
+      "prefix": "/opt/autoware/autoware_control_msgs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_control_performance_analysis",
+      "prefix": "/opt/autoware/autoware_control_performance_analysis",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_control_validator",
+      "prefix": "/opt/autoware/autoware_control_validator",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_core",
+      "prefix": "/opt/autoware/autoware_core",
+      "status": "missing-oe-recipe",
+      "detail": ""
+    },
+    {
+      "package": "autoware_core_api",
+      "prefix": "/opt/autoware/autoware_core_api",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_core_control",
+      "prefix": "/opt/autoware/autoware_core_control",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_core_localization",
+      "prefix": "/opt/autoware/autoware_core_localization",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_core_map",
+      "prefix": "/opt/autoware/autoware_core_map",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_core_perception",
+      "prefix": "/opt/autoware/autoware_core_perception",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_core_planning",
+      "prefix": "/opt/autoware/autoware_core_planning",
+      "status": "missing-oe-recipe",
+      "detail": ""
+    },
+    {
+      "package": "autoware_core_sensing",
+      "prefix": "/opt/autoware/autoware_core_sensing",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_core_vehicle",
+      "prefix": "/opt/autoware/autoware_core_vehicle",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_costmap_generator",
+      "prefix": "/opt/autoware/autoware_costmap_generator",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_crop_box_filter",
+      "prefix": "/opt/autoware/autoware_crop_box_filter",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_crosswalk_traffic_light_estimator",
+      "prefix": "/opt/autoware/autoware_crosswalk_traffic_light_estimator",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_cuda_dependency_meta",
+      "prefix": "/opt/autoware/autoware_cuda_dependency_meta",
+      "status": "cuda",
+      "detail": ""
+    },
+    {
+      "package": "autoware_cuda_pointcloud_preprocessor",
+      "prefix": "/opt/autoware/autoware_cuda_pointcloud_preprocessor",
+      "status": "cuda",
+      "detail": ""
+    },
+    {
+      "package": "autoware_cuda_utils",
+      "prefix": "/opt/autoware/autoware_cuda_utils",
+      "status": "cuda",
+      "detail": ""
+    },
+    {
+      "package": "autoware_default_adapi",
+      "prefix": "/opt/autoware/autoware_default_adapi",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_default_adapi_universe",
+      "prefix": "/opt/autoware/autoware_default_adapi_universe",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_deprecated_boundary_departure_checker",
+      "prefix": "/opt/autoware/autoware_deprecated_boundary_departure_checker",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_detected_object_feature_remover",
+      "prefix": "/opt/autoware/autoware_detected_object_feature_remover",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_detected_object_validation",
+      "prefix": "/opt/autoware/autoware_detected_object_validation",
+      "status": "missing-oe-recipe",
+      "detail": ""
+    },
+    {
+      "package": "autoware_detection_by_tracker",
+      "prefix": "/opt/autoware/autoware_detection_by_tracker",
+      "status": "missing-oe-recipe",
+      "detail": ""
+    },
+    {
+      "package": "autoware_diagnostic_graph_aggregator",
+      "prefix": "/opt/autoware/autoware_diagnostic_graph_aggregator",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_diagnostic_graph_merger",
+      "prefix": "/opt/autoware/autoware_diagnostic_graph_merger",
+      "status": "not-in-autoware-ref",
+      "detail": ""
+    },
+    {
+      "package": "autoware_diagnostic_graph_test_examples",
+      "prefix": "/opt/autoware/autoware_diagnostic_graph_test_examples",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_diagnostic_graph_utils",
+      "prefix": "/opt/autoware/autoware_diagnostic_graph_utils",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_diffusion_planner",
+      "prefix": "/opt/autoware/autoware_diffusion_planner",
+      "status": "cuda",
+      "detail": ""
+    },
+    {
+      "package": "autoware_downsample_filters",
+      "prefix": "/opt/autoware/autoware_downsample_filters",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_driving_mode_manager",
+      "prefix": "/opt/autoware/autoware_driving_mode_manager",
+      "status": "not-in-autoware-ref",
+      "detail": ""
+    },
+    {
+      "package": "autoware_dummy_diag_publisher",
+      "prefix": "/opt/autoware/autoware_dummy_diag_publisher",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "autoware_dummy_infrastructure",
+      "prefix": "/opt/autoware/autoware_dummy_infrastructure",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "autoware_dummy_perception_publisher",
+      "prefix": "/opt/autoware/autoware_dummy_perception_publisher",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "autoware_dummy_traffic_light_publisher",
+      "prefix": "/opt/autoware/autoware_dummy_traffic_light_publisher",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "autoware_duplicated_node_checker",
+      "prefix": "/opt/autoware/autoware_duplicated_node_checker",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_ekf_localizer",
+      "prefix": "/opt/autoware/autoware_ekf_localizer",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_elevation_map_loader",
+      "prefix": "/opt/autoware/autoware_elevation_map_loader",
+      "status": "missing-oe-recipe",
+      "detail": ""
+    },
+    {
+      "package": "autoware_euclidean_cluster",
+      "prefix": "/opt/autoware/autoware_euclidean_cluster",
+      "status": "missing-oe-recipe",
+      "detail": ""
+    },
+    {
+      "package": "autoware_euclidean_cluster_object_detector",
+      "prefix": "/opt/autoware/autoware_euclidean_cluster_object_detector",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_evaluation_adapter",
+      "prefix": "/opt/autoware/autoware_evaluation_adapter",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_external_cmd_converter",
+      "prefix": "/opt/autoware/autoware_external_cmd_converter",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_external_cmd_selector",
+      "prefix": "/opt/autoware/autoware_external_cmd_selector",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_external_velocity_limit_selector",
+      "prefix": "/opt/autoware/autoware_external_velocity_limit_selector",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_fake_test_node",
+      "prefix": "/opt/autoware/autoware_fake_test_node",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_fault_injection",
+      "prefix": "/opt/autoware/autoware_fault_injection",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "autoware_freespace_planner",
+      "prefix": "/opt/autoware/autoware_freespace_planner",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_freespace_planning_algorithms",
+      "prefix": "/opt/autoware/autoware_freespace_planning_algorithms",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_frenet_planner",
+      "prefix": "/opt/autoware/autoware_frenet_planner",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_generic_service_divider",
+      "prefix": "/opt/autoware/autoware_generic_service_divider",
+      "status": "not-in-autoware-ref",
+      "detail": ""
+    },
+    {
+      "package": "autoware_geo_pose_projector",
+      "prefix": "/opt/autoware/autoware_geo_pose_projector",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_geography_utils",
+      "prefix": "/opt/autoware/autoware_geography_utils",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_global_parameter_loader",
+      "prefix": "/opt/autoware/autoware_global_parameter_loader",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_glog_component",
+      "prefix": "/opt/autoware/autoware_glog_component",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_gnss_poser",
+      "prefix": "/opt/autoware/autoware_gnss_poser",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_goal_distance_calculator",
+      "prefix": "/opt/autoware/autoware_goal_distance_calculator",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_grid_map_utils",
+      "prefix": "/opt/autoware/autoware_grid_map_utils",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_ground_filter",
+      "prefix": "/opt/autoware/autoware_ground_filter",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_ground_segmentation",
+      "prefix": "/opt/autoware/autoware_ground_segmentation",
+      "status": "missing-oe-recipe",
+      "detail": ""
+    },
+    {
+      "package": "autoware_ground_segmentation_cuda",
+      "prefix": "/opt/autoware/autoware_ground_segmentation_cuda",
+      "status": "cuda",
+      "detail": ""
+    },
+    {
+      "package": "autoware_gyro_odometer",
+      "prefix": "/opt/autoware/autoware_gyro_odometer",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_hazard_lights_selector",
+      "prefix": "/opt/autoware/autoware_hazard_lights_selector",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_hazard_status_converter",
+      "prefix": "/opt/autoware/autoware_hazard_status_converter",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_image_diagnostics",
+      "prefix": "/opt/autoware/autoware_image_diagnostics",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_image_object_locator",
+      "prefix": "/opt/autoware/autoware_image_object_locator",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_image_projection_based_fusion",
+      "prefix": "/opt/autoware/autoware_image_projection_based_fusion",
+      "status": "cuda",
+      "detail": ""
+    },
+    {
+      "package": "autoware_image_transport_decompressor",
+      "prefix": "/opt/autoware/autoware_image_transport_decompressor",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_imu_corrector",
+      "prefix": "/opt/autoware/autoware_imu_corrector",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_in_lane_mrm_planner",
+      "prefix": "/opt/autoware/autoware_in_lane_mrm_planner",
+      "status": "not-in-autoware-ref",
+      "detail": ""
+    },
+    {
+      "package": "autoware_interface_spec_lint",
+      "prefix": "/opt/autoware/autoware_interface_spec_lint",
+      "status": "not-in-autoware-ref",
+      "detail": ""
+    },
+    {
+      "package": "autoware_internal_debug_msgs",
+      "prefix": "/opt/autoware/autoware_internal_debug_msgs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_internal_localization_msgs",
+      "prefix": "/opt/autoware/autoware_internal_localization_msgs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_internal_metric_msgs",
+      "prefix": "/opt/autoware/autoware_internal_metric_msgs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_internal_msgs",
+      "prefix": "/opt/autoware/autoware_internal_msgs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_internal_perception_msgs",
+      "prefix": "/opt/autoware/autoware_internal_perception_msgs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_internal_planning_msgs",
+      "prefix": "/opt/autoware/autoware_internal_planning_msgs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_interpolation",
+      "prefix": "/opt/autoware/autoware_interpolation",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_joy_controller",
+      "prefix": "/opt/autoware/autoware_joy_controller",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_kalman_filter",
+      "prefix": "/opt/autoware/autoware_kalman_filter",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_kinematic_evaluator",
+      "prefix": "/opt/autoware/autoware_kinematic_evaluator",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_landmark_manager",
+      "prefix": "/opt/autoware/autoware_landmark_manager",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_lane_departure_checker",
+      "prefix": "/opt/autoware/autoware_lane_departure_checker",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_lanelet2_extension",
+      "prefix": "/opt/autoware/autoware_lanelet2_extension",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_lanelet2_extension_python",
+      "prefix": "/opt/autoware/autoware_lanelet2_extension_python",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_lanelet2_map_visualizer",
+      "prefix": "/opt/autoware/autoware_lanelet2_map_visualizer",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_lanelet2_utils",
+      "prefix": "/opt/autoware/autoware_lanelet2_utils",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_launch",
+      "prefix": "/opt/autoware/autoware_launch",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "autoware_learning_based_vehicle_model",
+      "prefix": "/opt/autoware/autoware_learning_based_vehicle_model",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_lidar_apollo_instance_segmentation",
+      "prefix": "/opt/autoware/autoware_lidar_apollo_instance_segmentation",
+      "status": "cuda",
+      "detail": ""
+    },
+    {
+      "package": "autoware_lidar_centerpoint",
+      "prefix": "/opt/autoware/autoware_lidar_centerpoint",
+      "status": "cuda",
+      "detail": ""
+    },
+    {
+      "package": "autoware_lidar_frnet",
+      "prefix": "/opt/autoware/autoware_lidar_frnet",
+      "status": "cuda",
+      "detail": ""
+    },
+    {
+      "package": "autoware_lidar_marker_localizer",
+      "prefix": "/opt/autoware/autoware_lidar_marker_localizer",
+      "status": "missing-oe-recipe",
+      "detail": ""
+    },
+    {
+      "package": "autoware_lidar_transfusion",
+      "prefix": "/opt/autoware/autoware_lidar_transfusion",
+      "status": "cuda",
+      "detail": ""
+    },
+    {
+      "package": "autoware_lint_common",
+      "prefix": "/opt/autoware/autoware_lint_common",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_localization_config",
+      "prefix": "/opt/autoware/autoware_localization_config",
+      "status": "not-in-autoware-ref",
+      "detail": ""
+    },
+    {
+      "package": "autoware_localization_error_monitor",
+      "prefix": "/opt/autoware/autoware_localization_error_monitor",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_localization_evaluator",
+      "prefix": "/opt/autoware/autoware_localization_evaluator",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_localization_launch",
+      "prefix": "/opt/autoware/autoware_localization_launch",
+      "status": "not-in-autoware-ref",
+      "detail": ""
+    },
+    {
+      "package": "autoware_localization_msgs",
+      "prefix": "/opt/autoware/autoware_localization_msgs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_localization_rviz_plugin",
+      "prefix": "/opt/autoware/autoware_localization_rviz_plugin",
+      "status": "qt",
+      "detail": ""
+    },
+    {
+      "package": "autoware_localization_util",
+      "prefix": "/opt/autoware/autoware_localization_util",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_manual_lane_change_handler",
+      "prefix": "/opt/autoware/autoware_manual_lane_change_handler",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_map_based_prediction",
+      "prefix": "/opt/autoware/autoware_map_based_prediction",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_map_config",
+      "prefix": "/opt/autoware/autoware_map_config",
+      "status": "not-in-autoware-ref",
+      "detail": ""
+    },
+    {
+      "package": "autoware_map_height_fitter",
+      "prefix": "/opt/autoware/autoware_map_height_fitter",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_map_launch",
+      "prefix": "/opt/autoware/autoware_map_launch",
+      "status": "not-in-autoware-ref",
+      "detail": ""
+    },
+    {
+      "package": "autoware_map_loader",
+      "prefix": "/opt/autoware/autoware_map_loader",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_map_msgs",
+      "prefix": "/opt/autoware/autoware_map_msgs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_map_projection_loader",
+      "prefix": "/opt/autoware/autoware_map_projection_loader",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_map_tf_generator",
+      "prefix": "/opt/autoware/autoware_map_tf_generator",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_marker_utils",
+      "prefix": "/opt/autoware/autoware_marker_utils",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_minimum_rule_based_planner",
+      "prefix": "/opt/autoware/autoware_minimum_rule_based_planner",
+      "status": "not-in-autoware-ref",
+      "detail": ""
+    },
+    {
+      "package": "autoware_mission_details_overlay_rviz_plugin",
+      "prefix": "/opt/autoware/autoware_mission_details_overlay_rviz_plugin",
+      "status": "qt",
+      "detail": ""
+    },
+    {
+      "package": "autoware_mission_planner",
+      "prefix": "/opt/autoware/autoware_mission_planner",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_mission_planner_universe",
+      "prefix": "/opt/autoware/autoware_mission_planner_universe",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_motion_utils",
+      "prefix": "/opt/autoware/autoware_motion_utils",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_motion_velocity_boundary_departure_prevention_module",
+      "prefix": "/opt/autoware/autoware_motion_velocity_boundary_departure_prevention_module",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "autoware_motion_velocity_dynamic_obstacle_stop_module",
+      "prefix": "/opt/autoware/autoware_motion_velocity_dynamic_obstacle_stop_module",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "autoware_motion_velocity_obstacle_cruise_module",
+      "prefix": "/opt/autoware/autoware_motion_velocity_obstacle_cruise_module",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "autoware_motion_velocity_obstacle_slow_down_module",
+      "prefix": "/opt/autoware/autoware_motion_velocity_obstacle_slow_down_module",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "autoware_motion_velocity_obstacle_stop_module",
+      "prefix": "/opt/autoware/autoware_motion_velocity_obstacle_stop_module",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "autoware_motion_velocity_obstacle_velocity_limiter_module",
+      "prefix": "/opt/autoware/autoware_motion_velocity_obstacle_velocity_limiter_module",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "autoware_motion_velocity_out_of_lane_module",
+      "prefix": "/opt/autoware/autoware_motion_velocity_out_of_lane_module",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "autoware_motion_velocity_planner",
+      "prefix": "/opt/autoware/autoware_motion_velocity_planner",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "autoware_motion_velocity_planner_common",
+      "prefix": "/opt/autoware/autoware_motion_velocity_planner_common",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "autoware_motion_velocity_road_user_stop_module",
+      "prefix": "/opt/autoware/autoware_motion_velocity_road_user_stop_module",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "autoware_motion_velocity_run_out_module",
+      "prefix": "/opt/autoware/autoware_motion_velocity_run_out_module",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "autoware_mpc_lateral_controller",
+      "prefix": "/opt/autoware/autoware_mpc_lateral_controller",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_mrm_comfortable_stop_operator",
+      "prefix": "/opt/autoware/autoware_mrm_comfortable_stop_operator",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_mrm_emergency_stop_operator",
+      "prefix": "/opt/autoware/autoware_mrm_emergency_stop_operator",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_mrm_handler",
+      "prefix": "/opt/autoware/autoware_mrm_handler",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_mrm_in_lane_stop_operator",
+      "prefix": "/opt/autoware/autoware_mrm_in_lane_stop_operator",
+      "status": "not-in-autoware-ref",
+      "detail": ""
+    },
+    {
+      "package": "autoware_mrm_reset_manager",
+      "prefix": "/opt/autoware/autoware_mrm_reset_manager",
+      "status": "not-in-autoware-ref",
+      "detail": ""
+    },
+    {
+      "package": "autoware_mrm_steering_hold_stop_operator",
+      "prefix": "/opt/autoware/autoware_mrm_steering_hold_stop_operator",
+      "status": "not-in-autoware-ref",
+      "detail": ""
+    },
+    {
+      "package": "autoware_msgs",
+      "prefix": "/opt/autoware/autoware_msgs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_multi_object_tracker",
+      "prefix": "/opt/autoware/autoware_multi_object_tracker",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_ndt_scan_matcher",
+      "prefix": "/opt/autoware/autoware_ndt_scan_matcher",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_node",
+      "prefix": "/opt/autoware/autoware_node",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_object_merger",
+      "prefix": "/opt/autoware/autoware_object_merger",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_object_recognition_utils",
+      "prefix": "/opt/autoware/autoware_object_recognition_utils",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_object_sorter",
+      "prefix": "/opt/autoware/autoware_object_sorter",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_objects_of_interest_marker_interface",
+      "prefix": "/opt/autoware/autoware_objects_of_interest_marker_interface",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_obstacle_collision_checker",
+      "prefix": "/opt/autoware/autoware_obstacle_collision_checker",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_obstacle_proximity_checker",
+      "prefix": "/opt/autoware/autoware_obstacle_proximity_checker",
+      "status": "not-in-autoware-ref",
+      "detail": ""
+    },
+    {
+      "package": "autoware_occupancy_grid_map_outlier_filter",
+      "prefix": "/opt/autoware/autoware_occupancy_grid_map_outlier_filter",
+      "status": "missing-oe-recipe",
+      "detail": ""
+    },
+    {
+      "package": "autoware_operation_mode_transition_manager",
+      "prefix": "/opt/autoware/autoware_operation_mode_transition_manager",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_osqp_interface",
+      "prefix": "/opt/autoware/autoware_osqp_interface",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_overlay_rviz_plugin",
+      "prefix": "/opt/autoware/autoware_overlay_rviz_plugin",
+      "status": "qt",
+      "detail": ""
+    },
+    {
+      "package": "autoware_path_distance_calculator",
+      "prefix": "/opt/autoware/autoware_path_distance_calculator",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_path_generator",
+      "prefix": "/opt/autoware/autoware_path_generator",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_path_optimizer",
+      "prefix": "/opt/autoware/autoware_path_optimizer",
+      "status": "missing-oe-recipe",
+      "detail": ""
+    },
+    {
+      "package": "autoware_path_sampler",
+      "prefix": "/opt/autoware/autoware_path_sampler",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_path_smoother",
+      "prefix": "/opt/autoware/autoware_path_smoother",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_pcl_extensions",
+      "prefix": "/opt/autoware/autoware_pcl_extensions",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_perception_config",
+      "prefix": "/opt/autoware/autoware_perception_config",
+      "status": "not-in-autoware-ref",
+      "detail": ""
+    },
+    {
+      "package": "autoware_perception_launch",
+      "prefix": "/opt/autoware/autoware_perception_launch",
+      "status": "not-in-autoware-ref",
+      "detail": ""
+    },
+    {
+      "package": "autoware_perception_msgs",
+      "prefix": "/opt/autoware/autoware_perception_msgs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_perception_objects_converter",
+      "prefix": "/opt/autoware/autoware_perception_objects_converter",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_perception_online_evaluator",
+      "prefix": "/opt/autoware/autoware_perception_online_evaluator",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_perception_rviz_plugin",
+      "prefix": "/opt/autoware/autoware_perception_rviz_plugin",
+      "status": "qt",
+      "detail": ""
+    },
+    {
+      "package": "autoware_pid_longitudinal_controller",
+      "prefix": "/opt/autoware/autoware_pid_longitudinal_controller",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_pipeline_latency_monitor",
+      "prefix": "/opt/autoware/autoware_pipeline_latency_monitor",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_planning_config",
+      "prefix": "/opt/autoware/autoware_planning_config",
+      "status": "not-in-autoware-ref",
+      "detail": ""
+    },
+    {
+      "package": "autoware_planning_evaluator",
+      "prefix": "/opt/autoware/autoware_planning_evaluator",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_planning_factor_interface",
+      "prefix": "/opt/autoware/autoware_planning_factor_interface",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_planning_launch",
+      "prefix": "/opt/autoware/autoware_planning_launch",
+      "status": "not-in-autoware-ref",
+      "detail": ""
+    },
+    {
+      "package": "autoware_planning_msgs",
+      "prefix": "/opt/autoware/autoware_planning_msgs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_planning_rviz_plugin",
+      "prefix": "/opt/autoware/autoware_planning_rviz_plugin",
+      "status": "qt",
+      "detail": ""
+    },
+    {
+      "package": "autoware_planning_test_manager",
+      "prefix": "/opt/autoware/autoware_planning_test_manager",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_planning_topic_converter",
+      "prefix": "/opt/autoware/autoware_planning_topic_converter",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_planning_validator",
+      "prefix": "/opt/autoware/autoware_planning_validator",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_planning_validator_intersection_collision_checker",
+      "prefix": "/opt/autoware/autoware_planning_validator_intersection_collision_checker",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_planning_validator_latency_checker",
+      "prefix": "/opt/autoware/autoware_planning_validator_latency_checker",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_planning_validator_rear_collision_checker",
+      "prefix": "/opt/autoware/autoware_planning_validator_rear_collision_checker",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_planning_validator_test_utils",
+      "prefix": "/opt/autoware/autoware_planning_validator_test_utils",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_planning_validator_trajectory_checker",
+      "prefix": "/opt/autoware/autoware_planning_validator_trajectory_checker",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_point_types",
+      "prefix": "/opt/autoware/autoware_point_types",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_pointcloud_preprocessor",
+      "prefix": "/opt/autoware/autoware_pointcloud_preprocessor",
+      "status": "missing-oe-recipe",
+      "detail": ""
+    },
+    {
+      "package": "autoware_polar_grid",
+      "prefix": "/opt/autoware/autoware_polar_grid",
+      "status": "qt",
+      "detail": ""
+    },
+    {
+      "package": "autoware_pose2twist",
+      "prefix": "/opt/autoware/autoware_pose2twist",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_pose_covariance_modifier",
+      "prefix": "/opt/autoware/autoware_pose_covariance_modifier",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_pose_estimator_arbiter",
+      "prefix": "/opt/autoware/autoware_pose_estimator_arbiter",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_pose_initialization_requester",
+      "prefix": "/opt/autoware/autoware_pose_initialization_requester",
+      "status": "not-in-autoware-ref",
+      "detail": ""
+    },
+    {
+      "package": "autoware_pose_initializer",
+      "prefix": "/opt/autoware/autoware_pose_initializer",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_pose_instability_detector",
+      "prefix": "/opt/autoware/autoware_pose_instability_detector",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_predicted_path_checker",
+      "prefix": "/opt/autoware/autoware_predicted_path_checker",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_predicted_path_postprocessor",
+      "prefix": "/opt/autoware/autoware_predicted_path_postprocessor",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_probabilistic_occupancy_grid_map",
+      "prefix": "/opt/autoware/autoware_probabilistic_occupancy_grid_map",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "autoware_processing_time_checker",
+      "prefix": "/opt/autoware/autoware_processing_time_checker",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_ptv3",
+      "prefix": "/opt/autoware/autoware_ptv3",
+      "status": "cuda",
+      "detail": ""
+    },
+    {
+      "package": "autoware_pure_pursuit",
+      "prefix": "/opt/autoware/autoware_pure_pursuit",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_pyplot",
+      "prefix": "/opt/autoware/autoware_pyplot",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_qos_utils",
+      "prefix": "/opt/autoware/autoware_qos_utils",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_qp_interface",
+      "prefix": "/opt/autoware/autoware_qp_interface",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "autoware_radar_fusion_to_detected_object",
+      "prefix": "/opt/autoware/autoware_radar_fusion_to_detected_object",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_radar_object_tracker",
+      "prefix": "/opt/autoware/autoware_radar_object_tracker",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_radar_objects_adapter",
+      "prefix": "/opt/autoware/autoware_radar_objects_adapter",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_radar_scan_to_pointcloud2",
+      "prefix": "/opt/autoware/autoware_radar_scan_to_pointcloud2",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_radar_static_pointcloud_filter",
+      "prefix": "/opt/autoware/autoware_radar_static_pointcloud_filter",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_radar_threshold_filter",
+      "prefix": "/opt/autoware/autoware_radar_threshold_filter",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_radar_tracks_msgs_converter",
+      "prefix": "/opt/autoware/autoware_radar_tracks_msgs_converter",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_radar_tracks_noise_filter",
+      "prefix": "/opt/autoware/autoware_radar_tracks_noise_filter",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_raindrop_cluster_filter",
+      "prefix": "/opt/autoware/autoware_raindrop_cluster_filter",
+      "status": "missing-oe-recipe",
+      "detail": ""
+    },
+    {
+      "package": "autoware_raw_vehicle_cmd_converter",
+      "prefix": "/opt/autoware/autoware_raw_vehicle_cmd_converter",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_redundancy_adapi_switcher",
+      "prefix": "/opt/autoware/autoware_redundancy_adapi_switcher",
+      "status": "not-in-autoware-ref",
+      "detail": ""
+    },
+    {
+      "package": "autoware_redundancy_command_selector",
+      "prefix": "/opt/autoware/autoware_redundancy_command_selector",
+      "status": "not-in-autoware-ref",
+      "detail": ""
+    },
+    {
+      "package": "autoware_redundancy_switcher_interface",
+      "prefix": "/opt/autoware/autoware_redundancy_switcher_interface",
+      "status": "not-in-autoware-ref",
+      "detail": ""
+    },
+    {
+      "package": "autoware_redundancy_switcher_interface_plugins",
+      "prefix": "/opt/autoware/autoware_redundancy_switcher_interface_plugins",
+      "status": "not-in-autoware-ref",
+      "detail": ""
+    },
+    {
+      "package": "autoware_remaining_distance_time_calculator",
+      "prefix": "/opt/autoware/autoware_remaining_distance_time_calculator",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_route_handler",
+      "prefix": "/opt/autoware/autoware_route_handler",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_rtc_interface",
+      "prefix": "/opt/autoware/autoware_rtc_interface",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_sample_designs",
+      "prefix": "/opt/autoware/autoware_sample_designs",
+      "status": "simulation",
+      "detail": ""
+    },
+    {
+      "package": "autoware_sample_sensor_kit_description",
+      "prefix": "/opt/autoware/autoware_sample_sensor_kit_description",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_sample_vehicle_description",
+      "prefix": "/opt/autoware/autoware_sample_vehicle_description",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_sampler_common",
+      "prefix": "/opt/autoware/autoware_sampler_common",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_scenario_selector",
+      "prefix": "/opt/autoware/autoware_scenario_selector",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_scenario_simulator_v2_adapter",
+      "prefix": "/opt/autoware/autoware_scenario_simulator_v2_adapter",
+      "status": "simulation",
+      "detail": ""
+    },
+    {
+      "package": "autoware_sensing_launch",
+      "prefix": "/opt/autoware/autoware_sensing_launch",
+      "status": "not-in-autoware-ref",
+      "detail": ""
+    },
+    {
+      "package": "autoware_sensing_msgs",
+      "prefix": "/opt/autoware/autoware_sensing_msgs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_sensor_driver_launch",
+      "prefix": "/opt/autoware/autoware_sensor_driver_launch",
+      "status": "not-in-autoware-ref",
+      "detail": ""
+    },
+    {
+      "package": "autoware_shape_estimation",
+      "prefix": "/opt/autoware/autoware_shape_estimation",
+      "status": "cuda",
+      "detail": ""
+    },
+    {
+      "package": "autoware_shift_decider",
+      "prefix": "/opt/autoware/autoware_shift_decider",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_signal_processing",
+      "prefix": "/opt/autoware/autoware_signal_processing",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_simpl_prediction",
+      "prefix": "/opt/autoware/autoware_simpl_prediction",
+      "status": "cuda",
+      "detail": ""
+    },
+    {
+      "package": "autoware_simple_object_merger",
+      "prefix": "/opt/autoware/autoware_simple_object_merger",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_simple_planning_simulator",
+      "prefix": "/opt/autoware/autoware_simple_planning_simulator",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "autoware_simple_pure_pursuit",
+      "prefix": "/opt/autoware/autoware_simple_pure_pursuit",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_simulation_msgs",
+      "prefix": "/opt/autoware/autoware_simulation_msgs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_smart_mpc_trajectory_follower",
+      "prefix": "/opt/autoware/autoware_smart_mpc_trajectory_follower",
+      "status": "missing-oe-recipe",
+      "detail": ""
+    },
+    {
+      "package": "autoware_spheric_collision_detector",
+      "prefix": "/opt/autoware/autoware_spheric_collision_detector",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_steer_offset_estimator",
+      "prefix": "/opt/autoware/autoware_steer_offset_estimator",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_stop_filter",
+      "prefix": "/opt/autoware/autoware_stop_filter",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_stop_mode_operator",
+      "prefix": "/opt/autoware/autoware_stop_mode_operator",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_string_stamped_rviz_plugin",
+      "prefix": "/opt/autoware/autoware_string_stamped_rviz_plugin",
+      "status": "qt",
+      "detail": ""
+    },
+    {
+      "package": "autoware_surround_obstacle_checker",
+      "prefix": "/opt/autoware/autoware_surround_obstacle_checker",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_system_design_examples",
+      "prefix": "/opt/autoware/autoware_system_design_examples",
+      "status": "simulation",
+      "detail": ""
+    },
+    {
+      "package": "autoware_system_designer",
+      "prefix": "/opt/autoware/autoware_system_designer",
+      "status": "simulation",
+      "detail": ""
+    },
+    {
+      "package": "autoware_system_monitor",
+      "prefix": "/opt/autoware/autoware_system_monitor",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_system_msgs",
+      "prefix": "/opt/autoware/autoware_system_msgs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_tensorrt_bevdet",
+      "prefix": "/opt/autoware/autoware_tensorrt_bevdet",
+      "status": "cuda",
+      "detail": ""
+    },
+    {
+      "package": "autoware_tensorrt_bevformer",
+      "prefix": "/opt/autoware/autoware_tensorrt_bevformer",
+      "status": "cuda",
+      "detail": ""
+    },
+    {
+      "package": "autoware_tensorrt_classifier",
+      "prefix": "/opt/autoware/autoware_tensorrt_classifier",
+      "status": "cuda",
+      "detail": ""
+    },
+    {
+      "package": "autoware_tensorrt_common",
+      "prefix": "/opt/autoware/autoware_tensorrt_common",
+      "status": "cuda",
+      "detail": ""
+    },
+    {
+      "package": "autoware_tensorrt_vad",
+      "prefix": "/opt/autoware/autoware_tensorrt_vad",
+      "status": "cuda",
+      "detail": ""
+    },
+    {
+      "package": "autoware_tensorrt_yolox",
+      "prefix": "/opt/autoware/autoware_tensorrt_yolox",
+      "status": "cuda",
+      "detail": ""
+    },
+    {
+      "package": "autoware_test_node",
+      "prefix": "/opt/autoware/autoware_test_node",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_test_utils",
+      "prefix": "/opt/autoware/autoware_test_utils",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_testing",
+      "prefix": "/opt/autoware/autoware_testing",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_time_utils",
+      "prefix": "/opt/autoware/autoware_time_utils",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_topic_relay_controller",
+      "prefix": "/opt/autoware/autoware_topic_relay_controller",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_topic_state_monitor",
+      "prefix": "/opt/autoware/autoware_topic_state_monitor",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_topic_text_overlay_rviz_plugin",
+      "prefix": "/opt/autoware/autoware_topic_text_overlay_rviz_plugin",
+      "status": "qt",
+      "detail": ""
+    },
+    {
+      "package": "autoware_tracking_object_merger",
+      "prefix": "/opt/autoware/autoware_tracking_object_merger",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_traffic_light_arbiter",
+      "prefix": "/opt/autoware/autoware_traffic_light_arbiter",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_traffic_light_category_merger",
+      "prefix": "/opt/autoware/autoware_traffic_light_category_merger",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_traffic_light_classifier",
+      "prefix": "/opt/autoware/autoware_traffic_light_classifier",
+      "status": "cuda",
+      "detail": ""
+    },
+    {
+      "package": "autoware_traffic_light_compliance_checker",
+      "prefix": "/opt/autoware/autoware_traffic_light_compliance_checker",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_traffic_light_fine_detector",
+      "prefix": "/opt/autoware/autoware_traffic_light_fine_detector",
+      "status": "cuda",
+      "detail": ""
+    },
+    {
+      "package": "autoware_traffic_light_map_based_detector",
+      "prefix": "/opt/autoware/autoware_traffic_light_map_based_detector",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_traffic_light_multi_camera_fusion",
+      "prefix": "/opt/autoware/autoware_traffic_light_multi_camera_fusion",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_traffic_light_occlusion_predictor",
+      "prefix": "/opt/autoware/autoware_traffic_light_occlusion_predictor",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_traffic_light_pipeline",
+      "prefix": "/opt/autoware/autoware_traffic_light_pipeline",
+      "status": "not-in-autoware-ref",
+      "detail": ""
+    },
+    {
+      "package": "autoware_traffic_light_recognition_marker_publisher",
+      "prefix": "/opt/autoware/autoware_traffic_light_recognition_marker_publisher",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_traffic_light_rviz_plugin",
+      "prefix": "/opt/autoware/autoware_traffic_light_rviz_plugin",
+      "status": "qt",
+      "detail": ""
+    },
+    {
+      "package": "autoware_traffic_light_selector",
+      "prefix": "/opt/autoware/autoware_traffic_light_selector",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_traffic_light_utils",
+      "prefix": "/opt/autoware/autoware_traffic_light_utils",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_traffic_light_visualization",
+      "prefix": "/opt/autoware/autoware_traffic_light_visualization",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "autoware_trajectory",
+      "prefix": "/opt/autoware/autoware_trajectory",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_trajectory_adapter",
+      "prefix": "/opt/autoware/autoware_trajectory_adapter",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_trajectory_concatenator",
+      "prefix": "/opt/autoware/autoware_trajectory_concatenator",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_trajectory_follower_base",
+      "prefix": "/opt/autoware/autoware_trajectory_follower_base",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_trajectory_follower_node",
+      "prefix": "/opt/autoware/autoware_trajectory_follower_node",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_trajectory_gate",
+      "prefix": "/opt/autoware/autoware_trajectory_gate",
+      "status": "not-in-autoware-ref",
+      "detail": ""
+    },
+    {
+      "package": "autoware_trajectory_modifier",
+      "prefix": "/opt/autoware/autoware_trajectory_modifier",
+      "status": "missing-oe-recipe",
+      "detail": ""
+    },
+    {
+      "package": "autoware_trajectory_ranker",
+      "prefix": "/opt/autoware/autoware_trajectory_ranker",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_trajectory_selector",
+      "prefix": "/opt/autoware/autoware_trajectory_selector",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_trajectory_validator",
+      "prefix": "/opt/autoware/autoware_trajectory_validator",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_twist2accel",
+      "prefix": "/opt/autoware/autoware_twist2accel",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_universe_utils",
+      "prefix": "/opt/autoware/autoware_universe_utils",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_utils",
+      "prefix": "/opt/autoware/autoware_utils",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_utils_debug",
+      "prefix": "/opt/autoware/autoware_utils_debug",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_utils_diagnostics",
+      "prefix": "/opt/autoware/autoware_utils_diagnostics",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_utils_geometry",
+      "prefix": "/opt/autoware/autoware_utils_geometry",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_utils_logging",
+      "prefix": "/opt/autoware/autoware_utils_logging",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_utils_math",
+      "prefix": "/opt/autoware/autoware_utils_math",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_utils_pcl",
+      "prefix": "/opt/autoware/autoware_utils_pcl",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_utils_rclcpp",
+      "prefix": "/opt/autoware/autoware_utils_rclcpp",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_utils_system",
+      "prefix": "/opt/autoware/autoware_utils_system",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_utils_tf",
+      "prefix": "/opt/autoware/autoware_utils_tf",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_utils_uuid",
+      "prefix": "/opt/autoware/autoware_utils_uuid",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_utils_visualization",
+      "prefix": "/opt/autoware/autoware_utils_visualization",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_v2x_msgs",
+      "prefix": "/opt/autoware/autoware_v2x_msgs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_vehicle_cmd_gate",
+      "prefix": "/opt/autoware/autoware_vehicle_cmd_gate",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_vehicle_door_simulator",
+      "prefix": "/opt/autoware/autoware_vehicle_door_simulator",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "autoware_vehicle_info_utils",
+      "prefix": "/opt/autoware/autoware_vehicle_info_utils",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_vehicle_msgs",
+      "prefix": "/opt/autoware/autoware_vehicle_msgs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_vehicle_velocity_converter",
+      "prefix": "/opt/autoware/autoware_vehicle_velocity_converter",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "autoware_velocity_smoother",
+      "prefix": "/opt/autoware/autoware_velocity_smoother",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "autoware_velodyne_monitor",
+      "prefix": "/opt/autoware/autoware_velodyne_monitor",
+      "status": "missing-oe-recipe",
+      "detail": ""
+    },
+    {
+      "package": "awsim_labs_sensor_kit_description",
+      "prefix": "/opt/autoware/awsim_labs_sensor_kit_description",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "awsim_labs_sensor_kit_launch",
+      "prefix": "/opt/autoware/awsim_labs_sensor_kit_launch",
+      "status": "missing-oe-recipe",
+      "detail": ""
+    },
+    {
+      "package": "awsim_labs_vehicle_description",
+      "prefix": "/opt/autoware/awsim_labs_vehicle_description",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "awsim_labs_vehicle_launch",
+      "prefix": "/opt/autoware/awsim_labs_vehicle_launch",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "awsim_sensor_kit_description",
+      "prefix": "/opt/autoware/awsim_sensor_kit_description",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "awsim_sensor_kit_launch",
+      "prefix": "/opt/autoware/awsim_sensor_kit_launch",
+      "status": "missing-oe-recipe",
+      "detail": ""
+    },
+    {
+      "package": "behaviortree_cpp_v3",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "bevdet_vendor",
+      "prefix": "/opt/autoware/bevdet_vendor",
+      "status": "cuda",
+      "detail": ""
+    },
+    {
+      "package": "bond",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "bondcpp",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "boost_io_context",
+      "prefix": "/opt/autoware/boost_io_context",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "boost_serial_driver",
+      "prefix": "/opt/autoware/boost_serial_driver",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "boost_tcp_driver",
+      "prefix": "/opt/autoware/boost_tcp_driver",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "boost_udp_driver",
+      "prefix": "/opt/autoware/boost_udp_driver",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "builtin_interfaces",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "camera_calibration_parsers",
+      "prefix": "/opt/ros/jazzy",
+      "status": "meta-ros-not-installed",
+      "detail": ""
+    },
+    {
+      "package": "camera_description",
+      "prefix": "/opt/autoware/camera_description",
+      "status": "vendor-example",
+      "detail": ""
+    },
+    {
+      "package": "camera_info_manager",
+      "prefix": "/opt/ros/jazzy",
+      "status": "meta-ros-not-installed",
+      "detail": ""
+    },
+    {
+      "package": "can_msgs",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "carla_sensor_kit_description",
+      "prefix": "/opt/autoware/carla_sensor_kit_description",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "carla_sensor_kit_launch",
+      "prefix": "/opt/autoware/carla_sensor_kit_launch",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "class_loader",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "common_interfaces",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "composition_interfaces",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "compressed_depth_image_transport",
+      "prefix": "/opt/ros/jazzy",
+      "status": "meta-ros-not-installed",
+      "detail": ""
+    },
+    {
+      "package": "compressed_image_transport",
+      "prefix": "/opt/ros/jazzy",
+      "status": "meta-ros-not-installed",
+      "detail": ""
+    },
+    {
+      "package": "console_bridge_vendor",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "continental_msgs",
+      "prefix": "/opt/autoware/continental_msgs",
+      "status": "vendor-example",
+      "detail": ""
+    },
+    {
+      "package": "continental_srvs",
+      "prefix": "/opt/autoware/continental_srvs",
+      "status": "vendor-example",
+      "detail": ""
+    },
+    {
+      "package": "cuda_blackboard",
+      "prefix": "/opt/autoware/cuda_blackboard",
+      "status": "cuda",
+      "detail": ""
+    },
+    {
+      "package": "cv_bridge",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "diagnostic_aggregator",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "diagnostic_msgs",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "diagnostic_updater",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "domain_coordinator",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "eagleye_can_velocity_converter",
+      "prefix": "/opt/autoware/eagleye_can_velocity_converter",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "eagleye_coordinate",
+      "prefix": "/opt/autoware/eagleye_coordinate",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "eagleye_fix2kml",
+      "prefix": "/opt/autoware/eagleye_fix2kml",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "eagleye_geo_pose_converter",
+      "prefix": "/opt/autoware/eagleye_geo_pose_converter",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "eagleye_geo_pose_fusion",
+      "prefix": "/opt/autoware/eagleye_geo_pose_fusion",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "eagleye_gnss_converter",
+      "prefix": "/opt/autoware/eagleye_gnss_converter",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "eagleye_msgs",
+      "prefix": "/opt/autoware/eagleye_msgs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "eagleye_navigation",
+      "prefix": "/opt/autoware/eagleye_navigation",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "eagleye_rt",
+      "prefix": "/opt/autoware/eagleye_rt",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "eagleye_tf",
+      "prefix": "/opt/autoware/eagleye_tf",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "eigen3_cmake_module",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "eigen_stl_containers",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "fastrtps_cmake_module",
+      "prefix": "/opt/ros/jazzy",
+      "status": "build-tool",
+      "detail": ""
+    },
+    {
+      "package": "filters",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "generate_parameter_library",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "generate_parameter_library_py",
+      "prefix": "/opt/ros/jazzy",
+      "status": "build-tool",
+      "detail": ""
+    },
+    {
+      "package": "geodesy",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "geographic_info",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "geographic_msgs",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "geometric_shapes",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "geometry2",
+      "prefix": "/opt/ros/jazzy",
+      "status": "meta-ros-not-installed",
+      "detail": ""
+    },
+    {
+      "package": "geometry_msgs",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "glog",
+      "prefix": "/opt/autoware/glog",
+      "status": "shadows-oe-recipe",
+      "detail": ""
+    },
+    {
+      "package": "gps_msgs",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "grid_map_core",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "grid_map_costmap_2d",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "grid_map_cv",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "grid_map_msgs",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "grid_map_pcl",
+      "prefix": "/opt/ros/jazzy",
+      "status": "meta-ros-not-installed",
+      "detail": ""
+    },
+    {
+      "package": "grid_map_ros",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "grid_map_rviz_plugin",
+      "prefix": "/opt/ros/jazzy",
+      "status": "qt",
+      "detail": ""
+    },
+    {
+      "package": "gz_cmake_vendor",
+      "prefix": "/opt/ros/jazzy",
+      "status": "meta-ros-not-installed",
+      "detail": ""
+    },
+    {
+      "package": "gz_math_vendor",
+      "prefix": "/opt/ros/jazzy",
+      "status": "meta-ros-not-installed",
+      "detail": ""
+    },
+    {
+      "package": "gz_utils_vendor",
+      "prefix": "/opt/ros/jazzy",
+      "status": "meta-ros-not-installed",
+      "detail": ""
+    },
+    {
+      "package": "image_geometry",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "image_transport",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "image_transport_plugins",
+      "prefix": "/opt/ros/jazzy",
+      "status": "meta-ros-not-installed",
+      "detail": ""
+    },
+    {
+      "package": "imu_description",
+      "prefix": "/opt/autoware/imu_description",
+      "status": "vendor-example",
+      "detail": ""
+    },
+    {
+      "package": "interactive_markers",
+      "prefix": "/opt/ros/jazzy",
+      "status": "meta-ros-not-installed",
+      "detail": ""
+    },
+    {
+      "package": "joy",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "kdl_parser",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "keyboard_handler",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "lanelet2_core",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "lanelet2_io",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "lanelet2_maps",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "lanelet2_matching",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "lanelet2_projection",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "lanelet2_python",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "lanelet2_routing",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "lanelet2_traffic_rules",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "lanelet2_validation",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "laser_geometry",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "launch",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "launch_ros",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "launch_testing",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "launch_testing_ament_cmake",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "launch_testing_ros",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "launch_xml",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "launch_yaml",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "libcurl_vendor",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "liblz4_vendor",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "libstatistics_collector",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "libyaml_vendor",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "lifecycle_msgs",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "livox_description",
+      "prefix": "/opt/autoware/livox_description",
+      "status": "vendor-example",
+      "detail": ""
+    },
+    {
+      "package": "llh_converter",
+      "prefix": "/opt/autoware/llh_converter",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "logging_demo",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "managed_transform_buffer",
+      "prefix": "/opt/autoware/managed_transform_buffer",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "map_msgs",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "mcap_vendor",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "message_filters",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "morai_msgs",
+      "prefix": "/opt/autoware/morai_msgs",
+      "status": "license-todo",
+      "detail": ""
+    },
+    {
+      "package": "mrt_cmake_modules",
+      "prefix": "/opt/ros/jazzy",
+      "status": "build-tool",
+      "detail": ""
+    },
+    {
+      "package": "mussp",
+      "prefix": "/opt/autoware/mussp",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "nav2_common",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "nav2_costmap_2d",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "nav2_msgs",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "nav2_util",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "nav2_voxel_grid",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "nav_msgs",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "nebula",
+      "prefix": "/opt/autoware/nebula",
+      "status": "vendor-example",
+      "detail": ""
+    },
+    {
+      "package": "nebula_continental",
+      "prefix": "/opt/autoware/nebula_continental",
+      "status": "vendor-example",
+      "detail": ""
+    },
+    {
+      "package": "nebula_continental_common",
+      "prefix": "/opt/autoware/nebula_continental_common",
+      "status": "vendor-example",
+      "detail": ""
+    },
+    {
+      "package": "nebula_continental_decoders",
+      "prefix": "/opt/autoware/nebula_continental_decoders",
+      "status": "vendor-example",
+      "detail": ""
+    },
+    {
+      "package": "nebula_continental_hw_interfaces",
+      "prefix": "/opt/autoware/nebula_continental_hw_interfaces",
+      "status": "vendor-example",
+      "detail": ""
+    },
+    {
+      "package": "nebula_core_common",
+      "prefix": "/opt/autoware/nebula_core_common",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "nebula_core_decoders",
+      "prefix": "/opt/autoware/nebula_core_decoders",
+      "status": "missing-oe-recipe",
+      "detail": ""
+    },
+    {
+      "package": "nebula_core_hw_interfaces",
+      "prefix": "/opt/autoware/nebula_core_hw_interfaces",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "nebula_core_ros",
+      "prefix": "/opt/autoware/nebula_core_ros",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "nebula_hesai",
+      "prefix": "/opt/autoware/nebula_hesai",
+      "status": "vendor-example",
+      "detail": ""
+    },
+    {
+      "package": "nebula_hesai_common",
+      "prefix": "/opt/autoware/nebula_hesai_common",
+      "status": "vendor-example",
+      "detail": ""
+    },
+    {
+      "package": "nebula_hesai_decoders",
+      "prefix": "/opt/autoware/nebula_hesai_decoders",
+      "status": "vendor-example",
+      "detail": ""
+    },
+    {
+      "package": "nebula_hesai_hw_interfaces",
+      "prefix": "/opt/autoware/nebula_hesai_hw_interfaces",
+      "status": "vendor-example",
+      "detail": ""
+    },
+    {
+      "package": "nebula_msgs",
+      "prefix": "/opt/autoware/nebula_msgs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "nebula_robosense",
+      "prefix": "/opt/autoware/nebula_robosense",
+      "status": "vendor-example",
+      "detail": ""
+    },
+    {
+      "package": "nebula_robosense_common",
+      "prefix": "/opt/autoware/nebula_robosense_common",
+      "status": "vendor-example",
+      "detail": ""
+    },
+    {
+      "package": "nebula_robosense_decoders",
+      "prefix": "/opt/autoware/nebula_robosense_decoders",
+      "status": "vendor-example",
+      "detail": ""
+    },
+    {
+      "package": "nebula_robosense_hw_interfaces",
+      "prefix": "/opt/autoware/nebula_robosense_hw_interfaces",
+      "status": "vendor-example",
+      "detail": ""
+    },
+    {
+      "package": "nebula_sample",
+      "prefix": "/opt/autoware/nebula_sample",
+      "status": "vendor-example",
+      "detail": ""
+    },
+    {
+      "package": "nebula_sample_common",
+      "prefix": "/opt/autoware/nebula_sample_common",
+      "status": "vendor-example",
+      "detail": ""
+    },
+    {
+      "package": "nebula_sample_decoders",
+      "prefix": "/opt/autoware/nebula_sample_decoders",
+      "status": "vendor-example",
+      "detail": ""
+    },
+    {
+      "package": "nebula_sample_hw_interfaces",
+      "prefix": "/opt/autoware/nebula_sample_hw_interfaces",
+      "status": "vendor-example",
+      "detail": ""
+    },
+    {
+      "package": "nebula_velodyne",
+      "prefix": "/opt/autoware/nebula_velodyne",
+      "status": "vendor-example",
+      "detail": ""
+    },
+    {
+      "package": "nebula_velodyne_common",
+      "prefix": "/opt/autoware/nebula_velodyne_common",
+      "status": "vendor-example",
+      "detail": ""
+    },
+    {
+      "package": "nebula_velodyne_decoders",
+      "prefix": "/opt/autoware/nebula_velodyne_decoders",
+      "status": "vendor-example",
+      "detail": ""
+    },
+    {
+      "package": "nebula_velodyne_hw_interfaces",
+      "prefix": "/opt/autoware/nebula_velodyne_hw_interfaces",
+      "status": "vendor-example",
+      "detail": ""
+    },
+    {
+      "package": "negotiated",
+      "prefix": "/opt/autoware/negotiated",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "negotiated_examples",
+      "prefix": "/opt/autoware/negotiated_examples",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "negotiated_interfaces",
+      "prefix": "/opt/autoware/negotiated_interfaces",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "nmea_msgs",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "orocos_kdl_vendor",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "osqp_vendor",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "osrf_pycommon",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "pandar_description",
+      "prefix": "/opt/autoware/pandar_description",
+      "status": "vendor-example",
+      "detail": ""
+    },
+    {
+      "package": "pandar_msgs",
+      "prefix": "/opt/autoware/pandar_msgs",
+      "status": "vendor-example",
+      "detail": ""
+    },
+    {
+      "package": "parameter_traits",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "pcl_conversions",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "pcl_msgs",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "pcl_ros",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "perception_utils",
+      "prefix": "/opt/autoware/perception_utils",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "pluginlib",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "point_cloud_msg_wrapper",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "point_cloud_transport",
+      "prefix": "/opt/ros/jazzy",
+      "status": "meta-ros-not-installed",
+      "detail": ""
+    },
+    {
+      "package": "pointcloud_to_laserscan",
+      "prefix": "/opt/autoware/pointcloud_to_laserscan",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "proxsuite",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "pybind11_vendor",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "python_cmake_module",
+      "prefix": "/opt/ros/jazzy",
+      "status": "build-tool",
+      "detail": ""
+    },
+    {
+      "package": "python_orocos_kdl_vendor",
+      "prefix": "/opt/ros/jazzy",
+      "status": "meta-ros-not-installed",
+      "detail": ""
+    },
+    {
+      "package": "python_qt_binding",
+      "prefix": "/opt/ros/jazzy",
+      "status": "qt",
+      "detail": ""
+    },
+    {
+      "package": "qt_gui",
+      "prefix": "/opt/ros/jazzy",
+      "status": "qt",
+      "detail": ""
+    },
+    {
+      "package": "qt_gui_py_common",
+      "prefix": "/opt/ros/jazzy",
+      "status": "qt",
+      "detail": ""
+    },
+    {
+      "package": "radar_description",
+      "prefix": "/opt/autoware/radar_description",
+      "status": "vendor-example",
+      "detail": ""
+    },
+    {
+      "package": "radar_msgs",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "random_numbers",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rcl",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rcl_action",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rcl_interfaces",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rcl_lifecycle",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rcl_logging_interface",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rcl_logging_spdlog",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rcl_yaml_param_parser",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rclcpp",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rclcpp_action",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rclcpp_components",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rclcpp_lifecycle",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rclpy",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rcpputils",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rcutils",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "resource_retriever",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rmw",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rmw_cyclonedds_cpp",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rmw_dds_common",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rmw_fastrtps_cpp",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rmw_fastrtps_shared_cpp",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rmw_implementation",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rmw_implementation_cmake",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "robosense_msgs",
+      "prefix": "/opt/autoware/robosense_msgs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "robot_state_publisher",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ros2_socketcan",
+      "prefix": "/opt/autoware/ros2_socketcan",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ros2_socketcan_msgs",
+      "prefix": "/opt/autoware/ros2_socketcan_msgs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ros2action",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ros2agnocast",
+      "prefix": "/opt/autoware/ros2agnocast",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ros2agnocast_discovery_agent",
+      "prefix": "/opt/autoware/ros2agnocast_discovery_agent",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ros2agnocast_discovery_msgs",
+      "prefix": "/opt/autoware/ros2agnocast_discovery_msgs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ros2bag",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "ros2cli",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ros2cli_common_extensions",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ros2component",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ros2doctor",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ros2interface",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ros2launch",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ros2lifecycle",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ros2multicast",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ros2node",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ros2param",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ros2pkg",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ros2plugin",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ros2run",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ros2service",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ros2topic",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ros_base",
+      "prefix": "/opt/ros/jazzy",
+      "status": "meta-ros-not-installed",
+      "detail": ""
+    },
+    {
+      "package": "ros_core",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ros_environment",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ros_workspace",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rosbag2",
+      "prefix": "/opt/ros/jazzy",
+      "status": "meta-ros-not-installed",
+      "detail": ""
+    },
+    {
+      "package": "rosbag2_compression",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "rosbag2_compression_zstd",
+      "prefix": "/opt/ros/jazzy",
+      "status": "meta-ros-not-installed",
+      "detail": ""
+    },
+    {
+      "package": "rosbag2_cpp",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rosbag2_interfaces",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "rosbag2_py",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "rosbag2_storage",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rosbag2_storage_default_plugins",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "rosbag2_storage_mcap",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rosbag2_storage_sqlite3",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "rosbag2_transport",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "rosgraph_msgs",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rosidl_adapter",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rosidl_cli",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rosidl_cmake",
+      "prefix": "/opt/ros/jazzy",
+      "status": "build-tool",
+      "detail": ""
+    },
+    {
+      "package": "rosidl_core_generators",
+      "prefix": "/opt/ros/jazzy",
+      "status": "build-tool",
+      "detail": ""
+    },
+    {
+      "package": "rosidl_core_runtime",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rosidl_default_generators",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rosidl_default_runtime",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rosidl_dynamic_typesupport",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rosidl_dynamic_typesupport_fastrtps",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rosidl_generator_c",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rosidl_generator_cpp",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rosidl_generator_py",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rosidl_generator_rs",
+      "prefix": "/opt/ros/jazzy",
+      "status": "build-tool",
+      "detail": ""
+    },
+    {
+      "package": "rosidl_generator_type_description",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rosidl_parser",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rosidl_pycommon",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rosidl_runtime_c",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rosidl_runtime_cpp",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rosidl_runtime_py",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rosidl_typesupport_c",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rosidl_typesupport_cpp",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rosidl_typesupport_fastrtps_c",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rosidl_typesupport_fastrtps_cpp",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rosidl_typesupport_interface",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rosidl_typesupport_introspection_c",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rosidl_typesupport_introspection_cpp",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rpyutils",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rqt_console",
+      "prefix": "/opt/ros/jazzy",
+      "status": "qt",
+      "detail": ""
+    },
+    {
+      "package": "rqt_gui",
+      "prefix": "/opt/ros/jazzy",
+      "status": "qt",
+      "detail": ""
+    },
+    {
+      "package": "rqt_gui_py",
+      "prefix": "/opt/ros/jazzy",
+      "status": "qt",
+      "detail": ""
+    },
+    {
+      "package": "rqt_py_common",
+      "prefix": "/opt/ros/jazzy",
+      "status": "qt",
+      "detail": ""
+    },
+    {
+      "package": "rqt_reconfigure",
+      "prefix": "/opt/ros/jazzy",
+      "status": "qt",
+      "detail": ""
+    },
+    {
+      "package": "rqt_robot_monitor",
+      "prefix": "/opt/ros/jazzy",
+      "status": "qt",
+      "detail": ""
+    },
+    {
+      "package": "rqt_runtime_monitor",
+      "prefix": "/opt/ros/jazzy",
+      "status": "qt",
+      "detail": ""
+    },
+    {
+      "package": "rtklib_bridge",
+      "prefix": "/opt/autoware/rtklib_bridge",
+      "status": "license-todo",
+      "detail": ""
+    },
+    {
+      "package": "rtklib_msgs",
+      "prefix": "/opt/autoware/rtklib_msgs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rviz2",
+      "prefix": "/opt/ros/jazzy",
+      "status": "qt",
+      "detail": ""
+    },
+    {
+      "package": "rviz_2d_overlay_msgs",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "rviz_2d_overlay_plugins",
+      "prefix": "/opt/ros/jazzy",
+      "status": "qt",
+      "detail": ""
+    },
+    {
+      "package": "rviz_assimp_vendor",
+      "prefix": "/opt/ros/jazzy",
+      "status": "qt",
+      "detail": ""
+    },
+    {
+      "package": "rviz_common",
+      "prefix": "/opt/ros/jazzy",
+      "status": "qt",
+      "detail": ""
+    },
+    {
+      "package": "rviz_default_plugins",
+      "prefix": "/opt/ros/jazzy",
+      "status": "qt",
+      "detail": ""
+    },
+    {
+      "package": "rviz_ogre_vendor",
+      "prefix": "/opt/ros/jazzy",
+      "status": "qt",
+      "detail": ""
+    },
+    {
+      "package": "rviz_rendering",
+      "prefix": "/opt/ros/jazzy",
+      "status": "qt",
+      "detail": ""
+    },
+    {
+      "package": "sample_sensor_kit_description",
+      "prefix": "/opt/autoware/sample_sensor_kit_description",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "sample_sensor_kit_launch",
+      "prefix": "/opt/autoware/sample_sensor_kit_launch",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "sample_vehicle_description",
+      "prefix": "/opt/autoware/sample_vehicle_description",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "sample_vehicle_launch",
+      "prefix": "/opt/autoware/sample_vehicle_launch",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "sdl2_vendor",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "sensor_msgs",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "sensor_msgs_py",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "septentrio_gnss_driver",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "service_msgs",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "shape_msgs",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "single_lidar_sensor_kit_description",
+      "prefix": "/opt/autoware/single_lidar_sensor_kit_description",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "single_lidar_sensor_kit_launch",
+      "prefix": "/opt/autoware/single_lidar_sensor_kit_launch",
+      "status": "missing-oe-recipe",
+      "detail": ""
+    },
+    {
+      "package": "smclib",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "spdlog_vendor",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "sqlite3_vendor",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "sros2",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "sros2_cmake",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "statistics_msgs",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "std_msgs",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "std_srvs",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "stereo_msgs",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "sync_tooling_msgs",
+      "prefix": "/opt/autoware/sync_tooling_msgs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "tango_icons_vendor",
+      "prefix": "/opt/ros/jazzy",
+      "status": "qt",
+      "detail": ""
+    },
+    {
+      "package": "tcb_span",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "tf2",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "tf2_bullet",
+      "prefix": "/opt/ros/jazzy",
+      "status": "meta-ros-not-installed",
+      "detail": ""
+    },
+    {
+      "package": "tf2_eigen",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "tf2_eigen_kdl",
+      "prefix": "/opt/ros/jazzy",
+      "status": "meta-ros-not-installed",
+      "detail": ""
+    },
+    {
+      "package": "tf2_geometry_msgs",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "tf2_kdl",
+      "prefix": "/opt/ros/jazzy",
+      "status": "meta-ros-not-installed",
+      "detail": ""
+    },
+    {
+      "package": "tf2_msgs",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "tf2_py",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "tf2_ros",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "tf2_ros_py",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "tf2_sensor_msgs",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "tf2_tools",
+      "prefix": "/opt/ros/jazzy",
+      "status": "meta-ros-not-installed",
+      "detail": ""
+    },
+    {
+      "package": "tf_transformations",
+      "prefix": "/opt/ros/jazzy",
+      "status": "meta-ros-not-installed",
+      "detail": ""
+    },
+    {
+      "package": "theora_image_transport",
+      "prefix": "/opt/ros/jazzy",
+      "status": "meta-ros-not-installed",
+      "detail": ""
+    },
+    {
+      "package": "tier4_active_generator_rviz_plugin",
+      "prefix": "/opt/autoware/tier4_active_generator_rviz_plugin",
+      "status": "qt",
+      "detail": ""
+    },
+    {
+      "package": "tier4_adapi_rviz_plugin",
+      "prefix": "/opt/autoware/tier4_adapi_rviz_plugin",
+      "status": "qt",
+      "detail": ""
+    },
+    {
+      "package": "tier4_api_msgs",
+      "prefix": "/opt/autoware/tier4_api_msgs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "tier4_api_utils",
+      "prefix": "/opt/autoware/tier4_api_utils",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "tier4_auto_msgs_converter",
+      "prefix": "/opt/autoware/tier4_auto_msgs_converter",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "tier4_autoware_api_launch",
+      "prefix": "/opt/autoware/tier4_autoware_api_launch",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "tier4_camera_view_rviz_plugin",
+      "prefix": "/opt/autoware/tier4_camera_view_rviz_plugin",
+      "status": "qt",
+      "detail": ""
+    },
+    {
+      "package": "tier4_control_mode_rviz_plugin",
+      "prefix": "/opt/autoware/tier4_control_mode_rviz_plugin",
+      "status": "qt",
+      "detail": ""
+    },
+    {
+      "package": "tier4_control_msgs",
+      "prefix": "/opt/autoware/tier4_control_msgs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "tier4_datetime_rviz_plugin",
+      "prefix": "/opt/autoware/tier4_datetime_rviz_plugin",
+      "status": "qt",
+      "detail": ""
+    },
+    {
+      "package": "tier4_debug_msgs",
+      "prefix": "/opt/autoware/tier4_debug_msgs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "tier4_dummy_object_rviz_plugin",
+      "prefix": "/opt/autoware/tier4_dummy_object_rviz_plugin",
+      "status": "qt",
+      "detail": ""
+    },
+    {
+      "package": "tier4_external_api_msgs",
+      "prefix": "/opt/autoware/tier4_external_api_msgs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "tier4_hmi_msgs",
+      "prefix": "/opt/autoware/tier4_hmi_msgs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "tier4_localization_msgs",
+      "prefix": "/opt/autoware/tier4_localization_msgs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "tier4_manual_lane_change_rviz_plugin",
+      "prefix": "/opt/autoware/tier4_manual_lane_change_rviz_plugin",
+      "status": "qt",
+      "detail": ""
+    },
+    {
+      "package": "tier4_map_msgs",
+      "prefix": "/opt/autoware/tier4_map_msgs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "tier4_metric_msgs",
+      "prefix": "/opt/autoware/tier4_metric_msgs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "tier4_perception_msgs",
+      "prefix": "/opt/autoware/tier4_perception_msgs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "tier4_perception_rviz_plugin",
+      "prefix": "/opt/autoware/tier4_perception_rviz_plugin",
+      "status": "qt",
+      "detail": ""
+    },
+    {
+      "package": "tier4_planning_factor_rviz_plugin",
+      "prefix": "/opt/autoware/tier4_planning_factor_rviz_plugin",
+      "status": "qt",
+      "detail": ""
+    },
+    {
+      "package": "tier4_planning_msgs",
+      "prefix": "/opt/autoware/tier4_planning_msgs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "tier4_rtc_msgs",
+      "prefix": "/opt/autoware/tier4_rtc_msgs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "tier4_simulation_msgs",
+      "prefix": "/opt/autoware/tier4_simulation_msgs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "tier4_simulator_launch",
+      "prefix": "/opt/autoware/tier4_simulator_launch",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "tier4_state_rviz_plugin",
+      "prefix": "/opt/autoware/tier4_state_rviz_plugin",
+      "status": "qt",
+      "detail": ""
+    },
+    {
+      "package": "tier4_system_launch",
+      "prefix": "/opt/autoware/tier4_system_launch",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "tier4_system_msgs",
+      "prefix": "/opt/autoware/tier4_system_msgs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "tier4_traffic_light_rviz_plugin",
+      "prefix": "/opt/autoware/tier4_traffic_light_rviz_plugin",
+      "status": "qt",
+      "detail": ""
+    },
+    {
+      "package": "tier4_v2x_msgs",
+      "prefix": "/opt/autoware/tier4_v2x_msgs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "tier4_vehicle_launch",
+      "prefix": "/opt/autoware/tier4_vehicle_launch",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "tier4_vehicle_msgs",
+      "prefix": "/opt/autoware/tier4_vehicle_msgs",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "tier4_vehicle_rviz_plugin",
+      "prefix": "/opt/autoware/tier4_vehicle_rviz_plugin",
+      "status": "qt",
+      "detail": ""
+    },
+    {
+      "package": "tinyxml2_vendor",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "tl_expected",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "topic_tools",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "topic_tools_interfaces",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "tracetools",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "trajectory_msgs",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "type_description_interfaces",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ublox_gps",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
+    },
+    {
+      "package": "ublox_msgs",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "ublox_serialization",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "udp_msgs",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "uncrustify_vendor",
+      "prefix": "/opt/ros/jazzy",
+      "status": "build-tool",
+      "detail": ""
+    },
+    {
+      "package": "unique_identifier_msgs",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "urdf",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "urdf_parser_plugin",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "usb_cam",
+      "prefix": "/opt/ros/jazzy",
+      "status": "meta-ros-not-installed",
+      "detail": ""
+    },
+    {
+      "package": "velodyne_description",
+      "prefix": "/opt/autoware/velodyne_description",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "velodyne_msgs",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "visualization_msgs",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "vls_description",
+      "prefix": "/opt/autoware/vls_description",
+      "status": "vendor-example",
+      "detail": ""
+    },
+    {
+      "package": "xacro",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "yabloc_common",
+      "prefix": "/opt/autoware/yabloc_common",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "yabloc_image_processing",
+      "prefix": "/opt/autoware/yabloc_image_processing",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "yabloc_monitor",
+      "prefix": "/opt/autoware/yabloc_monitor",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "yabloc_particle_filter",
+      "prefix": "/opt/autoware/yabloc_particle_filter",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "yabloc_pose_initializer",
+      "prefix": "/opt/autoware/yabloc_pose_initializer",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "yaml_cpp_vendor",
+      "prefix": "/opt/ros/jazzy",
+      "status": "in-image",
+      "detail": ""
+    },
+    {
+      "package": "zstd_image_transport",
+      "prefix": "/opt/ros/jazzy",
+      "status": "meta-ros-not-installed",
+      "detail": ""
+    },
+    {
+      "package": "zstd_vendor",
+      "prefix": "/opt/ros/jazzy",
+      "status": "meta-ros-not-installed",
+      "detail": ""
+    }
+  ],
+  "only_here": [
+    "autoware-automatic-pose-initializer",
+    "autoware-component-interface-tools",
+    "common-awsim-labs-sensor-launch",
+    "tier4-map-launch",
+    "tier4-sensing-launch"
+  ],
+  "unexplained": []
+}

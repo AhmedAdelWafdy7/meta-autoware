@@ -36,3 +36,23 @@ jobs:
         run: |
           kas shell kas/autoware.yml:kas/ci.yml -c \
             "bitbake qemu-helper-native:do_addto_recipe_sysroot && python3 $GITHUB_WORKSPACE/tools/boot-test.py qemuarm64 --image core-image-autoware"
+
+      - name: Compare with Autoware's images
+        run: |
+          # kas shell starts from a clean environment, so expand GITHUB_WORKSPACE out here
+          kas shell kas/autoware.yml:kas/ci.yml -c "
+            manifest=\$(bitbake-getvar --value -q DEPLOY_DIR | tail -1)/images/qemuarm64/core-image-autoware-jazzy-qemuarm64.rootfs.manifest
+            for upstream in $GITHUB_WORKSPACE/results/upstream/*.json; do
+              python3 $GITHUB_WORKSPACE/tools/compare-upstream.py --upstream \"\$upstream\" \
+                --manifest core-image-autoware=\"\$manifest\" \
+                --output $GITHUB_WORKSPACE/parity/\$(basename \"\$upstream\" .json) || exit 1
+            done"
+          for f in parity/*.md; do sed -n '1,/^Autoware packages in/p' "$f" >> "$GITHUB_STEP_SUMMARY"; done
+
+      - name: Upload the comparison
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: parity
+          path: parity/
+          if-no-files-found: ignore

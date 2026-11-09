@@ -14,3 +14,5 @@ __pycache__/
 # mash intermediates and build logs; generated-recipes/ holds the result
 results/*/build_mash/
 results/*/build*.log
+# written by the CI comparison step; the committed tables are in results/parity/
+/parity/
