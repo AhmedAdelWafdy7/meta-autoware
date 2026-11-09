@@ -10,3 +10,7 @@ yocto-cache
 
 __pycache__/
 *.pyc
+
+# mash intermediates and build logs; generated-recipes/ holds the result
+results/*/build_mash/
+results/*/build*.log

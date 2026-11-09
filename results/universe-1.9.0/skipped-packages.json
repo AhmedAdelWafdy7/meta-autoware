@@ -1,0 +1,167 @@
+{
+  "autoware_ref": "1.9.0",
+  "ros_distro": "jazzy",
+  "skipped_count": 32,
+  "skipped": [
+    {
+      "name": "autoware-bevfusion",
+      "category": "cuda_or_proprietary_dep",
+      "reason": "mash failure taxonomy: cuda_or_proprietary_dep"
+    },
+    {
+      "name": "autoware-bytetrack",
+      "category": "cuda_or_proprietary_dep",
+      "reason": "mash failure taxonomy: cuda_or_proprietary_dep"
+    },
+    {
+      "name": "autoware-calibration-status-classifier",
+      "category": "cuda_or_proprietary_dep",
+      "reason": "mash failure taxonomy: cuda_or_proprietary_dep"
+    },
+    {
+      "name": "autoware-camera-streampetr",
+      "category": "cuda_or_proprietary_dep",
+      "reason": "mash failure taxonomy: cuda_or_proprietary_dep"
+    },
+    {
+      "name": "autoware-cuda-dependency-meta",
+      "category": "cuda_or_proprietary_dep",
+      "reason": "CUDA, TensorRT or NVIDIA in the package name; no CUDA backend yet"
+    },
+    {
+      "name": "autoware-cuda-pointcloud-preprocessor",
+      "category": "cuda_or_proprietary_dep",
+      "reason": "mash failure taxonomy: cuda_or_proprietary_dep"
+    },
+    {
+      "name": "autoware-cuda-utils",
+      "category": "cuda_or_proprietary_dep",
+      "reason": "mash failure taxonomy: cuda_or_proprietary_dep"
+    },
+    {
+      "name": "autoware-diffusion-planner",
+      "category": "cuda_or_proprietary_dep",
+      "reason": "mash failure taxonomy: cuda_or_proprietary_dep"
+    },
+    {
+      "name": "autoware-ground-segmentation-cuda",
+      "category": "cuda_or_proprietary_dep",
+      "reason": "mash failure taxonomy: cuda_or_proprietary_dep"
+    },
+    {
+      "name": "autoware-image-projection-based-fusion",
+      "category": "cuda_or_proprietary_dep",
+      "reason": "mash failure taxonomy: cuda_or_proprietary_dep"
+    },
+    {
+      "name": "autoware-lidar-apollo-instance-segmentation",
+      "category": "cuda_or_proprietary_dep",
+      "reason": "mash failure taxonomy: cuda_or_proprietary_dep"
+    },
+    {
+      "name": "autoware-lidar-centerpoint",
+      "category": "cuda_or_proprietary_dep",
+      "reason": "mash failure taxonomy: cuda_or_proprietary_dep"
+    },
+    {
+      "name": "autoware-lidar-frnet",
+      "category": "cuda_or_proprietary_dep",
+      "reason": "mash failure taxonomy: cuda_or_proprietary_dep"
+    },
+    {
+      "name": "autoware-lidar-transfusion",
+      "category": "cuda_or_proprietary_dep",
+      "reason": "mash failure taxonomy: cuda_or_proprietary_dep"
+    },
+    {
+      "name": "autoware-ptv3",
+      "category": "cuda_or_proprietary_dep",
+      "reason": "mash failure taxonomy: cuda_or_proprietary_dep"
+    },
+    {
+      "name": "autoware-shape-estimation",
+      "category": "cuda_or_proprietary_dep",
+      "reason": "mash failure taxonomy: cuda_or_proprietary_dep"
+    },
+    {
+      "name": "autoware-simpl-prediction",
+      "category": "cuda_or_proprietary_dep",
+      "reason": "mash failure taxonomy: cuda_or_proprietary_dep"
+    },
+    {
+      "name": "autoware-tensorrt-bevdet",
+      "category": "cuda_or_proprietary_dep",
+      "reason": "CUDA, TensorRT or NVIDIA in the package name; no CUDA backend yet"
+    },
+    {
+      "name": "autoware-tensorrt-bevformer",
+      "category": "cuda_or_proprietary_dep",
+      "reason": "mash failure taxonomy: cuda_or_proprietary_dep"
+    },
+    {
+      "name": "autoware-tensorrt-classifier",
+      "category": "cuda_or_proprietary_dep",
+      "reason": "mash failure taxonomy: cuda_or_proprietary_dep"
+    },
+    {
+      "name": "autoware-tensorrt-common",
+      "category": "cuda_or_proprietary_dep",
+      "reason": "mash failure taxonomy: cuda_or_proprietary_dep"
+    },
+    {
+      "name": "autoware-tensorrt-plugins",
+      "category": "cuda_or_proprietary_dep",
+      "reason": "mash failure taxonomy: cuda_or_proprietary_dep"
+    },
+    {
+      "name": "autoware-tensorrt-vad",
+      "category": "cuda_or_proprietary_dep",
+      "reason": "mash failure taxonomy: cuda_or_proprietary_dep"
+    },
+    {
+      "name": "autoware-tensorrt-yolox",
+      "category": "cuda_or_proprietary_dep",
+      "reason": "mash failure taxonomy: cuda_or_proprietary_dep"
+    },
+    {
+      "name": "autoware-traffic-light-classifier",
+      "category": "cuda_or_proprietary_dep",
+      "reason": "mash failure taxonomy: cuda_or_proprietary_dep"
+    },
+    {
+      "name": "autoware-traffic-light-fine-detector",
+      "category": "cuda_or_proprietary_dep",
+      "reason": "mash failure taxonomy: cuda_or_proprietary_dep"
+    },
+    {
+      "name": "bevdet-vendor",
+      "category": "cuda_or_proprietary_dep",
+      "reason": "CUDA, TensorRT or NVIDIA in the package name; no CUDA backend yet"
+    },
+    {
+      "name": "cuda-blackboard",
+      "category": "cuda_or_proprietary_dep",
+      "reason": "CUDA, TensorRT or NVIDIA in the package name; no CUDA backend yet"
+    },
+    {
+      "name": "glog",
+      "category": "shadows_oe_recipe",
+      "reason": "same name as an openembedded-core/meta-openembedded recipe; that one is used instead"
+    },
+    {
+      "name": "morai-msgs",
+      "category": "license_todo",
+      "reason": "LICENSE = \"TODO\" placeholder, never filled in upstream"
+    },
+    {
+      "name": "rtklib-bridge",
+      "category": "license_todo",
+      "reason": "LICENSE = \"TODO\" placeholder, never filled in upstream"
+    },
+    {
+      "name": "trt-batched-nms",
+      "category": "cuda_or_proprietary_dep",
+      "reason": "mash failure taxonomy: cuda_or_proprietary_dep"
+    }
+  ]
+}
