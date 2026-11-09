@@ -23,10 +23,28 @@ RDEPENDS:${PN} += "\
     autoware-behavior-path-side-shift-module \
     autoware-behavior-path-start-planner-module \
     autoware-behavior-path-static-obstacle-avoidance-module \
+    autoware-behavior-velocity-blind-spot-module \
+    autoware-behavior-velocity-crosswalk-module \
+    autoware-behavior-velocity-detection-area-module \
+    autoware-behavior-velocity-intersection-module \
+    autoware-behavior-velocity-no-drivable-lane-module \
+    autoware-behavior-velocity-no-stopping-area-module \
+    autoware-behavior-velocity-occlusion-spot-module \
+    autoware-behavior-velocity-planner \
+    autoware-behavior-velocity-planner-common \
+    autoware-behavior-velocity-roundabout-module \
+    autoware-behavior-velocity-rtc-interface \
+    autoware-behavior-velocity-speed-bump-module \
+    autoware-behavior-velocity-stop-line-module \
+    autoware-behavior-velocity-template-module \
+    autoware-behavior-velocity-traffic-light-module \
+    autoware-behavior-velocity-virtual-traffic-light-module \
+    autoware-behavior-velocity-walkway-module \
     autoware-bezier-sampler \
     autoware-boundary-departure-checker \
     autoware-cluster-merger \
     autoware-collision-detector \
+    autoware-core-planning \
     autoware-costmap-generator \
     autoware-crosswalk-traffic-light-estimator \
     autoware-deprecated-boundary-departure-checker \
@@ -42,6 +60,17 @@ RDEPENDS:${PN} += "\
     autoware-mission-planner \
     autoware-mission-planner-universe \
     autoware-motion-utils \
+    autoware-motion-velocity-boundary-departure-prevention-module \
+    autoware-motion-velocity-dynamic-obstacle-stop-module \
+    autoware-motion-velocity-obstacle-cruise-module \
+    autoware-motion-velocity-obstacle-slow-down-module \
+    autoware-motion-velocity-obstacle-stop-module \
+    autoware-motion-velocity-obstacle-velocity-limiter-module \
+    autoware-motion-velocity-out-of-lane-module \
+    autoware-motion-velocity-planner \
+    autoware-motion-velocity-planner-common \
+    autoware-motion-velocity-road-user-stop-module \
+    autoware-motion-velocity-run-out-module \
     autoware-multi-object-tracker \
     autoware-object-merger \
     autoware-object-sorter \
@@ -55,13 +84,11 @@ RDEPENDS:${PN} += "\
     autoware-perception-online-evaluator \
     autoware-planning-evaluator \
     autoware-planning-factor-interface \
-    autoware-planning-test-manager \
     autoware-planning-topic-converter \
     autoware-planning-validator \
     autoware-planning-validator-intersection-collision-checker \
     autoware-planning-validator-latency-checker \
     autoware-planning-validator-rear-collision-checker \
-    autoware-planning-validator-test-utils \
     autoware-planning-validator-trajectory-checker \
     autoware-predicted-path-checker \
     autoware-predicted-path-postprocessor \
@@ -87,5 +114,6 @@ RDEPENDS:${PN} += "\
     autoware-trajectory-ranker \
     autoware-trajectory-selector \
     autoware-trajectory-validator \
+    autoware-velocity-smoother \
     mussp \
 "

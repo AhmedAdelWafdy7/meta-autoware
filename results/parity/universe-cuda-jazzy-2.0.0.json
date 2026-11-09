@@ -10,13 +10,14 @@
     "core-image-autoware-demo"
   ],
   "counts": {
-    "in-image": 521,
+    "in-image": 529,
+    "in-other-image": 59,
     "build-tool": 31,
-    "missing-oe-recipe": 26,
+    "missing-oe-recipe": 18,
     "qt": 42,
-    "in-other-image": 61,
     "cuda": 27,
     "not-in-autoware-ref": 30,
+    "not-installed": 2,
     "simulation": 4,
     "meta-ros-not-installed": 25,
     "vendor-example": 30,
@@ -39,8 +40,8 @@
     {
       "package": "agnocast",
       "prefix": "/opt/autoware/agnocast",
-      "status": "in-image",
-      "detail": ""
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
     },
     {
       "package": "agnocast_cie_config_msgs",
@@ -63,8 +64,8 @@
     {
       "package": "agnocast_e2e_test",
       "prefix": "/opt/autoware/agnocast_e2e_test",
-      "status": "in-image",
-      "detail": ""
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
     },
     {
       "package": "agnocast_ioctl_wrapper",
@@ -75,14 +76,14 @@
     {
       "package": "agnocast_sample_application",
       "prefix": "/opt/autoware/agnocast_sample_application",
-      "status": "in-image",
-      "detail": ""
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
     },
     {
       "package": "agnocast_sample_interfaces",
       "prefix": "/opt/autoware/agnocast_sample_interfaces",
-      "status": "in-image",
-      "detail": ""
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
     },
     {
       "package": "agnocastlib",
@@ -417,8 +418,8 @@
     {
       "package": "autoware_awsim_sensor_kit_description",
       "prefix": "/opt/autoware/autoware_awsim_sensor_kit_description",
-      "status": "in-image",
-      "detail": ""
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
     },
     {
       "package": "autoware_bag_time_manager_rviz_plugin",
@@ -507,104 +508,104 @@
     {
       "package": "autoware_behavior_velocity_blind_spot_module",
       "prefix": "/opt/autoware/autoware_behavior_velocity_blind_spot_module",
-      "status": "in-other-image",
-      "detail": "core-image-autoware-demo"
+      "status": "in-image",
+      "detail": ""
     },
     {
       "package": "autoware_behavior_velocity_crosswalk_module",
       "prefix": "/opt/autoware/autoware_behavior_velocity_crosswalk_module",
-      "status": "in-other-image",
-      "detail": "core-image-autoware-demo"
+      "status": "in-image",
+      "detail": ""
     },
     {
       "package": "autoware_behavior_velocity_detection_area_module",
       "prefix": "/opt/autoware/autoware_behavior_velocity_detection_area_module",
-      "status": "in-other-image",
-      "detail": "core-image-autoware-demo"
+      "status": "in-image",
+      "detail": ""
     },
     {
       "package": "autoware_behavior_velocity_intersection_module",
       "prefix": "/opt/autoware/autoware_behavior_velocity_intersection_module",
-      "status": "in-other-image",
-      "detail": "core-image-autoware-demo"
+      "status": "in-image",
+      "detail": ""
     },
     {
       "package": "autoware_behavior_velocity_no_drivable_lane_module",
       "prefix": "/opt/autoware/autoware_behavior_velocity_no_drivable_lane_module",
-      "status": "missing-oe-recipe",
+      "status": "in-image",
       "detail": ""
     },
     {
       "package": "autoware_behavior_velocity_no_stopping_area_module",
       "prefix": "/opt/autoware/autoware_behavior_velocity_no_stopping_area_module",
-      "status": "in-other-image",
-      "detail": "core-image-autoware-demo"
+      "status": "in-image",
+      "detail": ""
     },
     {
       "package": "autoware_behavior_velocity_occlusion_spot_module",
       "prefix": "/opt/autoware/autoware_behavior_velocity_occlusion_spot_module",
-      "status": "missing-oe-recipe",
+      "status": "in-image",
       "detail": ""
     },
     {
       "package": "autoware_behavior_velocity_planner",
       "prefix": "/opt/autoware/autoware_behavior_velocity_planner",
-      "status": "in-other-image",
-      "detail": "core-image-autoware-demo"
+      "status": "in-image",
+      "detail": ""
     },
     {
       "package": "autoware_behavior_velocity_planner_common",
       "prefix": "/opt/autoware/autoware_behavior_velocity_planner_common",
-      "status": "in-other-image",
-      "detail": "core-image-autoware-demo"
+      "status": "in-image",
+      "detail": ""
     },
     {
       "package": "autoware_behavior_velocity_roundabout_module",
       "prefix": "/opt/autoware/autoware_behavior_velocity_roundabout_module",
-      "status": "missing-oe-recipe",
+      "status": "in-image",
       "detail": ""
     },
     {
       "package": "autoware_behavior_velocity_rtc_interface",
       "prefix": "/opt/autoware/autoware_behavior_velocity_rtc_interface",
-      "status": "in-other-image",
-      "detail": "core-image-autoware-demo"
+      "status": "in-image",
+      "detail": ""
     },
     {
       "package": "autoware_behavior_velocity_speed_bump_module",
       "prefix": "/opt/autoware/autoware_behavior_velocity_speed_bump_module",
-      "status": "missing-oe-recipe",
+      "status": "in-image",
       "detail": ""
     },
     {
       "package": "autoware_behavior_velocity_stop_line_module",
       "prefix": "/opt/autoware/autoware_behavior_velocity_stop_line_module",
-      "status": "in-other-image",
-      "detail": "core-image-autoware-demo"
+      "status": "in-image",
+      "detail": ""
     },
     {
       "package": "autoware_behavior_velocity_template_module",
       "prefix": "/opt/autoware/autoware_behavior_velocity_template_module",
-      "status": "missing-oe-recipe",
+      "status": "in-image",
       "detail": ""
     },
     {
       "package": "autoware_behavior_velocity_traffic_light_module",
       "prefix": "/opt/autoware/autoware_behavior_velocity_traffic_light_module",
-      "status": "in-other-image",
-      "detail": "core-image-autoware-demo"
+      "status": "in-image",
+      "detail": ""
     },
     {
       "package": "autoware_behavior_velocity_virtual_traffic_light_module",
       "prefix": "/opt/autoware/autoware_behavior_velocity_virtual_traffic_light_module",
-      "status": "in-other-image",
-      "detail": "core-image-autoware-demo"
+      "status": "in-image",
+      "detail": ""
     },
     {
       "package": "autoware_behavior_velocity_walkway_module",
       "prefix": "/opt/autoware/autoware_behavior_velocity_walkway_module",
-      "status": "in-other-image",
-      "detail": "core-image-autoware-demo"
+      "status": "in-image",
+      "detail": ""
     },
     {
       "package": "autoware_bevfusion",
@@ -837,7 +838,7 @@
     {
       "package": "autoware_core_planning",
       "prefix": "/opt/autoware/autoware_core_planning",
-      "status": "missing-oe-recipe",
+      "status": "in-image",
       "detail": ""
     },
     {
@@ -915,8 +916,8 @@
     {
       "package": "autoware_detected_object_validation",
       "prefix": "/opt/autoware/autoware_detected_object_validation",
-      "status": "missing-oe-recipe",
-      "detail": ""
+      "status": "not-installed",
+      "detail": "perception"
     },
     {
       "package": "autoware_detection_by_tracker",
@@ -939,8 +940,8 @@
     {
       "package": "autoware_diagnostic_graph_test_examples",
       "prefix": "/opt/autoware/autoware_diagnostic_graph_test_examples",
-      "status": "in-image",
-      "detail": ""
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
     },
     {
       "package": "autoware_diagnostic_graph_utils",
@@ -1047,8 +1048,8 @@
     {
       "package": "autoware_fake_test_node",
       "prefix": "/opt/autoware/autoware_fake_test_node",
-      "status": "in-image",
-      "detail": ""
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
     },
     {
       "package": "autoware_fault_injection",
@@ -1479,68 +1480,68 @@
     {
       "package": "autoware_motion_velocity_boundary_departure_prevention_module",
       "prefix": "/opt/autoware/autoware_motion_velocity_boundary_departure_prevention_module",
-      "status": "in-other-image",
-      "detail": "core-image-autoware-demo"
+      "status": "in-image",
+      "detail": ""
     },
     {
       "package": "autoware_motion_velocity_dynamic_obstacle_stop_module",
       "prefix": "/opt/autoware/autoware_motion_velocity_dynamic_obstacle_stop_module",
-      "status": "in-other-image",
-      "detail": "core-image-autoware-demo"
+      "status": "in-image",
+      "detail": ""
     },
     {
       "package": "autoware_motion_velocity_obstacle_cruise_module",
       "prefix": "/opt/autoware/autoware_motion_velocity_obstacle_cruise_module",
-      "status": "in-other-image",
-      "detail": "core-image-autoware-demo"
+      "status": "in-image",
+      "detail": ""
     },
     {
       "package": "autoware_motion_velocity_obstacle_slow_down_module",
       "prefix": "/opt/autoware/autoware_motion_velocity_obstacle_slow_down_module",
-      "status": "in-other-image",
-      "detail": "core-image-autoware-demo"
+      "status": "in-image",
+      "detail": ""
     },
     {
       "package": "autoware_motion_velocity_obstacle_stop_module",
       "prefix": "/opt/autoware/autoware_motion_velocity_obstacle_stop_module",
-      "status": "in-other-image",
-      "detail": "core-image-autoware-demo"
+      "status": "in-image",
+      "detail": ""
     },
     {
       "package": "autoware_motion_velocity_obstacle_velocity_limiter_module",
       "prefix": "/opt/autoware/autoware_motion_velocity_obstacle_velocity_limiter_module",
-      "status": "in-other-image",
-      "detail": "core-image-autoware-demo"
+      "status": "in-image",
+      "detail": ""
     },
     {
       "package": "autoware_motion_velocity_out_of_lane_module",
       "prefix": "/opt/autoware/autoware_motion_velocity_out_of_lane_module",
-      "status": "in-other-image",
-      "detail": "core-image-autoware-demo"
+      "status": "in-image",
+      "detail": ""
     },
     {
       "package": "autoware_motion_velocity_planner",
       "prefix": "/opt/autoware/autoware_motion_velocity_planner",
-      "status": "in-other-image",
-      "detail": "core-image-autoware-demo"
+      "status": "in-image",
+      "detail": ""
     },
     {
       "package": "autoware_motion_velocity_planner_common",
       "prefix": "/opt/autoware/autoware_motion_velocity_planner_common",
-      "status": "in-other-image",
-      "detail": "core-image-autoware-demo"
+      "status": "in-image",
+      "detail": ""
     },
     {
       "package": "autoware_motion_velocity_road_user_stop_module",
       "prefix": "/opt/autoware/autoware_motion_velocity_road_user_stop_module",
-      "status": "in-other-image",
-      "detail": "core-image-autoware-demo"
+      "status": "in-image",
+      "detail": ""
     },
     {
       "package": "autoware_motion_velocity_run_out_module",
       "prefix": "/opt/autoware/autoware_motion_velocity_run_out_module",
-      "status": "in-other-image",
-      "detail": "core-image-autoware-demo"
+      "status": "in-image",
+      "detail": ""
     },
     {
       "package": "autoware_mpc_lateral_controller",
@@ -1827,8 +1828,8 @@
     {
       "package": "autoware_planning_validator_test_utils",
       "prefix": "/opt/autoware/autoware_planning_validator_test_utils",
-      "status": "in-image",
-      "detail": ""
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
     },
     {
       "package": "autoware_planning_validator_trajectory_checker",
@@ -1941,8 +1942,8 @@
     {
       "package": "autoware_qp_interface",
       "prefix": "/opt/autoware/autoware_qp_interface",
-      "status": "in-other-image",
-      "detail": "core-image-autoware-demo"
+      "status": "in-image",
+      "detail": ""
     },
     {
       "package": "autoware_radar_fusion_to_detected_object",
@@ -1995,8 +1996,8 @@
     {
       "package": "autoware_raindrop_cluster_filter",
       "prefix": "/opt/autoware/autoware_raindrop_cluster_filter",
-      "status": "missing-oe-recipe",
-      "detail": ""
+      "status": "not-installed",
+      "detail": "perception"
     },
     {
       "package": "autoware_raw_vehicle_cmd_converter",
@@ -2055,14 +2056,14 @@
     {
       "package": "autoware_sample_sensor_kit_description",
       "prefix": "/opt/autoware/autoware_sample_sensor_kit_description",
-      "status": "in-image",
-      "detail": ""
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
     },
     {
       "package": "autoware_sample_vehicle_description",
       "prefix": "/opt/autoware/autoware_sample_vehicle_description",
-      "status": "in-image",
-      "detail": ""
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
     },
     {
       "package": "autoware_sampler_common",
@@ -2253,8 +2254,8 @@
     {
       "package": "autoware_test_node",
       "prefix": "/opt/autoware/autoware_test_node",
-      "status": "in-image",
-      "detail": ""
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
     },
     {
       "package": "autoware_test_utils",
@@ -2265,8 +2266,8 @@
     {
       "package": "autoware_testing",
       "prefix": "/opt/autoware/autoware_testing",
-      "status": "in-image",
-      "detail": ""
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
     },
     {
       "package": "autoware_time_utils",
@@ -2565,8 +2566,8 @@
     {
       "package": "autoware_velocity_smoother",
       "prefix": "/opt/autoware/autoware_velocity_smoother",
-      "status": "in-other-image",
-      "detail": "core-image-autoware-demo"
+      "status": "in-image",
+      "detail": ""
     },
     {
       "package": "autoware_velodyne_monitor",
@@ -2577,8 +2578,8 @@
     {
       "package": "awsim_labs_sensor_kit_description",
       "prefix": "/opt/autoware/awsim_labs_sensor_kit_description",
-      "status": "in-image",
-      "detail": ""
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
     },
     {
       "package": "awsim_labs_sensor_kit_launch",
@@ -2589,20 +2590,20 @@
     {
       "package": "awsim_labs_vehicle_description",
       "prefix": "/opt/autoware/awsim_labs_vehicle_description",
-      "status": "in-image",
-      "detail": ""
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
     },
     {
       "package": "awsim_labs_vehicle_launch",
       "prefix": "/opt/autoware/awsim_labs_vehicle_launch",
-      "status": "in-image",
-      "detail": ""
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
     },
     {
       "package": "awsim_sensor_kit_description",
       "prefix": "/opt/autoware/awsim_sensor_kit_description",
-      "status": "in-image",
-      "detail": ""
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
     },
     {
       "package": "awsim_sensor_kit_launch",
@@ -2691,14 +2692,14 @@
     {
       "package": "carla_sensor_kit_description",
       "prefix": "/opt/autoware/carla_sensor_kit_description",
-      "status": "in-image",
-      "detail": ""
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
     },
     {
       "package": "carla_sensor_kit_launch",
       "prefix": "/opt/autoware/carla_sensor_kit_launch",
-      "status": "in-image",
-      "detail": ""
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
     },
     {
       "package": "class_loader",
@@ -3531,8 +3532,8 @@
     {
       "package": "proxsuite",
       "prefix": "/opt/ros/jazzy",
-      "status": "in-other-image",
-      "detail": "core-image-autoware-demo"
+      "status": "in-image",
+      "detail": ""
     },
     {
       "package": "pybind11_vendor",
@@ -4227,8 +4228,8 @@
     {
       "package": "sample_sensor_kit_description",
       "prefix": "/opt/autoware/sample_sensor_kit_description",
-      "status": "in-image",
-      "detail": ""
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
     },
     {
       "package": "sample_sensor_kit_launch",
@@ -4239,14 +4240,14 @@
     {
       "package": "sample_vehicle_description",
       "prefix": "/opt/autoware/sample_vehicle_description",
-      "status": "in-image",
-      "detail": ""
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
     },
     {
       "package": "sample_vehicle_launch",
       "prefix": "/opt/autoware/sample_vehicle_launch",
-      "status": "in-image",
-      "detail": ""
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
     },
     {
       "package": "sdl2_vendor",
@@ -4287,8 +4288,8 @@
     {
       "package": "single_lidar_sensor_kit_description",
       "prefix": "/opt/autoware/single_lidar_sensor_kit_description",
-      "status": "in-image",
-      "detail": ""
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
     },
     {
       "package": "single_lidar_sensor_kit_launch",
@@ -4749,14 +4750,14 @@
     {
       "package": "velodyne_description",
       "prefix": "/opt/autoware/velodyne_description",
-      "status": "in-image",
-      "detail": ""
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
     },
     {
       "package": "velodyne_msgs",
       "prefix": "/opt/ros/jazzy",
-      "status": "in-image",
-      "detail": ""
+      "status": "in-other-image",
+      "detail": "core-image-autoware-demo"
     },
     {
       "package": "visualization_msgs",
@@ -4828,7 +4829,6 @@
   "only_here": [
     "autoware-automatic-pose-initializer",
     "autoware-component-interface-tools",
-    "common-awsim-labs-sensor-launch",
     "tier4-map-launch",
     "tier4-sensing-launch"
   ],
