@@ -1,0 +1,5 @@
+foxglove_bridge               	src/foxglove_bridge           	(ros.ament_cmake)
+	- ROS package manifest: src/foxglove_bridge/package.xml
+	- Excluded by condition: catkin, gtest, nodelet, ros_babel_fish, roscpp, roslib, rostest, rosunit
+	- Package repo path: 
+	- Bitbake recipe: /tmp/tmp.eWoLUznLC5/ws/build_mash/foxglove-bridge/foxglove-bridge_0.8.5.bb
