@@ -6,7 +6,7 @@ an aggregate and cannot be brace-initialised from 16 bytes ("could not
 convert '{...}' from '<brace-enclosed initializer list>'"). Copy the bytes
 in with begin(), which every Boost release has.
 
-Upstream-Status: Pending
+Upstream-Status: Submitted [https://github.com/autowarefoundation/autoware_universe/pull/13605]
 Signed-off-by: Ahmed Adel Wafdy <fandes99@gmail.com>
 ---
  src/object_manager.hpp |    5 +++--
@@ -30,7 +30,7 @@ index 6eae56559..d06316936 100644
      const auto & ids = uid.uuid;
 -    boost::uuids::uuid u = {ids[0], ids[1], ids[2],  ids[3],  ids[4],  ids[5],  ids[6],  ids[7],
 -                            ids[8], ids[9], ids[10], ids[11], ids[12], ids[13], ids[14], ids[15]};
-+    boost::uuids::uuid u;
++    boost::uuids::uuid u{};
 +    std::copy(ids.begin(), ids.end(), u.begin());
      return boost::hash<boost::uuids::uuid>()(u);
    }
