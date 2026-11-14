@@ -1,0 +1,37 @@
+From: Ahmed Adel Wafdy <fandes99@gmail.com>
+Subject: [PATCH] fix(autoware_behavior_velocity_intersection_module): copy the UUID bytes into boost::uuids::uuid
+
+Boost.Uuid 1.86 gave boost::uuids::uuid constructors, so it is no longer
+an aggregate and cannot be brace-initialised from 16 bytes ("could not
+convert '{...}' from '<brace-enclosed initializer list>'"). Copy the bytes
+in with begin(), which every Boost release has.
+
+Upstream-Status: Submitted [https://github.com/autowarefoundation/autoware_universe/pull/13605]
+Signed-off-by: Ahmed Adel Wafdy <fandes99@gmail.com>
+---
+ .../object_manager.hpp                             |    5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/include/autoware/behavior_velocity_intersection_module/object_manager.hpp b/include/autoware/behavior_velocity_intersection_module/object_manager.hpp
+index 732d6bdb6..75d1aa160 100644
+--- a/include/autoware/behavior_velocity_intersection_module/object_manager.hpp
++++ b/include/autoware/behavior_velocity_intersection_module/object_manager.hpp
+@@ -28,6 +28,7 @@
+ #include <lanelet2_core/primitives/LineString.h>
+ #include <lanelet2_core/primitives/Point.h>
+ 
++#include <algorithm>
+ #include <memory>
+ #include <optional>
+ #include <string>
+@@ -45,8 +46,8 @@ struct hash<unique_identifier_msgs::msg::UUID>
+   size_t operator()(const unique_identifier_msgs::msg::UUID & uid) const
+   {
+     const auto & ids = uid.uuid;
+-    boost::uuids::uuid u = {ids[0], ids[1], ids[2],  ids[3],  ids[4],  ids[5],  ids[6],  ids[7],
+-                            ids[8], ids[9], ids[10], ids[11], ids[12], ids[13], ids[14], ids[15]};
++    boost::uuids::uuid u{};
++    std::copy(ids.begin(), ids.end(), u.begin());
+     return boost::hash<boost::uuids::uuid>()(u);
+   }
+ };
