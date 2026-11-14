@@ -17,7 +17,7 @@ RDEPENDS:${PN} += "\
     autoware-adapi-specs \
     autoware-agnocast-wrapper \
     autoware-cmake \
-    autoware-component-interface-tools \
+    autoware-component-interface-admission \
     autoware-component-interface-utils \
     autoware-core-api \
     autoware-core-perception \

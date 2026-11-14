@@ -174,15 +174,17 @@ python() {
 
     # Dependencies on excluded CUDA packages, kept when a BSP sets DISTRO_FEATURES:cuda
     cuda_only_deps = {
-        'tier4-planning-launch': ['autoware-diffusion-planner'],
-        'tier4-perception-launch': [
-            'autoware-bevfusion', 'autoware-bytetrack', 'autoware-ground-segmentation-cuda',
+        'autoware-planning-launch': ['autoware-diffusion-planner'],
+        'autoware-perception-launch': [
+            'autoware-bevfusion', 'autoware-bytetrack', 'autoware-cuda-pointcloud-preprocessor',
+            'autoware-ground-segmentation-cuda',
             'autoware-image-projection-based-fusion', 'autoware-lidar-apollo-instance-segmentation',
             'autoware-lidar-centerpoint', 'autoware-lidar-transfusion', 'autoware-ptv3',
             'autoware-shape-estimation', 'autoware-simpl-prediction', 'autoware-tensorrt-bevdet',
             'autoware-tensorrt-yolox', 'autoware-traffic-light-classifier',
             'autoware-traffic-light-fine-detector',
         ],
+        'autoware-sensing-launch': ['autoware-cuda-pointcloud-preprocessor'],
         'autoware-probabilistic-occupancy-grid-map': [
             'autoware-cuda-dependency-meta', 'autoware-cuda-utils',
         ],
@@ -193,12 +195,9 @@ python() {
     # Runtime-only dependencies that cannot be built here (no recipe for acados, cgal,
     # crypto++, libpng++; no Qt) and that the planning simulator does not start
     unbuildable_rdepends = {
-        # trajectory optimizer and modifier need the path optimizer and are only used by
-        # the CUDA diffusion planner
-        'tier4-planning-launch': [
-            'autoware-path-optimizer', 'autoware-trajectory-optimizer', 'autoware-trajectory-modifier',
-        ],
-        'tier4-perception-launch': [
+        # path optimizer and trajectory modifier need acados
+        'autoware-planning-launch': ['autoware-path-optimizer', 'autoware-trajectory-modifier'],
+        'autoware-perception-launch': [
             'autoware-pointcloud-preprocessor', 'autoware-ground-segmentation',
             'autoware-compare-map-segmentation', 'autoware-euclidean-cluster',
             'autoware-detection-by-tracker', 'autoware-occupancy-grid-map-outlier-filter',
@@ -206,10 +205,15 @@ python() {
             'autoware-elevation-map-loader',
         ],
         'autoware-probabilistic-occupancy-grid-map': ['autoware-pointcloud-preprocessor'],
-        'tier4-simulator-launch': ['tier4-localization-launch', 'autoware-elevation-map-loader'],
-        'autoware-launch': ['rviz2', 'tier4-localization-launch'],
+        'tier4-simulator-launch': ['autoware-localization-launch', 'autoware-elevation-map-loader'],
+        'autoware-launch': ['rviz2', 'autoware-localization-launch'],
         'autoware-dummy-diag-publisher': ['rqt-reconfigure', 'rqt-robot-monitor', 'rqt-runtime-monitor'],
-        'sample-sensor-kit-launch': ['autoware-pointcloud-preprocessor', 'common-sensor-launch', 'usb-cam'],
+        # pointcloud preprocessor needs cgal; the driver launch needs nebula (libpng++) and
+        # the velodyne monitor (crypto++)
+        'autoware-sensing-launch': ['autoware-pointcloud-preprocessor'],
+        'sample-sensor-kit-launch': [
+            'autoware-pointcloud-preprocessor', 'autoware-sensor-driver-launch', 'usb-cam',
+        ],
     }
     if pn in unbuildable_rdepends:
         current = (d.getVar(rdep_key) or '').split()

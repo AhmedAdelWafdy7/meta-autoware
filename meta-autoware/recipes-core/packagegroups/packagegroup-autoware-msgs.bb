@@ -39,7 +39,6 @@ RDEPENDS:${PN} += "\
     ros2-socketcan-msgs \
     ros2agnocast-discovery-msgs \
     rtklib-msgs \
-    rviz-2d-overlay-msgs \
     sync-tooling-msgs \
     tier4-api-msgs \
     tier4-auto-msgs-converter \

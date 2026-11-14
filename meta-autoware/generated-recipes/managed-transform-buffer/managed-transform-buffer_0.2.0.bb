@@ -75,7 +75,7 @@ RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 
 ROS_BRANCH ?= "branch=main"
 SRC_URI = "git://github.com/autowarefoundation/managed_transform_buffer.git;${ROS_BRANCH};protocol=https"
-SRCREV = "b12c9c11bccdb0ea24ac3665c91f0933ba43752f"
+SRCREV = "4eac6b4c5f78ad1b9ade87b549d7b7143b0208bc"
 S = "${WORKDIR}/git/managed_transform_buffer"
 
 ROS_BUILD_TYPE = "ament_cmake"

@@ -16,10 +16,12 @@ RDEPENDS:${PN} += "\
     autoware-command-mode-switcher-plugins \
     autoware-command-mode-types \
     autoware-control-command-gate \
+    autoware-control-config \
     autoware-control-evaluator \
     autoware-control-performance-analysis \
     autoware-control-validator \
     autoware-core-control \
+    autoware-driving-mode-manager \
     autoware-external-cmd-converter \
     autoware-external-cmd-selector \
     autoware-hazard-lights-selector \
@@ -29,6 +31,9 @@ RDEPENDS:${PN} += "\
     autoware-mrm-comfortable-stop-operator \
     autoware-mrm-emergency-stop-operator \
     autoware-mrm-handler \
+    autoware-mrm-in-lane-stop-operator \
+    autoware-mrm-reset-manager \
+    autoware-mrm-steering-hold-stop-operator \
     autoware-operation-mode-transition-manager \
     autoware-pid-longitudinal-controller \
     autoware-pure-pursuit \

@@ -54,9 +54,9 @@ DEPENDS += "${ROS_EXPORT_DEPENDS} ${ROS_BUILDTOOL_EXPORT_DEPENDS}"
 
 RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 
-ROS_BRANCH ?= "branch=fix/user-defined-value-type-signedness-mismatch"
+ROS_BRANCH ?= "branch=tier4/universe"
 SRC_URI = "git://github.com/tier4/tier4_autoware_msgs.git;${ROS_BRANCH};protocol=https"
-SRCREV = "00d0ddcb4763e64128c910628a1891816b86844b"
+SRCREV = "ed0b9e86ff72598178c9030ec1b52515ef98d69a"
 S = "${WORKDIR}/git/tier4_hmi_msgs"
 
 ROS_BUILD_TYPE = "ament_cmake"

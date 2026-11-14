@@ -19,10 +19,10 @@ RDEPENDS:${PN} += "\
     tier4-simulator-launch \
     autoware-fault-injection \
     autoware-carla-interface \
+    autoware-redundancy-command-selector \
     tier4-system-launch \
     tier4-autoware-api-launch \
     autoware-system-designer \
     autoware-system-design-examples \
-    autoware-universe-designs \
     autoware-sample-designs \
 "
