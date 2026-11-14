@@ -1,0 +1,5 @@
+repositories:
+  foxglove_bridge:
+    type: git
+    url: https://github.com/foxglove/ros-foxglove-bridge.git
+    version: 0.8.5
