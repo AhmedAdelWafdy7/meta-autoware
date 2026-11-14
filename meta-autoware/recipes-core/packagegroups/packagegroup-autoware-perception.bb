@@ -9,4 +9,4 @@ inherit packagegroup
 PACKAGES = "${PN}"
 ALLOW_EMPTY:${PN} = "1"
 
-RDEPENDS:${PN} += "${@bb.utils.contains('DISTRO_FEATURES', 'cuda', 'tier4-perception-launch autoware-diffusion-planner', '', d)}"
+RDEPENDS:${PN} += "${@bb.utils.contains('DISTRO_FEATURES', 'cuda', 'autoware-perception-launch autoware-diffusion-planner', '', d)}"
