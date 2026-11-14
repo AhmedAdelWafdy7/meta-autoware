@@ -237,7 +237,7 @@ python() {
 # Packages whose exported CMake files keep absolute paths into their own recipe sysroot,
 # which is wrong for every consumer and fatal buildpaths QA on wrynose. Listed rather than
 # applied to all, so the other recipes keep their task hashes.
-AUTOWARE_RELOCATE_CMAKE_EXPORTS = "agnocastlib autoware-osqp-interface sync-tooling-msgs"
+AUTOWARE_RELOCATE_CMAKE_EXPORTS = "agnocastlib autoware-osqp-interface autoware-qp-interface sync-tooling-msgs"
 
 # CMAKE_SYSROOT is the consumer's sysroot when OE or its SDK cross-compiles, and empty on
 # target. The braces are escaped so BitBake leaves ${CMAKE_SYSROOT} for CMake.

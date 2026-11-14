@@ -9,13 +9,9 @@ PACKAGES = "${PN}"
 ALLOW_EMPTY:${PN} = "1"
 
 RDEPENDS:${PN} += "\
-    agnocast \
     agnocast-cie-thread-configurator \
     agnocast-components \
-    agnocast-e2e-test \
     agnocast-ioctl-wrapper \
-    agnocast-sample-application \
-    agnocast-sample-interfaces \
     agnocastlib \
     autoware-adapi-adaptors \
     autoware-adapi-specs \
@@ -27,7 +23,6 @@ RDEPENDS:${PN} += "\
     autoware-core-perception \
     autoware-default-adapi \
     autoware-default-adapi-universe \
-    autoware-fake-test-node \
     autoware-geography-utils \
     autoware-global-parameter-loader \
     autoware-interpolation \
@@ -41,11 +36,9 @@ RDEPENDS:${PN} += "\
     autoware-point-types \
     autoware-pyplot \
     autoware-qos-utils \
+    autoware-qp-interface \
     autoware-rtc-interface \
     autoware-signal-processing \
-    autoware-test-node \
-    autoware-test-utils \
-    autoware-testing \
     autoware-time-utils \
     autoware-traffic-light-utils \
     autoware-universe-utils \

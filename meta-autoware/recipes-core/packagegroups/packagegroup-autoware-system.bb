@@ -13,7 +13,6 @@ RDEPENDS:${PN} += "\
     autoware-component-monitor \
     autoware-component-state-monitor \
     autoware-diagnostic-graph-aggregator \
-    autoware-diagnostic-graph-test-examples \
     autoware-diagnostic-graph-utils \
     autoware-duplicated-node-checker \
     autoware-evaluation-adapter \

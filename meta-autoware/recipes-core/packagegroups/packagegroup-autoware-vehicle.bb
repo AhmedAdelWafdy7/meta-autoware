@@ -11,12 +11,7 @@ ALLOW_EMPTY:${PN} = "1"
 RDEPENDS:${PN} += "\
     autoware-core-vehicle \
     autoware-learning-based-vehicle-model \
-    autoware-sample-vehicle-description \
     autoware-vehicle-info-utils \
     autoware-vehicle-velocity-converter \
-    awsim-labs-vehicle-description \
-    awsim-labs-vehicle-launch \
-    sample-vehicle-description \
-    sample-vehicle-launch \
     tier4-vehicle-launch \
 "

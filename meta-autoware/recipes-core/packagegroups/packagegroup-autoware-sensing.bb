@@ -9,7 +9,6 @@ PACKAGES = "${PN}"
 ALLOW_EMPTY:${PN} = "1"
 
 RDEPENDS:${PN} += "\
-    autoware-awsim-sensor-kit-description \
     autoware-core-sensing \
     autoware-crop-box-filter \
     autoware-euclidean-cluster-object-detector \
@@ -26,17 +25,11 @@ RDEPENDS:${PN} += "\
     autoware-radar-static-pointcloud-filter \
     autoware-radar-threshold-filter \
     autoware-radar-tracks-noise-filter \
-    autoware-sample-sensor-kit-description \
     autoware-traffic-light-multi-camera-fusion \
-    awsim-labs-sensor-kit-description \
-    awsim-sensor-kit-description \
     boost-io-context \
     boost-serial-driver \
     boost-tcp-driver \
     boost-udp-driver \
-    carla-sensor-kit-description \
-    carla-sensor-kit-launch \
-    common-awsim-labs-sensor-launch \
     nebula-core-common \
     nebula-core-hw-interfaces \
     nebula-core-ros \
@@ -44,7 +37,5 @@ RDEPENDS:${PN} += "\
     ros2-socketcan \
     ros2agnocast \
     ros2agnocast-discovery-agent \
-    sample-sensor-kit-description \
-    single-lidar-sensor-kit-description \
     tier4-sensing-launch \
 "
