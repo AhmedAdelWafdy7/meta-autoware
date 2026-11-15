@@ -80,8 +80,28 @@ Log in as `root` (no password), then run `. /opt/ros/jazzy/setup.sh`.
 | `meta-autoware/recipes-thirdparty-bbappends/` | patches and fixes for specific packages |
 | `meta-autoware/recipes-core/` | images and packagegroups |
 | `meta-autoware/recipes-demo/` | the planning simulator demo and its map |
+| `meta-autoware/PACKAGES.list` | packages taken from the generator output, written by `tools/rollout.sh` |
 | `doc/` | Pi 5 notes and screenshots |
-| `tools/` | `boot-test.py` for the QEMU checks, `ci-host-check.sh` for the CI runner |
+| `tools/` | recipe generation, `boot-test.py` for the QEMU checks, `ci-host-check.sh` for the CI runner |
+| `results/` | generator logs, failure taxonomy and the list of skipped packages, per Autoware version |
+
+## Regenerate the recipes
+
+`generated-recipes/` is the output of one command:
+
+```sh
+kas checkout kas/autoware.yml      # the OE layers, to check recipe name collisions
+tools/rollout.sh --ros-distro jazzy --autoware-ref 2.0.0
+tools/run-mash-devtools.sh 0.8.5   # foxglove_bridge, outside autoware.repos
+tools/sync-generated-recipes.sh devtools-0.8.5 meta-autoware/PACKAGES-devtools.list
+tools/categorize-packages.py && tools/generate-tier1-packagegroups.py
+```
+
+It needs Ubuntu 24.04 with ROS 2 Jazzy, or Docker or Podman. The `ros-mash` version, the
+rosdistro commit for rosdep and the container image are pinned in `tools/mash-pins.sh`, so the
+same Autoware version gives the same recipes. Every package left out is listed with its reason
+in `results/universe-<version>/skipped-packages.json`. `--no-mash` reuses the last generator
+output, for when only the class or the scripts changed.
 
 ## Contributing
 
