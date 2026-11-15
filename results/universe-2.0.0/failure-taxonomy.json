@@ -1,0 +1,369 @@
+{
+  "mode": "universe-2.0.0",
+  "packages_discovered": 502,
+  "recipes_generated": 502,
+  "unresolved_warnings_total_occurrences": 2089,
+  "unresolved_warnings_unique_names": 215,
+  "self_resolved_false_positives": {
+    "count": 210,
+    "note": "mash reported these as unresolvable external deps, but mash itself discovered and generated a recipe for every one of them in this same run -- a self-resolution bug, not a real dependency gap",
+    "names": [
+      "autoware_ar_tag_based_localizer",
+      "autoware_autonomous_emergency_braking",
+      "autoware_behavior_path_lane_change_module",
+      "autoware_behavior_path_planner",
+      "autoware_behavior_path_planner_common",
+      "autoware_behavior_path_static_obstacle_avoidance_module",
+      "autoware_behavior_velocity_crosswalk_module",
+      "autoware_behavior_velocity_intersection_module",
+      "autoware_behavior_velocity_rtc_interface",
+      "autoware_bevfusion",
+      "autoware_bezier_sampler",
+      "autoware_boundary_departure_checker",
+      "autoware_bytetrack",
+      "autoware_carla_interface",
+      "autoware_collision_detector",
+      "autoware_command_mode_decider",
+      "autoware_command_mode_switcher",
+      "autoware_command_mode_types",
+      "autoware_compare_map_segmentation",
+      "autoware_component_interface_specs_universe",
+      "autoware_component_interface_utils",
+      "autoware_component_state_monitor",
+      "autoware_control_command_gate",
+      "autoware_control_config",
+      "autoware_control_evaluator",
+      "autoware_control_launch",
+      "autoware_control_validator",
+      "autoware_costmap_generator",
+      "autoware_crosswalk_traffic_light_estimator",
+      "autoware_cuda_dependency_meta",
+      "autoware_cuda_pointcloud_preprocessor",
+      "autoware_cuda_utils",
+      "autoware_default_adapi_universe",
+      "autoware_deprecated_boundary_departure_checker",
+      "autoware_detected_object_feature_remover",
+      "autoware_detected_object_validation",
+      "autoware_detection_by_tracker",
+      "autoware_diagnostic_graph_aggregator",
+      "autoware_diagnostic_graph_utils",
+      "autoware_diffusion_planner",
+      "autoware_dummy_diag_publisher",
+      "autoware_dummy_infrastructure",
+      "autoware_dummy_perception_publisher",
+      "autoware_dummy_traffic_light_publisher",
+      "autoware_duplicated_node_checker",
+      "autoware_elevation_map_loader",
+      "autoware_euclidean_cluster",
+      "autoware_evaluation_adapter",
+      "autoware_external_cmd_converter",
+      "autoware_external_cmd_selector",
+      "autoware_external_velocity_limit_selector",
+      "autoware_fake_test_node",
+      "autoware_fault_injection",
+      "autoware_freespace_planner",
+      "autoware_freespace_planning_algorithms",
+      "autoware_frenet_planner",
+      "autoware_geo_pose_projector",
+      "autoware_grid_map_utils",
+      "autoware_ground_segmentation",
+      "autoware_ground_segmentation_cuda",
+      "autoware_hazard_lights_selector",
+      "autoware_hazard_status_converter",
+      "autoware_image_object_locator",
+      "autoware_image_projection_based_fusion",
+      "autoware_image_transport_decompressor",
+      "autoware_imu_corrector",
+      "autoware_landmark_manager",
+      "autoware_lane_departure_checker",
+      "autoware_launch",
+      "autoware_learning_based_vehicle_model",
+      "autoware_lidar_apollo_instance_segmentation",
+      "autoware_lidar_centerpoint",
+      "autoware_lidar_marker_localizer",
+      "autoware_lidar_transfusion",
+      "autoware_localization_config",
+      "autoware_localization_error_monitor",
+      "autoware_localization_launch",
+      "autoware_manual_lane_change_handler",
+      "autoware_map_based_prediction",
+      "autoware_map_config",
+      "autoware_map_launch",
+      "autoware_map_tf_generator",
+      "autoware_mission_planner_universe",
+      "autoware_mpc_lateral_controller",
+      "autoware_mrm_comfortable_stop_operator",
+      "autoware_mrm_emergency_stop_operator",
+      "autoware_mrm_handler",
+      "autoware_multi_object_tracker",
+      "autoware_object_merger",
+      "autoware_object_sorter",
+      "autoware_obstacle_proximity_checker",
+      "autoware_occupancy_grid_map_outlier_filter",
+      "autoware_path_optimizer",
+      "autoware_path_sampler",
+      "autoware_path_smoother",
+      "autoware_pcl_extensions",
+      "autoware_perception_config",
+      "autoware_perception_launch",
+      "autoware_perception_online_evaluator",
+      "autoware_pid_longitudinal_controller",
+      "autoware_pipeline_latency_monitor",
+      "autoware_planning_config",
+      "autoware_planning_evaluator",
+      "autoware_planning_launch",
+      "autoware_planning_validator",
+      "autoware_planning_validator_test_utils",
+      "autoware_pointcloud_preprocessor",
+      "autoware_pose_covariance_modifier",
+      "autoware_pose_estimator_arbiter",
+      "autoware_pose_initialization_requester",
+      "autoware_pose_instability_detector",
+      "autoware_probabilistic_occupancy_grid_map",
+      "autoware_processing_time_checker",
+      "autoware_ptv3",
+      "autoware_pure_pursuit",
+      "autoware_radar_tracks_msgs_converter",
+      "autoware_radar_tracks_noise_filter",
+      "autoware_raindrop_cluster_filter",
+      "autoware_raw_vehicle_cmd_converter",
+      "autoware_redundancy_switcher_interface",
+      "autoware_remaining_distance_time_calculator",
+      "autoware_rtc_interface",
+      "autoware_sampler_common",
+      "autoware_scenario_selector",
+      "autoware_sensing_launch",
+      "autoware_sensor_driver_launch",
+      "autoware_shape_estimation",
+      "autoware_shift_decider",
+      "autoware_simpl_prediction",
+      "autoware_simple_object_merger",
+      "autoware_simple_planning_simulator",
+      "autoware_stop_mode_operator",
+      "autoware_surround_obstacle_checker",
+      "autoware_system_designer",
+      "autoware_system_monitor",
+      "autoware_tensorrt_bevdet",
+      "autoware_tensorrt_classifier",
+      "autoware_tensorrt_common",
+      "autoware_tensorrt_plugins",
+      "autoware_tensorrt_yolox",
+      "autoware_topic_state_monitor",
+      "autoware_tracking_object_merger",
+      "autoware_traffic_light_arbiter",
+      "autoware_traffic_light_category_merger",
+      "autoware_traffic_light_classifier",
+      "autoware_traffic_light_compliance_checker",
+      "autoware_traffic_light_fine_detector",
+      "autoware_traffic_light_map_based_detector",
+      "autoware_traffic_light_multi_camera_fusion",
+      "autoware_traffic_light_occlusion_predictor",
+      "autoware_traffic_light_selector",
+      "autoware_traffic_light_utils",
+      "autoware_traffic_light_visualization",
+      "autoware_trajectory_adapter",
+      "autoware_trajectory_concatenator",
+      "autoware_trajectory_follower_base",
+      "autoware_trajectory_follower_node",
+      "autoware_trajectory_modifier",
+      "autoware_trajectory_ranker",
+      "autoware_trajectory_validator",
+      "autoware_universe_utils",
+      "autoware_vehicle_cmd_gate",
+      "autoware_vehicle_door_simulator",
+      "autoware_velodyne_monitor",
+      "bevdet_vendor",
+      "boost_io_context",
+      "carla_sensor_kit_description",
+      "cuda_blackboard",
+      "eagleye_coordinate",
+      "eagleye_geo_pose_fusion",
+      "eagleye_gnss_converter",
+      "eagleye_msgs",
+      "eagleye_navigation",
+      "eagleye_rt",
+      "glog",
+      "llh_converter",
+      "managed_transform_buffer",
+      "mussp",
+      "negotiated",
+      "negotiated_interfaces",
+      "perception_utils",
+      "ros2agnocast_discovery_agent",
+      "ros2agnocast_discovery_msgs",
+      "rtklib_msgs",
+      "sample_sensor_kit_description",
+      "sample_sensor_kit_launch",
+      "sample_vehicle_description",
+      "sample_vehicle_launch",
+      "tier4_api_msgs",
+      "tier4_api_utils",
+      "tier4_autoware_api_launch",
+      "tier4_control_msgs",
+      "tier4_debug_msgs",
+      "tier4_external_api_msgs",
+      "tier4_metric_msgs",
+      "tier4_perception_msgs",
+      "tier4_planning_msgs",
+      "tier4_rtc_msgs",
+      "tier4_simulation_msgs",
+      "tier4_simulator_launch",
+      "tier4_system_launch",
+      "tier4_system_msgs",
+      "tier4_v2x_msgs",
+      "tier4_vehicle_launch",
+      "tier4_vehicle_msgs",
+      "yabloc_common",
+      "yabloc_image_processing",
+      "yabloc_monitor",
+      "yabloc_particle_filter",
+      "yabloc_pose_initializer"
+    ]
+  },
+  "categories": {
+    "unresolved_rosdep_key": [],
+    "missing_oe_recipe": [
+      {
+        "name": "cgal",
+        "occurrences": 4
+      },
+      {
+        "name": "crypto++",
+        "occurrences": 4
+      },
+      {
+        "name": "edac-utils",
+        "occurrences": 2
+      },
+      {
+        "name": "libexpected-dev",
+        "occurrences": 8
+      },
+      {
+        "name": "libpng++-dev",
+        "occurrences": 3
+      }
+    ],
+    "cuda_or_proprietary_dep": [
+      {
+        "name": "autoware_bevfusion",
+        "source": "recipe_content_scan"
+      },
+      {
+        "name": "autoware_bytetrack",
+        "source": "recipe_content_scan"
+      },
+      {
+        "name": "autoware_calibration_status_classifier",
+        "source": "recipe_content_scan"
+      },
+      {
+        "name": "autoware_camera_streampetr",
+        "source": "recipe_content_scan"
+      },
+      {
+        "name": "autoware_cuda_pointcloud_preprocessor",
+        "source": "recipe_content_scan"
+      },
+      {
+        "name": "autoware_cuda_utils",
+        "source": "recipe_content_scan"
+      },
+      {
+        "name": "autoware_diffusion_planner",
+        "source": "recipe_content_scan"
+      },
+      {
+        "name": "autoware_ground_segmentation_cuda",
+        "source": "recipe_content_scan"
+      },
+      {
+        "name": "autoware_image_projection_based_fusion",
+        "source": "recipe_content_scan"
+      },
+      {
+        "name": "autoware_lidar_apollo_instance_segmentation",
+        "source": "recipe_content_scan"
+      },
+      {
+        "name": "autoware_lidar_centerpoint",
+        "source": "recipe_content_scan"
+      },
+      {
+        "name": "autoware_lidar_frnet",
+        "source": "recipe_content_scan"
+      },
+      {
+        "name": "autoware_lidar_transfusion",
+        "source": "recipe_content_scan"
+      },
+      {
+        "name": "autoware_perception_launch",
+        "source": "recipe_content_scan"
+      },
+      {
+        "name": "autoware_probabilistic_occupancy_grid_map",
+        "source": "recipe_content_scan"
+      },
+      {
+        "name": "autoware_ptv3",
+        "source": "recipe_content_scan"
+      },
+      {
+        "name": "autoware_sensing_launch",
+        "source": "recipe_content_scan"
+      },
+      {
+        "name": "autoware_shape_estimation",
+        "source": "recipe_content_scan"
+      },
+      {
+        "name": "autoware_simpl_prediction",
+        "source": "recipe_content_scan"
+      },
+      {
+        "name": "autoware_tensorrt_bevformer",
+        "source": "recipe_content_scan"
+      },
+      {
+        "name": "autoware_tensorrt_classifier",
+        "source": "recipe_content_scan"
+      },
+      {
+        "name": "autoware_tensorrt_common",
+        "source": "recipe_content_scan"
+      },
+      {
+        "name": "autoware_tensorrt_plugins",
+        "source": "recipe_content_scan"
+      },
+      {
+        "name": "autoware_tensorrt_vad",
+        "source": "recipe_content_scan"
+      },
+      {
+        "name": "autoware_tensorrt_yolox",
+        "source": "recipe_content_scan"
+      },
+      {
+        "name": "autoware_traffic_light_classifier",
+        "source": "recipe_content_scan"
+      },
+      {
+        "name": "autoware_traffic_light_fine_detector",
+        "source": "recipe_content_scan"
+      },
+      {
+        "name": "autoware_traffic_light_pipeline",
+        "source": "recipe_content_scan"
+      },
+      {
+        "name": "bevdet_vendor",
+        "source": "recipe_content_scan"
+      }
+    ],
+    "monorepo_path_handling": [],
+    "malformed_package_xml": [],
+    "other": []
+  }
+}

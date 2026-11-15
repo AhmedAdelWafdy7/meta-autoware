@@ -5,7 +5,7 @@ boost::hash is declared in boost/container_hash/hash.hpp. Boost.Uuid 1.86
 stopped including it from uuid_hash.hpp, so "hash is not a member of
 boost". boost/functional/hash.hpp forwards to it in every Boost release.
 
-Upstream-Status: Submitted [https://github.com/autowarefoundation/autoware_universe/pull/13593]
+Upstream-Status: Backport [https://github.com/autowarefoundation/autoware_universe/commit/9bd42c582e892f238d2ffba8568637c3cb87cf61]
 Signed-off-by: Ahmed Adel Wafdy <fandes99@gmail.com>
 ---
  .../trajectory_modifier_utils/obstacle_stop_utils.hpp            | 1 +
