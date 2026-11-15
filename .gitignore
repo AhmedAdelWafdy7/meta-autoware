@@ -11,6 +11,10 @@ yocto-cache
 __pycache__/
 *.pyc
 
-# mash intermediates and build logs; generated-recipes/ holds the result
+# mash intermediates, logs and the failure taxonomy; only input.repos and
+# skipped-packages.json are kept per version
 results/*/build_mash/
 results/*/build*.log
+results/*/mash.log
+results/*/vcs-import.log
+results/*/failure-taxonomy.json

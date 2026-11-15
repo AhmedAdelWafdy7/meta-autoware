@@ -83,7 +83,7 @@ Log in as `root` (no password), then run `. /opt/ros/jazzy/setup.sh`.
 | `meta-autoware/PACKAGES.list` | packages taken from the generator output, written by `tools/rollout.sh` |
 | `doc/` | Pi 5 notes and screenshots |
 | `tools/` | recipe generation, `boot-test.py` for the QEMU checks, `ci-host-check.sh` for the CI runner |
-| `results/` | generator logs, failure taxonomy and the list of skipped packages, per Autoware version |
+| `results/` | the `autoware.repos` input and the list of skipped packages, per Autoware version |
 
 ## Regenerate the recipes
 
