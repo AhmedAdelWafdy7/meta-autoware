@@ -13,13 +13,18 @@ RDEPENDS:${PN} += "\
     autoware-component-monitor \
     autoware-component-state-monitor \
     autoware-diagnostic-graph-aggregator \
+    autoware-diagnostic-graph-merger \
     autoware-diagnostic-graph-utils \
     autoware-duplicated-node-checker \
     autoware-evaluation-adapter \
+    autoware-generic-service-divider \
     autoware-glog-component \
     autoware-kinematic-evaluator \
     autoware-pipeline-latency-monitor \
     autoware-processing-time-checker \
+    autoware-redundancy-adapi-switcher \
+    autoware-redundancy-switcher-interface \
+    autoware-redundancy-switcher-interface-plugins \
     autoware-system-monitor \
     autoware-topic-state-monitor \
     autoware-utils-diagnostics \

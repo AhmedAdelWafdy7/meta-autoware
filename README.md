@@ -91,7 +91,7 @@ Log in as `root` (no password), then run `. /opt/ros/jazzy/setup.sh`.
 
 ```sh
 kas checkout kas/autoware.yml      # the OE layers, to check recipe name collisions
-tools/rollout.sh --ros-distro jazzy --autoware-ref 1.9.0
+tools/rollout.sh --ros-distro jazzy --autoware-ref 2.0.0
 tools/run-mash-devtools.sh 0.8.5   # foxglove_bridge, outside autoware.repos
 tools/sync-generated-recipes.sh devtools-0.8.5 meta-autoware/PACKAGES-devtools.list
 tools/categorize-packages.py && tools/generate-tier1-packagegroups.py

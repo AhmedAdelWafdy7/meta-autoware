@@ -10,18 +10,19 @@ ALLOW_EMPTY:${PN} = "1"
 
 RDEPENDS:${PN} += "\
     autoware-ar-tag-based-localizer \
-    autoware-automatic-pose-initializer \
     autoware-core-localization \
     autoware-ekf-localizer \
     autoware-geo-pose-projector \
     autoware-gyro-odometer \
     autoware-landmark-manager \
+    autoware-localization-config \
     autoware-localization-error-monitor \
     autoware-localization-evaluator \
     autoware-localization-util \
     autoware-ndt-scan-matcher \
     autoware-pose-covariance-modifier \
     autoware-pose-estimator-arbiter \
+    autoware-pose-initialization-requester \
     autoware-pose-initializer \
     autoware-pose-instability-detector \
     autoware-pose2twist \

@@ -4,7 +4,7 @@ Subject: [PATCH] fix(autoware_behavior_path_lane_change_module): include fmt/ran
 fmt 11 moved fmt::join from fmt/format.h to fmt/ranges.h. fmt/ranges.h
 exists in fmt 9 and 10 too, so including it works with all of them.
 
-Upstream-Status: Submitted [https://github.com/autowarefoundation/autoware_universe/pull/13594]
+Upstream-Status: Backport [https://github.com/autowarefoundation/autoware_universe/commit/0aca0ea44d6ebba9600f753bb561f423591459c8]
 Signed-off-by: Ahmed Adel Wafdy <fandes99@gmail.com>
 ---
  src/interface.cpp | 1 +

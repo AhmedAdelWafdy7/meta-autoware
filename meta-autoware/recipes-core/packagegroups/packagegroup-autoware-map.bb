@@ -16,10 +16,11 @@ RDEPENDS:${PN} += "\
     autoware-lanelet2-map-visualizer \
     autoware-lanelet2-utils \
     autoware-map-based-prediction \
+    autoware-map-config \
     autoware-map-height-fitter \
+    autoware-map-launch \
     autoware-map-loader \
     autoware-map-projection-loader \
     autoware-map-tf-generator \
     autoware-traffic-light-map-based-detector \
-    tier4-map-launch \
 "

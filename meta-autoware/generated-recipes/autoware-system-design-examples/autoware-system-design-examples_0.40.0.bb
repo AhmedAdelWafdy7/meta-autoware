@@ -51,7 +51,7 @@ RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 
 ROS_BRANCH ?= "branch=main"
 SRC_URI = "git://github.com/autowarefoundation/autoware_system_designer.git;${ROS_BRANCH};protocol=https"
-SRCREV = "0bb96f29d8e27ee88658b506fa56967054b19f64"
+SRCREV = "61338ed5c185653843de1e5ce6bc8c845c343853"
 S = "${WORKDIR}/git/autoware_system_design_examples"
 
 ROS_BUILD_TYPE = "ament_cmake"

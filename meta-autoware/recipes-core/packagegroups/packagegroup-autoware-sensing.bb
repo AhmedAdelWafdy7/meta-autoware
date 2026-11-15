@@ -25,6 +25,7 @@ RDEPENDS:${PN} += "\
     autoware-radar-static-pointcloud-filter \
     autoware-radar-threshold-filter \
     autoware-radar-tracks-noise-filter \
+    autoware-sensing-launch \
     autoware-traffic-light-multi-camera-fusion \
     boost-io-context \
     boost-serial-driver \
@@ -37,5 +38,4 @@ RDEPENDS:${PN} += "\
     ros2-socketcan \
     ros2agnocast \
     ros2agnocast-discovery-agent \
-    tier4-sensing-launch \
 "

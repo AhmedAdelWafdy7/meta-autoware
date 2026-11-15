@@ -24,7 +24,7 @@ QT5_GAP_NAMES = {
     "autoware-perception-rviz-plugin", "autoware-planning-rviz-plugin",
     "autoware-polar-grid", "autoware-string-stamped-rviz-plugin",
     "autoware-topic-text-overlay-rviz-plugin", "autoware-traffic-light-rviz-plugin",
-    "autoware-adapi-visualizers", "rviz-2d-overlay-plugins",
+    "autoware-adapi-visualizers", "tier4-active-generator-rviz-plugin",
     "tier4-adapi-rviz-plugin", "tier4-camera-view-rviz-plugin",
     "tier4-control-mode-rviz-plugin", "tier4-datetime-rviz-plugin",
     "tier4-dummy-object-rviz-plugin", "tier4-manual-lane-change-rviz-plugin",
@@ -45,7 +45,7 @@ VENDOR_SPECIFIC_NAMES = {
     "nebula-sample-hw-interfaces", "nebula-velodyne", "nebula-velodyne-common",
     "nebula-velodyne-decoders", "nebula-velodyne-hw-interfaces",
     "camera-description", "imu-description", "livox-description",
-    "autoware-livox-tag-filter", "pandar-description", "radar-description",
+    "pandar-description", "radar-description",
     "velodyne-description", "vls-description", "pandar-msgs",
     # vendor message schemas
     "continental-msgs", "continental-srvs",
@@ -58,11 +58,11 @@ MISSING_OE_RECIPE_CHAIN_NAMES = {
     # cgal, via autoware-pointcloud-preprocessor
     "autoware-pointcloud-preprocessor", "autoware-compare-map-segmentation",
     "autoware-ground-segmentation", "autoware-lidar-marker-localizer",
-    "autoware-occupancy-grid-map-outlier-filter", "tier4-localization-launch",
+    "autoware-occupancy-grid-map-outlier-filter", "autoware-localization-launch",
     # python3-scipy
     "autoware-accel-brake-map-calibrator", "autoware-smart-mpc-trajectory-follower",
     # crypto++ and cpprest, via autoware-velodyne-monitor
-    "autoware-velodyne-monitor", "common-sensor-launch", "single-lidar-common-launch",
+    "autoware-velodyne-monitor", "autoware-sensor-driver-launch",
     # libpng++
     "nebula-core-decoders",
     # autoware-shape-estimation (CUDA, excluded)
@@ -72,8 +72,8 @@ MISSING_OE_RECIPE_CHAIN_NAMES = {
     # usb-cam
     "awsim-labs-sensor-kit-launch", "awsim-sensor-kit-launch", "single-lidar-sensor-kit-launch",
     # find_package(acados) at configure time, which bitbake -g cannot see; the trajectory
-    # optimizer and modifier need the path optimizer
-    "autoware-path-optimizer", "autoware-trajectory-optimizer", "autoware-trajectory-modifier",
+    # modifier needs the path optimizer, and the minimum rule-based planner needs the modifier
+    "autoware-path-optimizer", "autoware-trajectory-modifier", "autoware-minimum-rule-based-planner",
 }
 
 # Vehicle and sensor kits for the reference vehicle and the simulators. An integrator replaces
@@ -103,6 +103,8 @@ TEST_NAMES = {
     "autoware-diagnostic-graph-test-examples", "autoware-planning-validator-test-utils",
     "autoware-fake-test-node", "autoware-test-node", "autoware-test-utils", "autoware-testing",
     "autoware-planning-test-manager",
+    # CI lint for the component interface specs
+    "autoware-interface-spec-lint",
     # the agnocast metapackage, which RDEPENDS on its samples; its libraries match the
     # planning rule one by one
     "agnocast",
@@ -120,21 +122,23 @@ SIMULATION_NAMES = {
     "tier4-simulator-launch",
     "autoware-fault-injection",
     "autoware-carla-interface",
+    # selects main or sub ECU commands, for simulation only
+    "autoware-redundancy-command-selector",
     "tier4-system-launch",
     "tier4-autoware-api-launch",
     # design-time tooling
     "autoware-system-designer",
     "autoware-system-design-examples",
-    "autoware-universe-designs",
     "autoware-sample-designs",
 }
 PLANNING_SIMULATOR_DEMO_NAMES = {
-    "tier4-planning-launch",
-    "tier4-control-launch",
+    "autoware-planning-launch",
+    "autoware-control-launch",
     # starts the whole stack, simulators included
     "autoware-launch",
     # perception, with its CUDA dependencies stripped; the demo starts them
-    "tier4-perception-launch",
+    "autoware-perception-launch",
+    "autoware-perception-config",
     "autoware-probabilistic-occupancy-grid-map",
 }
 
@@ -173,11 +177,13 @@ RULES = [
         # MRM and hazard handlers issue vehicle commands
         "hazard-lights-selector", "hazard-status-converter", "mrm-comfortable-stop",
         "mrm-emergency-stop", "mrm-handler", "stop-mode-operator", "steer-offset-estimator",
+        "mrm-in-lane-stop-operator", "mrm-steering-hold-stop-operator", "mrm-reset-manager",
+        "driving-mode-manager",
     ]),
     ("localization", [
         "localization", "localiz", "ndt-scan-matcher", "ekf-localizer",
         "gyro-odometer", "pose-initializer", "pose-estimator", "pose-instability",
-        "pose-covariance", "pose2twist", "ar-tag-based-localizer", "landmark-manager",
+        "pose-covariance", "pose2twist", "pose-initialization-requester", "ar-tag-based-localizer", "landmark-manager",
         "yabloc", "lidar-marker-localizer", "eagleye", "geo-pose", "twist2accel",
     ]),
     ("map", ["-map", "map-", "lanelet2", "elevation-map"]),
@@ -207,6 +213,8 @@ RULES = [
         "glog-component", "bluetooth-monitor", "velodyne-monitor", "pipeline-latency",
         "topic-state-monitor", "topic-relay-controller", "evaluation-adapter",
         "kinematic-evaluator",
+        # redundant main/sub ECU switching
+        "redundancy-", "generic-service-divider",
     ]),
     ("common", [
         "-utils", "utils-", "interpolation", "kalman-filter", "signal-processing",
@@ -221,7 +229,7 @@ RULES = [
         "rtc-interface", "global-parameter-loader", "glog", "lint-common",
         "testing", "fake-test-node", "test-node", "node",
         "autoware-core", "autoware-core-api", "autoware-launch",
-        "llh-converter", "managed-transform-buffer",
+        "llh-converter", "managed-transform-buffer", "component-interface-admission",
     ]),
 ]
 

@@ -55,6 +55,7 @@ RDEPENDS:${PN} += "\
     autoware-freespace-planning-algorithms \
     autoware-frenet-planner \
     autoware-goal-distance-calculator \
+    autoware-in-lane-mrm-planner \
     autoware-lane-departure-checker \
     autoware-manual-lane-change-handler \
     autoware-mission-planner \
@@ -76,12 +77,14 @@ RDEPENDS:${PN} += "\
     autoware-object-sorter \
     autoware-objects-of-interest-marker-interface \
     autoware-obstacle-collision-checker \
+    autoware-obstacle-proximity-checker \
     autoware-path-distance-calculator \
     autoware-path-generator \
     autoware-path-sampler \
     autoware-path-smoother \
     autoware-perception-objects-converter \
     autoware-perception-online-evaluator \
+    autoware-planning-config \
     autoware-planning-evaluator \
     autoware-planning-factor-interface \
     autoware-planning-topic-converter \
@@ -111,6 +114,7 @@ RDEPENDS:${PN} += "\
     autoware-trajectory-concatenator \
     autoware-trajectory-follower-base \
     autoware-trajectory-follower-node \
+    autoware-trajectory-gate \
     autoware-trajectory-ranker \
     autoware-trajectory-selector \
     autoware-trajectory-validator \

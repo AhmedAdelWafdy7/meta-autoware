@@ -169,6 +169,18 @@ PYEOF
 echo "== [4/4] sync in-scope recipes into ${OUTPUT_DIR} =="
 "$REPO_ROOT/tools/sync-generated-recipes.sh" "$RESULTS_NAME" "$REPO_ROOT/meta-autoware/PACKAGES.list" "$OUTPUT_DIR"
 
+# Recipes for packages this ref no longer has, or now skips; devtools ones are synced
+# into the same directory from their own list
+KEEP="$(cat "$REPO_ROOT/meta-autoware/PACKAGES.list" "$REPO_ROOT"/meta-autoware/PACKAGES-*.list 2>/dev/null \
+  | grep -v '^#' | grep -v '^[[:space:]]*$' || true)"
+for DIR in "$OUTPUT_DIR"/*/; do
+  PKG="$(basename "$DIR")"
+  if ! grep -qxF "$PKG" <<<"$KEEP"; then
+    rm -rf "$DIR"
+    echo "  removed: $PKG (not in scope for ${AUTOWARE_REF})"
+  fi
+done
+
 echo "Reproduce with: tools/rollout.sh --ros-distro $ROS_DISTRO --autoware-ref $AUTOWARE_REF --output ${OUTPUT_DIR#"$REPO_ROOT"/}"
 
 if [ "$DO_BUILD" = true ]; then

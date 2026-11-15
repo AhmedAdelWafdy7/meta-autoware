@@ -1,5 +1,5 @@
 # Everything autoware_launch's planning_simulator.launch.xml starts, including the planner
-# modules the default planning preset loads by name (tier4-planning-launch doesn't declare
+# modules the default planning preset loads by name (autoware-planning-launch doesn't declare
 # them). CUDA-only and otherwise unbuildable RDEPENDS are stripped in autoware-fixups.bbclass.
 DESCRIPTION = "Autoware planning simulator, demo only"
 LICENSE = "Apache-2.0"
@@ -12,13 +12,14 @@ ALLOW_EMPTY:${PN} = "1"
 
 RDEPENDS:${PN} += "\
     autoware-launch \
-    tier4-map-launch \
+    autoware-map-launch \
     tier4-vehicle-launch \
     tier4-system-launch \
-    tier4-planning-launch \
-    tier4-control-launch \
+    autoware-planning-launch \
+    autoware-control-launch \
     tier4-simulator-launch \
-    tier4-perception-launch \
+    autoware-perception-launch \
+    autoware-perception-config \
     tier4-autoware-api-launch \
     autoware-simple-planning-simulator \
     autoware-dummy-perception-publisher \
