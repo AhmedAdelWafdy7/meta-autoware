@@ -56,7 +56,7 @@ while IFS= read -r PKG; do
   done
 
   # which autoware-fixups.bbclass predicates will apply
-  COVERAGE="none known -- build it, consult tools/find-missing-cmake-dep.sh on failure"
+  COVERAGE="none known -- build it, check do_configure on failure"
   CONTENT="$(cat "$DST"/*.bb 2>/dev/null || true)"
   HITS=""
   if grep -q "rosidl-default-runtime" <<<"$CONTENT"; then

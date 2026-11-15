@@ -215,13 +215,6 @@ if [ "$DO_BUILD" = true ]; then
       echo "See \`results/${RESULTS_NAME}/build.log\` for the failing task(s) and"
       echo "\`results/${RESULTS_NAME}/failure-taxonomy.json\`/\`skipped-packages.json\` for"
       echo "what was excluded ahead of time."
-      echo
-      echo "For a \`do_configure\` failure that looks like a missing CMake package"
-      echo "(\"Could not find a package configuration file provided by ...\"), run"
-      echo "\`tools/find-missing-cmake-dep.sh\` against that task's log -- it checks"
-      echo "whether this is a new instance of the mrt_cmake_modules-shaped class"
-      echo "already handled in \`meta-autoware/classes/autoware-fixups.bbclass\`,"
-      echo "or something new that needs its own line added there."
     } >> "$REPORT"
   fi
   echo
