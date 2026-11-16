@@ -20,6 +20,9 @@ local_conf_header:
     BB_NUMBER_THREADS ?= "2"
     PARALLEL_MAKE ?= "-j 2"
     PARALLEL_MAKE:pn-opencv ?= "-j 1"
+    # PCL and the PCL-heavy pointcloud preprocessor reach ~4.5 GB per compile job; two at once OOM the host
+    PARALLEL_MAKE:pn-pcl ?= "-j 1"
+    PARALLEL_MAKE:pn-autoware-pointcloud-preprocessor ?= "-j 1"
     PARALLEL_MAKE:pn-autoware-behavior-path-planner ?= "-j 1"
     # 2.0.0: its compile jobs reach ~4 GB each; at -j 2 beside the path planner it OOMed 13 GB
     PARALLEL_MAKE:pn-autoware-behavior-velocity-planner ?= "-j 1"
