@@ -1,0 +1,31 @@
+#!/bin/sh
+# Autoware logging simulator on the sample map, fed by the sample rosbag: the lidar packets
+# are decoded and preprocessed, and NDT and the EKF localize the vehicle. Foxglove connects
+# to port 8765. Extra arguments are passed to the launch.
+set -e
+. /opt/ros/jazzy/setup.sh
+
+ros2 launch foxglove_bridge foxglove_bridge_launch.xml port:=8765 send_buffer_limit:=400000000 &
+
+ros2 launch autoware_launch logging_simulator.launch.xml \
+    map_path:=/opt/autoware/maps/sample-map-rosbag \
+    vehicle_model:=sample_vehicle \
+    sensor_model:=sample_sensor_kit \
+    rviz:=false \
+    perception:=false \
+    "$@" &
+LAUNCH=$!
+
+# The stack takes minutes to come up on four cores, and the bag is only 30 s long: played
+# early, it is over before NDT can initialize. The AD API publishes the localization state
+# late in the launch; wait for it, then let the load settle.
+until timeout 20 ros2 topic echo --once /api/localization/initialization_state >/dev/null 2>&1; do
+    kill -0 $LAUNCH 2>/dev/null || { echo "$(date +%T) autoware-rosbag-replay: launch exited" >&2; exit 1; }
+    sleep 5
+done
+echo "$(date +%T) autoware-rosbag-replay: localization API up"
+sleep "${AUTOWARE_BAG_DELAY:-30}"
+# the docs play it at 0.2x; the Pi needs the same headroom
+echo "$(date +%T) autoware-rosbag-replay: playing the bag"
+ros2 bag play /opt/autoware/bags/sample-rosbag -r "${AUTOWARE_BAG_RATE:-0.2}" -s sqlite3
+wait $LAUNCH
