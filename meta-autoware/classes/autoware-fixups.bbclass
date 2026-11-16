@@ -192,8 +192,8 @@ python() {
     if pn in cuda_only_deps and not bb.utils.contains('DISTRO_FEATURES', 'cuda', True, False, d):
         strip_deps(cuda_only_deps[pn])
 
-    # Runtime-only dependencies that cannot be built here (no recipe for acados, cgal,
-    # crypto++, libpng++; no Qt) and that the planning simulator does not start
+    # Runtime-only dependencies that cannot be built here (no recipe for acados or
+    # crypto++; no Qt) and that the simulators do not start
     unbuildable_rdepends = {
         # path optimizer and trajectory modifier need acados
         'autoware-planning-launch': ['autoware-path-optimizer', 'autoware-trajectory-modifier'],
@@ -204,16 +204,13 @@ python() {
             'autoware-raindrop-cluster-filter', 'autoware-detected-object-validation',
             'autoware-elevation-map-loader',
         ],
-        'autoware-probabilistic-occupancy-grid-map': ['autoware-pointcloud-preprocessor'],
-        'tier4-simulator-launch': ['autoware-localization-launch', 'autoware-elevation-map-loader'],
-        'autoware-launch': ['rviz2', 'autoware-localization-launch'],
+        'tier4-simulator-launch': ['autoware-elevation-map-loader'],
+        'autoware-launch': ['rviz2', 'autoware-elevation-map-loader'],
         'autoware-dummy-diag-publisher': ['rqt-reconfigure', 'rqt-robot-monitor', 'rqt-runtime-monitor'],
-        # pointcloud preprocessor needs cgal; the driver launch needs nebula (libpng++) and
-        # the velodyne monitor (crypto++)
-        'autoware-sensing-launch': ['autoware-pointcloud-preprocessor'],
-        'sample-sensor-kit-launch': [
-            'autoware-pointcloud-preprocessor', 'autoware-sensor-driver-launch', 'usb-cam',
-        ],
+        # the velodyne monitor needs crypto++; it only runs with launch_driver:=true
+        'autoware-sensor-driver-launch': ['autoware-velodyne-monitor'],
+        # ublox_gps needs the asio io_service that asio 1.33 removed; both run with launch_driver:=true only
+        'sample-sensor-kit-launch': ['usb-cam', 'ublox-gps'],
     }
     if pn in unbuildable_rdepends:
         current = (d.getVar(rdep_key) or '').split()
@@ -241,7 +238,7 @@ python() {
 # Packages whose exported CMake files keep absolute paths into their own recipe sysroot,
 # which is wrong for every consumer and fatal buildpaths QA on wrynose. Listed rather than
 # applied to all, so the other recipes keep their task hashes.
-AUTOWARE_RELOCATE_CMAKE_EXPORTS = "agnocastlib autoware-osqp-interface autoware-qp-interface sync-tooling-msgs"
+AUTOWARE_RELOCATE_CMAKE_EXPORTS = "agnocastlib autoware-osqp-interface autoware-pointcloud-preprocessor autoware-qp-interface nebula-hesai sync-tooling-msgs"
 
 # CMAKE_SYSROOT is the consumer's sysroot when OE or its SDK cross-compiles, and empty on
 # target. The braces are escaped so BitBake leaves ${CMAKE_SYSROOT} for CMake.
@@ -256,13 +253,13 @@ autoware_relocate_cmake_exports() {
 
 # Map non-SPDX license names from package.xml to SPDX ids. Runs as an event
 # handler because base.bbclass checks the LICENSE format before any python().
-AUTOWARE_LICENSE_MAP = "Apache 2=Apache-2.0;Apache2=Apache-2.0;CC BY-SA 4.0=CC-BY-SA-4.0;BSD3=BSD-3-Clause;BSD-3-Clause-License=BSD-3-Clause;BSD-2=BSD-2-Clause;Boost=BSL-1.0"
+AUTOWARE_LICENSE_MAP = "Apache 2=Apache-2.0;Apache2=Apache-2.0;CC BY-SA 4.0=CC-BY-SA-4.0;BSD3=BSD-3-Clause;BSD-3-Clause-License=BSD-3-Clause;BSD-2=BSD-2-Clause;Boost=BSL-1.0;LGPLv3=LGPL-3.0-only"
 # plain "BSD" only where the upstream license text was checked and is BSD-3-Clause (lanelet2* too)
 AUTOWARE_LICENSE_BSD3 = " \
     autoware-ndt-scan-matcher \
     eagleye-can-velocity-converter eagleye-coordinate eagleye-msgs eagleye-navigation eagleye-rt eagleye-tf \
     eigen-stl-containers geodesy geometric-shapes random-numbers \
-    grid-map-cmake-helpers grid-map-core grid-map-costmap-2d grid-map-cv grid-map-msgs grid-map-ros \
+    grid-map-cmake-helpers grid-map-core grid-map-costmap-2d grid-map-cv grid-map-msgs grid-map-pcl grid-map-ros \
     pointcloud-to-laserscan rtklib-msgs ublox-gps ublox-msgs ublox-serialization \
     velodyne-description velodyne-driver velodyne-msgs velodyne-pointcloud \
 "
