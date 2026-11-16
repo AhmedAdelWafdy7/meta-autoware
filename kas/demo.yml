@@ -3,5 +3,10 @@
 header:
   version: 14
 
+repos:
+  project:
+    layers:
+      meta-autoware-apps:
+
 target:
   - core-image-autoware-demo
