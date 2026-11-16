@@ -14,7 +14,7 @@ Find TBB through its CMake config (the FindTBB.cmake module in
 mrt_cmake_modules predates oneTBB), link TBB::tbb, and declare the
 dependency.
 
-Upstream-Status: Pending
+Upstream-Status: Submitted [https://github.com/autowarefoundation/autoware_universe/pull/13639]
 Signed-off-by: Ahmed Adel Wafdy <fandes99@gmail.com>
 ---
  CMakeLists.txt | 5 +++++
