@@ -10,7 +10,7 @@ SRC_URI[sha256sum] = "998af216ab16ebb88543fbaa2dbb9175855e944775b66f2996fc945c84
 UPSTREAM_CHECK_URI = "https://download.savannah.nongnu.org/releases/pngpp/"
 UPSTREAM_CHECK_REGEX = "png\+\+-(?P<pver>\d+(\.\d+)+)\.tar"
 
-S = "${UNPACKDIR}/png++-${PV}"
+S = "${WORKDIR}/png++-${PV}"
 
 # ROS packages name it by its Debian package, libpng++-dev
 PROVIDES += "libpng++-dev"

@@ -20,7 +20,7 @@ SRC_URI[sha256sum] = "8e7ce1e30e8ffcb3e69d153c3a561bb1f38bbb4becd8e6544cbaa0fb28
 UPSTREAM_CHECK_URI = "https://github.com/CGAL/cgal/releases"
 UPSTREAM_CHECK_REGEX = "releases/tag/v(?P<pver>\d+(\.\d+)+)"
 
-S = "${UNPACKDIR}/CGAL-${PV}"
+S = "${WORKDIR}/CGAL-${PV}"
 
 inherit cmake
 

@@ -13,7 +13,7 @@ SRC_URI = " \
 SRC_URI[map.sha256sum] = "07e2da0b0bf12e2324f7083c2ce5556fb8044c50cef1da6428ab9084c3903bc8"
 SRC_URI[bag.sha256sum] = "5f9d36353393b3d249212153c19049822b1298db56512aa045b4f7f6fc37cf88"
 
-S = "${UNPACKDIR}"
+S = "${WORKDIR}"
 
 inherit allarch
 
