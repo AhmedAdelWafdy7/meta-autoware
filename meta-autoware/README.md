@@ -33,8 +33,9 @@ Nothing else needs configuring. The layer turns on its own `autoware-fixups` cla
 | `core-image-autoware-minimal` | system, vehicle and control |
 | `core-image-autoware` | the minimal image plus sensing, localization, planning and map |
 | `core-image-autoware-dev` | `core-image-autoware` plus simulation and developer tools; not for production |
-| `core-image-autoware-demo` | the planning simulator demo, with a map licensed for non-commercial use |
 | `core-image-autoware-perception` | `packagegroup-autoware-core` plus perception; perception is empty unless `DISTRO_FEATURES` has `cuda` |
+
+The demo image, `core-image-autoware-demo`, is in the `meta-autoware-apps` layer.
 
 To add your own vehicle and sensor packages, use `CORE_IMAGE_EXTRA_INSTALL`, or build your
 image from the `packagegroup-autoware-*` groups.

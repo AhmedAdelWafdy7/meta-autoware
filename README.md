@@ -42,7 +42,7 @@ On each branch, CI builds `core-image-autoware` for qemuarm64 and boots it under
 kas build kas/qemuarm64.yml                        # ROS 2 base image
 kas build kas/autoware.yml                         # Autoware image
 kas build kas/raspberrypi5.yml                     # Autoware image for the Pi 5
-kas build kas/raspberrypi5.yml:kas/demo.yml        # planning simulator demo for the Pi 5
+kas build kas/raspberrypi5.yml:kas/demo.yml        # demo image for the Pi 5, meta-autoware-apps
 ```
 
 A first build takes hours. `kas/cache.yml` keeps downloads and sstate in `yocto-cache/`, next
@@ -79,7 +79,7 @@ Log in as `root` (no password), then run `. /opt/ros/jazzy/setup.sh`.
 | `meta-autoware/classes/autoware-fixups.bbclass` | fixes applied to the generated recipes |
 | `meta-autoware/recipes-thirdparty-bbappends/` | patches and fixes for specific packages |
 | `meta-autoware/recipes-core/` | images and packagegroups |
-| `meta-autoware/recipes-demo/` | the planning simulator demo and its map |
+| `meta-autoware-apps/` | demo layer: the planning simulator, the rosbag replay and their data |
 | `meta-autoware/PACKAGES.list` | packages taken from the generator output, written by `tools/rollout.sh` |
 | `doc/` | Pi 5 notes and screenshots |
 | `tools/` | recipe generation, `boot-test.py` for the QEMU checks, `ci-host-check.sh` for the CI runner |
