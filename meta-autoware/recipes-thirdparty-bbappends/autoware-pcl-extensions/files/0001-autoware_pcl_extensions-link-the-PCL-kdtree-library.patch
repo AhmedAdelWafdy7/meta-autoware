@@ -1,0 +1,35 @@
+From e44626e788aa358a7d2509dbcd0db9da8a44a8aa Mon Sep 17 00:00:00 2001
+From: Ahmed Adel Wafdy <fandes99@gmail.com>
+Date: Mon, 16 Nov 2026 12:05:07 +0000
+Subject: [PATCH] fix(autoware_pcl_extensions): link the PCL kdtree library
+
+VoxelGridNearestCentroid builds a pcl::KdTreeFLANN, which libpcl_kdtree
+provides, but the package only finds and links the PCL common component.
+Lazy binding hides the undefined symbol until it is called. Linked with
+-z now, dlopen fails ("undefined symbol:
+pcl::KdTreeFLANN<pcl::PointXYZ>::setInputCloud").
+
+Find the kdtree component as well.
+
+Upstream-Status: Pending
+Signed-off-by: Ahmed Adel Wafdy <fandes99@gmail.com>
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 0b5ae0b755..54d2dfa9c5 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -4,7 +4,7 @@ project(autoware_pcl_extensions)
+ find_package(autoware_cmake REQUIRED)
+ autoware_package()
+ 
+-find_package(PCL REQUIRED COMPONENTS common)
++find_package(PCL REQUIRED COMPONENTS common kdtree)
+ find_package(eigen3_cmake_module REQUIRED)
+ find_package(Eigen3 REQUIRED)
+ 
+-- 
+2.43.0
+
