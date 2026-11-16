@@ -79,7 +79,7 @@ Log in as `root` (no password), then run `. /opt/ros/jazzy/setup.sh`.
 | `meta-autoware/classes/autoware-fixups.bbclass` | fixes applied to the generated recipes |
 | `meta-autoware/recipes-thirdparty-bbappends/` | patches and fixes for specific packages |
 | `meta-autoware/recipes-core/` | images and packagegroups |
-| `meta-autoware-apps/` | demo layer: the planning simulator and its map, and the demo image |
+| `meta-autoware-apps/` | demo layer: the planning simulator, the rosbag replay and their data |
 | `meta-autoware/PACKAGES.list` | packages taken from the generator output, written by `tools/rollout.sh` |
 | `doc/` | Pi 5 notes and screenshots |
 | `tools/` | recipe generation, `boot-test.py` for the QEMU checks, `ci-host-check.sh` for the CI runner |
