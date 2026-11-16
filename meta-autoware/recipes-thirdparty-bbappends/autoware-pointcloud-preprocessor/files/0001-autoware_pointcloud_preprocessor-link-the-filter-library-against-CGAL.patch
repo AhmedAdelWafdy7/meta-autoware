@@ -1,0 +1,39 @@
+From ab4a2d4e87db3449ef8ea67531451cc826b8f5bf Mon Sep 17 00:00:00 2001
+From: Ahmed Adel Wafdy <fandes99@gmail.com>
+Date: Mon, 16 Nov 2026 12:03:50 +0000
+Subject: [PATCH] fix(autoware_pointcloud_preprocessor): link the filter
+ library against CGAL
+
+polygon_remover.cpp and utility/geometry.cpp, built into
+pointcloud_preprocessor_filter, use CGAL with GMP numbers, but only
+polygon_remover_node links gmp and CGAL. The library has undefined GMP
+symbols, which lazy binding hides until they are called. Linked with
+-z now, dlopen fails ("undefined symbol: __gmpz_set_si") and no
+component in the library loads: crop box, distortion corrector, ring
+outlier, concatenate and downsample filters.
+
+Link it the same way as polygon_remover_node.
+
+Upstream-Status: Pending
+Signed-off-by: Ahmed Adel Wafdy <fandes99@gmail.com>
+---
+ CMakeLists.txt | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index a5b2652fa4..e8fdac7aed 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -144,6 +144,9 @@ target_link_libraries(pointcloud_preprocessor_filter
+   ${Sophus_LIBRARIES}
+   ${PCL_LIBRARIES}
+   ${tf2_sensor_msgs_LIBRARIES}
++  gmp
++  CGAL::CGAL
++  CGAL::CGAL_Core
+ )
+ 
+ target_include_directories(pointcloud_preprocessor_filter PRIVATE
+-- 
+2.43.0
+
