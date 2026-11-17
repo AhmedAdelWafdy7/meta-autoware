@@ -14,10 +14,12 @@ RDEPENDS:${PN} += "\
     autoware-euclidean-cluster-object-detector \
     autoware-gnss-poser \
     autoware-ground-filter \
+    autoware-ground-segmentation \
     autoware-image-diagnostics \
     autoware-image-object-locator \
     autoware-image-transport-decompressor \
     autoware-imu-corrector \
+    autoware-pointcloud-preprocessor \
     autoware-radar-fusion-to-detected-object \
     autoware-radar-object-tracker \
     autoware-radar-objects-adapter \
@@ -32,6 +34,7 @@ RDEPENDS:${PN} += "\
     boost-tcp-driver \
     boost-udp-driver \
     nebula-core-common \
+    nebula-core-decoders \
     nebula-core-hw-interfaces \
     nebula-core-ros \
     pointcloud-to-laserscan \
