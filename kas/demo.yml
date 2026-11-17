@@ -1,7 +1,17 @@
-# Planning simulator demo image. Use on top of a machine config, e.g.
+# Planning simulator and rosbag replay demo image. Use on top of a machine config, e.g.
 # kas build kas/raspberrypi5.yml:kas/demo.yml
 header:
   version: 14
 
+repos:
+  project:
+    layers:
+      meta-autoware-apps:
+
 target:
   - core-image-autoware-demo
+
+local_conf_header:
+  demo-data: |
+    # the rosbag replay demo's map and bag: Copyright TIER IV, no license stated, demo use only
+    LICENSE_FLAGS_ACCEPTED += "tier4-sample-data"
