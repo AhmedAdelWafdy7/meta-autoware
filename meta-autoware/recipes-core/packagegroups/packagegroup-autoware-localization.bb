@@ -15,9 +15,11 @@ RDEPENDS:${PN} += "\
     autoware-geo-pose-projector \
     autoware-gyro-odometer \
     autoware-landmark-manager \
+    autoware-lidar-marker-localizer \
     autoware-localization-config \
     autoware-localization-error-monitor \
     autoware-localization-evaluator \
+    autoware-localization-launch \
     autoware-localization-util \
     autoware-ndt-scan-matcher \
     autoware-pose-covariance-modifier \
