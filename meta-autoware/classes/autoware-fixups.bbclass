@@ -197,11 +197,9 @@ python() {
     unbuildable_rdepends = {
         # path optimizer and trajectory modifier need acados
         'autoware-planning-launch': ['autoware-path-optimizer', 'autoware-trajectory-modifier'],
+        # euclidean cluster and detection by tracker need the CUDA-only shape estimation
         'autoware-perception-launch': [
-            'autoware-pointcloud-preprocessor', 'autoware-ground-segmentation',
-            'autoware-compare-map-segmentation', 'autoware-euclidean-cluster',
-            'autoware-detection-by-tracker', 'autoware-occupancy-grid-map-outlier-filter',
-            'autoware-raindrop-cluster-filter', 'autoware-detected-object-validation',
+            'autoware-euclidean-cluster', 'autoware-detection-by-tracker',
             'autoware-elevation-map-loader',
         ],
         'tier4-simulator-launch': ['autoware-elevation-map-loader'],
