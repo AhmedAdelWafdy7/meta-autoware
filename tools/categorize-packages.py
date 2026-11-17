@@ -49,22 +49,18 @@ VENDOR_SPECIFIC_NAMES = {
     "velodyne-description", "vls-description", "pandar-msgs",
     # vendor message schemas
     "continental-msgs", "continental-srvs",
+    # launches nebula with every vendor's drivers
+    "autoware-sensor-driver-launch",
 }
 
 # Depend, directly or transitively, on something with no recipe in the layers used. Each
 # entry is what `bitbake -g <pn>` reports missing, so recheck with it when a recipe is added
 # (the planners were left here for a python3-scipy dependency proxsuite no longer has).
 MISSING_OE_RECIPE_CHAIN_NAMES = {
-    # cgal, via autoware-pointcloud-preprocessor
-    "autoware-pointcloud-preprocessor", "autoware-compare-map-segmentation",
-    "autoware-ground-segmentation", "autoware-lidar-marker-localizer",
-    "autoware-occupancy-grid-map-outlier-filter", "autoware-localization-launch",
     # python3-scipy
     "autoware-accel-brake-map-calibrator", "autoware-smart-mpc-trajectory-follower",
-    # crypto++ and cpprest, via autoware-velodyne-monitor
-    "autoware-velodyne-monitor", "autoware-sensor-driver-launch",
-    # libpng++
-    "nebula-core-decoders",
+    # crypto++ and cpprest; the sensor driver launch only starts it with launch_driver:=true
+    "autoware-velodyne-monitor",
     # autoware-shape-estimation (CUDA, excluded)
     "autoware-euclidean-cluster", "autoware-detection-by-tracker",
     # rviz2, qtbase

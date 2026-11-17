@@ -9,6 +9,7 @@ PACKAGES = "${PN}"
 ALLOW_EMPTY:${PN} = "1"
 
 RDEPENDS:${PN} += "\
+    autoware-compare-map-segmentation \
     autoware-core-map \
     autoware-grid-map-utils \
     autoware-lanelet2-extension \
@@ -22,5 +23,6 @@ RDEPENDS:${PN} += "\
     autoware-map-loader \
     autoware-map-projection-loader \
     autoware-map-tf-generator \
+    autoware-occupancy-grid-map-outlier-filter \
     autoware-traffic-light-map-based-detector \
 "
