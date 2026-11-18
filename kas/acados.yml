@@ -1,0 +1,10 @@
+# Opt-in: builds the acados planners (path optimizer, trajectory modifier, minimum
+# rule-based planner). Their solver code is generated with acados' tera_renderer, which has
+# no licence upstream, so t-renderer-native is gated behind this flag. Nothing from it is
+# installed on the target. Use with: kas build kas/autoware.yml:kas/acados.yml
+header:
+  version: 14
+
+local_conf_header:
+  acados: |
+    LICENSE_FLAGS_ACCEPTED += "acados-tera-renderer"
