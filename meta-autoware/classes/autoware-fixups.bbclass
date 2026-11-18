@@ -145,7 +145,8 @@ python() {
     # them; gtest-vendor installs the headers under src/
     if is_mash_generated:
         depends = d.getVar('DEPENDS') or ''
-        gtest_headers = ('autoware-fake-test-node', 'autoware-planning-test-manager')
+        # mpt_optimizer.hpp uses FRIEND_TEST
+        gtest_headers = ('autoware-fake-test-node', 'autoware-planning-test-manager', 'autoware-path-optimizer')
         if pn in gtest_headers or any(p in depends.split() for p in gtest_headers):
             if 'gtest-vendor' not in depends.split():
                 d.appendVar('DEPENDS', ' gtest-vendor')
@@ -192,11 +193,9 @@ python() {
     if pn in cuda_only_deps and not bb.utils.contains('DISTRO_FEATURES', 'cuda', True, False, d):
         strip_deps(cuda_only_deps[pn])
 
-    # Runtime-only dependencies that cannot be built here (no recipe for acados or
-    # crypto++; no Qt) and that the simulators do not start
+    # Runtime-only dependencies that cannot be built here (cpprest does not build with
+    # Boost 1.87+; no Qt) and that the simulators do not start
     unbuildable_rdepends = {
-        # path optimizer and trajectory modifier need acados
-        'autoware-planning-launch': ['autoware-path-optimizer', 'autoware-trajectory-modifier'],
         # euclidean cluster and detection by tracker need the CUDA-only shape estimation
         'autoware-perception-launch': [
             'autoware-euclidean-cluster', 'autoware-detection-by-tracker',
@@ -205,11 +204,17 @@ python() {
         'tier4-simulator-launch': ['autoware-elevation-map-loader'],
         'autoware-launch': ['rviz2', 'autoware-elevation-map-loader'],
         'autoware-dummy-diag-publisher': ['rqt-reconfigure', 'rqt-robot-monitor', 'rqt-runtime-monitor'],
-        # the velodyne monitor needs crypto++; it only runs with launch_driver:=true
+        # the velodyne monitor needs cpprest; it only runs with launch_driver:=true
         'autoware-sensor-driver-launch': ['autoware-velodyne-monitor'],
         # ublox_gps needs the asio io_service that asio 1.33 removed; both run with launch_driver:=true only
         'sample-sensor-kit-launch': ['usb-cam', 'ublox-gps'],
     }
+    # the path optimizer and trajectory modifier need t_renderer for acados code generation,
+    # which has no licence (recipes-support/acados/t-renderer-native_*.bb)
+    if not bb.utils.contains('LICENSE_FLAGS_ACCEPTED', 'acados-tera-renderer', True, False, d):
+        unbuildable_rdepends['autoware-planning-launch'] = [
+            'autoware-path-optimizer', 'autoware-trajectory-modifier',
+        ]
     if pn in unbuildable_rdepends:
         current = (d.getVar(rdep_key) or '').split()
         d.setVar(rdep_key, ' '.join(v for v in current if v not in unbuildable_rdepends[pn]))
@@ -236,7 +241,7 @@ python() {
 # Packages whose exported CMake files keep absolute paths into their own recipe sysroot,
 # which is wrong for every consumer and fatal buildpaths QA on wrynose. Listed rather than
 # applied to all, so the other recipes keep their task hashes.
-AUTOWARE_RELOCATE_CMAKE_EXPORTS = "agnocastlib autoware-osqp-interface autoware-pointcloud-preprocessor autoware-qp-interface nebula-hesai sync-tooling-msgs"
+AUTOWARE_RELOCATE_CMAKE_EXPORTS = "agnocastlib autoware-osqp-interface autoware-path-optimizer autoware-pointcloud-preprocessor autoware-qp-interface nebula-hesai sync-tooling-msgs"
 
 # CMAKE_SYSROOT is the consumer's sysroot when OE or its SDK cross-compiles, and empty on
 # target. The braces are escaped so BitBake leaves ${CMAKE_SYSROOT} for CMake.

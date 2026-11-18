@@ -19,6 +19,8 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 
 # Need Qt5/X11/OpenGL, which the target image doesn't have
 QT5_GAP_NAMES = {
+    # rviz2, and python3-scipy (meta-python-ai)
+    "autoware-accel-brake-map-calibrator",
     "autoware-bag-time-manager-rviz-plugin", "autoware-localization-rviz-plugin",
     "autoware-mission-details-overlay-rviz-plugin", "autoware-overlay-rviz-plugin",
     "autoware-perception-rviz-plugin", "autoware-planning-rviz-plugin",
@@ -57,9 +59,11 @@ VENDOR_SPECIFIC_NAMES = {
 # entry is what `bitbake -g <pn>` reports missing, so recheck with it when a recipe is added
 # (the planners were left here for a python3-scipy dependency proxsuite no longer has).
 MISSING_OE_RECIPE_CHAIN_NAMES = {
-    # python3-scipy
-    "autoware-accel-brake-map-calibrator", "autoware-smart-mpc-trajectory-follower",
-    # crypto++ and cpprest; the sensor driver launch only starts it with launch_driver:=true
+    # python3-scipy (meta-python-ai), and torch, scikit-learn and numba, which its Python code
+    # imports but package.xml does not declare
+    "autoware-smart-mpc-trajectory-follower",
+    # cpprest: archived upstream, uses asio io_service, which Boost 1.87 removed; the sensor
+    # driver launch only starts it with launch_driver:=true
     "autoware-velodyne-monitor",
     # autoware-shape-estimation (CUDA, excluded)
     "autoware-euclidean-cluster", "autoware-detection-by-tracker",
@@ -67,9 +71,16 @@ MISSING_OE_RECIPE_CHAIN_NAMES = {
     "autoware-core", "autoware-elevation-map-loader",
     # usb-cam
     "awsim-labs-sensor-kit-launch", "awsim-sensor-kit-launch", "single-lidar-sensor-kit-launch",
-    # find_package(acados) at configure time, which bitbake -g cannot see; the trajectory
-    # modifier needs the path optimizer, and the minimum rule-based planner needs the modifier
-    "autoware-path-optimizer", "autoware-trajectory-modifier", "autoware-minimum-rule-based-planner",
+}
+
+# Build only with an overlay or licence flag; written as conditional RDEPENDS of their group
+GATED_NAMES = {
+    # acados solver code is rendered by t_renderer, which has no licence: needs
+    # acados-tera-renderer in LICENSE_FLAGS_ACCEPTED. The trajectory modifier needs the path
+    # optimizer, and the minimum rule-based planner needs the modifier.
+    "autoware-path-optimizer": "acados",
+    "autoware-trajectory-modifier": "acados",
+    "autoware-minimum-rule-based-planner": "acados",
 }
 
 # Vehicle and sensor kits for the reference vehicle and the simulators. An integrator replaces
@@ -245,11 +256,14 @@ def categorize(pn):
         return "simulation"
     if pn in PLANNING_SIMULATOR_DEMO_NAMES:
         return "planning-simulator-demo"
-    for category, patterns in RULES:
-        for pat in patterns:
-            if pat in pn:
-                return category
-    return "uncategorized"
+    category = "uncategorized"
+    for cat, patterns in RULES:
+        if any(pat in pn for pat in patterns):
+            category = cat
+            break
+    if pn in GATED_NAMES:
+        return f"{category}:{GATED_NAMES[pn]}"
+    return category
 
 
 def main():

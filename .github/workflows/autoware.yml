@@ -36,3 +36,25 @@ jobs:
         run: |
           kas shell kas/autoware.yml:kas/ci.yml -c \
             "bitbake qemu-helper-native:do_addto_recipe_sysroot && python3 $GITHUB_WORKSPACE/tools/boot-test.py qemuarm64 --image core-image-autoware"
+
+  acados-planners:
+    # after the default build: same runner workspace and build/, and the host has room for one build
+    needs: build-and-boot-test
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: [self-hosted, Linux, ARM64]
+    timeout-minutes: 720
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          clean: false
+
+      - name: Stop stale bitbake server
+        run: pkill -f "$GITHUB_WORKSPACE/layers/bitbake/bin/bitbake-server" || true
+
+      - name: Build core-image-autoware with the acados planners (acados-tera-renderer accepted)
+        run: kas build kas/autoware.yml:kas/ci.yml:kas/acados.yml
+
+      - name: Boot test (Autoware node and path optimizer)
+        run: |
+          kas shell kas/autoware.yml:kas/ci.yml:kas/acados.yml -c \
+            "bitbake qemu-helper-native:do_addto_recipe_sysroot && python3 $GITHUB_WORKSPACE/tools/boot-test.py qemuarm64 --image core-image-autoware --acados"

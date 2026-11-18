@@ -1,0 +1,41 @@
+From e67b3976076c699fc4291e8ba5fe15a53c7e40b1 Mon Sep 17 00:00:00 2001
+From: Ahmed Adel Wafdy <fandes99@gmail.com>
+Date: Tue, 17 Nov 2026 13:40:32 +0000
+Subject: [PATCH] fix(autoware_velodyne_monitor): depend on OpenSSL instead of
+ crypto++
+
+The package declares crypto++ but no source file includes it. The
+library links "crypto", which is OpenSSL's libcrypto, not crypto++
+(libcryptopp). On distributions without a crypto++ package the
+dependency blocks the build for nothing, and libssl-dev is not
+declared although libcrypto is linked.
+
+Replace the crypto++ dependency with libssl-dev.
+
+Upstream-Status: Pending
+Signed-off-by: Ahmed Adel Wafdy <fandes99@gmail.com>
+---
+ package.xml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/package.xml b/package.xml
+index c25b0b3..e905c27 100644
+--- a/package.xml
++++ b/package.xml
+@@ -11,12 +11,12 @@
+   <buildtool_depend>ament_cmake_auto</buildtool_depend>
+   <buildtool_depend>autoware_cmake</buildtool_depend>
+ 
+-  <depend>crypto++</depend>
+   <depend>diagnostic_msgs</depend>
+   <depend>diagnostic_updater</depend>
+   <depend>fmt</depend>
+   <depend>libboost-dev</depend>
+   <depend>libcpprest-dev</depend>
++  <depend>libssl-dev</depend>
+   <depend>rclcpp</depend>
+   <depend>rclcpp_components</depend>
+   <depend>std_msgs</depend>
+-- 
+2.43.0
+

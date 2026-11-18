@@ -1,0 +1,113 @@
+From 4a8a6a3ea9e278515ab29e70cac1472889037239 Mon Sep 17 00:00:00 2001
+From: Ahmed Adel Wafdy <fandes99@gmail.com>
+Date: Tue, 17 Nov 2026 13:51:26 +0000
+Subject: [PATCH] acados_template: import scipy and matplotlib only where they
+ are used
+
+Importing acados_template pulls in scipy (acados_ocp, acados_ocp_solver)
+and matplotlib (plot_utils), although code generation uses neither.
+scipy is only needed to merge cost weights and to build a Hessian
+block, matplotlib only for the plot helpers. Import them in those
+functions, so the package imports and generates code without them.
+
+This lets solver code be generated in a cross-build environment where
+the build host has numpy and casadi but no scipy or matplotlib.
+
+Upstream-Status: Pending
+Signed-off-by: Ahmed Adel Wafdy <fandes99@gmail.com>
+---
+ .../acados_template/acados_template/acados_ocp.py      |  2 +-
+ .../acados_template/acados_ocp_solver.py               |  2 +-
+ .../acados_template/acados_template/plot_utils.py      | 10 ++++++++--
+ 3 files changed, 10 insertions(+), 4 deletions(-)
+
+diff --git a/interfaces/acados_template/acados_template/acados_ocp.py b/interfaces/acados_template/acados_template/acados_ocp.py
+index c5baf69..81c74c0 100644
+--- a/interfaces/acados_template/acados_template/acados_ocp.py
++++ b/interfaces/acados_template/acados_template/acados_ocp.py
+@@ -31,7 +31,6 @@
+ from typing import Optional, Union, Tuple
+ import numpy as np
+ 
+-from scipy.linalg import block_diag
+ from copy import deepcopy
+ 
+ import casadi as ca
+@@ -1924,6 +1923,7 @@ class AcadosOcp:
+ 
+         if cost_type == "NONLINEAR_LS":
+             current_W = getattr(self.cost, W_attr)
++            from scipy.linalg import block_diag
+             setattr(self.cost, W_attr, block_diag(current_W, weight))
+ 
+         elif cost_type == "CONVEX_OVER_NONLINEAR":
+diff --git a/interfaces/acados_template/acados_template/acados_ocp_solver.py b/interfaces/acados_template/acados_template/acados_ocp_solver.py
+index 3a4d7ae..e29d65b 100644
+--- a/interfaces/acados_template/acados_template/acados_ocp_solver.py
++++ b/interfaces/acados_template/acados_template/acados_ocp_solver.py
+@@ -47,7 +47,6 @@ from datetime import datetime
+ from typing import Union, Optional, List, Tuple, Sequence, Dict
+ 
+ import numpy as np
+-import scipy.linalg
+ from deprecated.sphinx import deprecated
+ from .builders import CMakeBuilder
+ from .acados_ocp import AcadosOcp
+@@ -2040,6 +2039,7 @@ class AcadosOcpSolver:
+         Q_mat = self.get_from_qp_in(stage, 'Q')
+         R_mat = self.get_from_qp_in(stage, 'R')
+         S_mat = self.get_from_qp_in(stage, 'S')
++        import scipy.linalg
+         hess_block = scipy.linalg.block_diag(R_mat, Q_mat)
+         nu = R_mat.shape[0]
+         hess_block[nu:, :nu] = S_mat.T
+diff --git a/interfaces/acados_template/acados_template/plot_utils.py b/interfaces/acados_template/acados_template/plot_utils.py
+index 55e9f94..4a44229 100644
+--- a/interfaces/acados_template/acados_template/plot_utils.py
++++ b/interfaces/acados_template/acados_template/plot_utils.py
+@@ -30,13 +30,13 @@
+ 
+ 
+ import shutil
+-import matplotlib
+-import matplotlib.pyplot as plt
+ import numpy as np
+ 
+ from typing import Optional, List
+ 
+ def latexify_plot() -> None:
++    import matplotlib
++    import matplotlib.pyplot as plt
+     text_usetex = True if shutil.which('latex') else False
+     params = {
+             'text.latex.preamble': r"\usepackage{gensymb} \usepackage{amsmath}",
+@@ -68,6 +68,8 @@ def plot_convergence(residuals: list,
+                      legend_handlelength: float = 1.0,
+                      legend_handletextpad: float = 0.4,
+                      ):
++    import matplotlib
++    import matplotlib.pyplot as plt
+     latexify_plot()
+ 
+     assert len(residuals) == len(list_labels), f"Lists of data and labels do not have the same length, got {len(residuals)} and {len(list_labels)}"
+@@ -103,6 +105,8 @@ def plot_contraction_rates(rates_list: list,
+                           labels: list,
+                           fig_filename: str = None,
+                           show_plot: bool = True):
++    import matplotlib
++    import matplotlib.pyplot as plt
+     latexify_plot()
+     plt.figure(figsize=(4.5, 3.0))
+     for rates, label in zip(rates_list, labels):
+@@ -151,6 +155,8 @@ def plot_trajectories(
+     show_plot: bool = True,
+     latexify: bool = True,
+ ):
++    import matplotlib
++    import matplotlib.pyplot as plt
+     if latexify:
+         latexify_plot()
+ 
+-- 
+2.43.0
+
