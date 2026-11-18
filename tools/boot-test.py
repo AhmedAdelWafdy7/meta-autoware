@@ -3,6 +3,7 @@
 
   ros-image-core       demo_nodes_cpp talker and demo_nodes_py listener exchange messages
   core-image-autoware  autoware_simple_pure_pursuit starts and publishes its control topic
+  --acados             also autoware_path_optimizer, whose acados solver is generated at build time
 
 Run from the repo root after the image is built:
     tools/boot-test.py qemuarm64
@@ -32,6 +33,12 @@ PURE_PURSUIT_PARAMS = (
     f"--params-file {ROS_SHARE}/autoware_vehicle_info_utils/config/vehicle_info.param.yaml "
     f"--params-file {ROS_SHARE}/autoware_simple_pure_pursuit/config/simple_pure_pursuit.param.yaml"
 )
+PATH_OPTIMIZER_PARAMS = (
+    f"--params-file {ROS_SHARE}/autoware_vehicle_info_utils/config/vehicle_info.param.yaml "
+    f"--params-file {ROS_SHARE}/autoware_path_optimizer/config/path_optimizer.param.yaml "
+    # ego_nearest_* thresholds, which the planning launch passes to every planner
+    f"--params-file {ROS_SHARE}/autoware_planning_config/config/scenario_planning/common/nearest_search.param.yaml"
+)
 
 
 def fail(msg):
@@ -52,12 +59,15 @@ def find_qemuboot_conf(machine, image):
 
 def wait_for(child, condition, timeout):
     """Poll a shell condition on the guest; returns once it holds or times out."""
-    # the "" keeps the marker out of the echoed command
+    # Bounded by the guest clock, not an iteration count: under QEMU one `ros2 node list`
+    # takes seconds, so counting iterations overran the expect timeout when the condition
+    # never held. The "" keeps the marker out of the echoed command
     child.sendline(
-        f"i=0; while ! {condition} && [ $i -lt {timeout} ]; "
-        'do sleep 1; i=$((i+1)); done; echo WAIT_""DONE'
+        f"end=$(($(date +%s)+{timeout})); while ! {condition} && [ $(date +%s) -lt $end ]; "
+        'do sleep 1; done; echo WAIT_""DONE'
     )
-    child.expect(r"WAIT_DONE", timeout=timeout + ROS_TIMEOUT)
+    # margin for the last check, which may start just before the deadline
+    child.expect(r"WAIT_DONE", timeout=timeout + 2 * ROS_TIMEOUT)
     child.expect(PROMPT, timeout=ROS_TIMEOUT)
 
 
@@ -94,23 +104,37 @@ def check_talker_listener(child):
     return None
 
 
-def check_autoware_node(child):
+def check_node(child, command, tag, node, topic):
+    """Start a node, check it registers and advertises topic."""
     run(child, ". /opt/ros/jazzy/setup.sh")
-    pid = start_background(
-        child,
-        f". /opt/ros/jazzy/setup.sh; ros2 run autoware_simple_pure_pursuit "
-        f"autoware_simple_pure_pursuit_exe --ros-args {PURE_PURSUIT_PARAMS}",
-        "PURSUIT",
-    )
-    wait_for(child, "ros2 node list 2>/dev/null | grep -q '^/simple_pure_pursuit$'", WAIT_TIMEOUT)
+    pid = start_background(child, f". /opt/ros/jazzy/setup.sh; {command}", tag)
+    wait_for(child, f"ros2 node list 2>/dev/null | grep -q '^{node}$'", WAIT_TIMEOUT)
     nodes = run(child, "ros2 node list")
     topics = run(child, "ros2 topic list")
-    log = run(child, f"kill {pid}; cat /tmp/PURSUIT.log")
-    if "/simple_pure_pursuit" not in nodes:
-        return f"node /simple_pure_pursuit not running. Node log:\n{log}"
-    if "/simple_pure_pursuit/output/control_command" not in topics:
-        return f"control_command topic missing. Topics:\n{topics}"
+    log = run(child, f"kill {pid}; cat /tmp/{tag}.log")
+    if node not in nodes:
+        return f"node {node} not running. Node log:\n{log}"
+    if topic not in topics:
+        return f"{topic} topic missing. Topics:\n{topics}"
     return None
+
+
+def check_autoware_node(child):
+    return check_node(
+        child,
+        f"ros2 run autoware_simple_pure_pursuit autoware_simple_pure_pursuit_exe "
+        f"--ros-args {PURE_PURSUIT_PARAMS}",
+        "PURSUIT", "/simple_pure_pursuit", "/simple_pure_pursuit/output/control_command",
+    )
+
+
+def check_path_optimizer(child):
+    # loads the acados solver code generated at build time (kas/acados.yml)
+    return check_node(
+        child,
+        f"ros2 run autoware_path_optimizer path_optimizer_node --ros-args {PATH_OPTIMIZER_PARAMS}",
+        "POPT", "/path_optimizer", "/path_optimizer/output/path",
+    )
 
 
 CHECKS = {
@@ -123,7 +147,11 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("machine", help="e.g. qemuarm64, qemux86-64")
     parser.add_argument("--image", default="ros-image-core", choices=sorted(CHECKS))
+    parser.add_argument("--acados", action="store_true",
+                        help="also start the path optimizer (image built with kas/acados.yml)")
     args = parser.parse_args()
+    if args.acados and args.image != "core-image-autoware":
+        parser.error("--acados needs --image core-image-autoware")
 
     if not RUNQEMU.exists():
         fail(f"runqemu not found at {RUNQEMU}; run kas first")
@@ -149,6 +177,8 @@ def main():
             child.expect(PROMPT, timeout=LOGIN_TIMEOUT)
 
         error = check(child)
+        if not error and args.acados:
+            error = check_path_optimizer(child)
 
         child.sendline("poweroff -f")
         child.expect(pexpect.EOF, timeout=BOOT_TIMEOUT)
