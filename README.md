@@ -45,6 +45,14 @@ kas build kas/raspberrypi5.yml                     # Autoware image for the Pi 5
 kas build kas/raspberrypi5.yml:kas/demo.yml        # demo image for the Pi 5, meta-autoware-apps
 ```
 
+The path optimizer, trajectory modifier and minimum rule-based planner are left out by
+default: acados generates their solver code with `tera_renderer`, a build-time tool with no
+licence upstream. Add `kas/acados.yml` to accept its licence flag and build them:
+
+```sh
+kas build kas/autoware.yml:kas/acados.yml
+```
+
 A first build takes hours. `kas/cache.yml` keeps downloads and sstate in `yocto-cache/`, next
 to the build directory, and pulls from the public Yocto sstate mirror. `kas/autoware.yml`
 runs two tasks at `-j 2`, which fits in 16 GB. One pcl source file needs about 6 GB on its own.

@@ -121,3 +121,6 @@ RDEPENDS:${PN} += "\
     autoware-velocity-smoother \
     mussp \
 "
+
+# acados code generation needs t_renderer, which has no licence (LICENSE_FLAGS)
+RDEPENDS:${PN} += "${@bb.utils.contains('LICENSE_FLAGS_ACCEPTED', 'acados-tera-renderer', 'autoware-minimum-rule-based-planner autoware-path-optimizer autoware-trajectory-modifier', '', d)}"
