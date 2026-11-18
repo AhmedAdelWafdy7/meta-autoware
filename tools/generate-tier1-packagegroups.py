@@ -31,11 +31,26 @@ DESCRIPTIONS = {
 }
 
 
+# Gated packages ("<category>:<gate>" in package-categories.json) and the condition that
+# adds them to their group
+GATES = {
+    "acados": "bb.utils.contains('LICENSE_FLAGS_ACCEPTED', 'acados-tera-renderer', '{names}', '', d)",
+}
+GATE_COMMENTS = {
+    "acados": "# acados code generation needs t_renderer, which has no licence (LICENSE_FLAGS)",
+}
+
+
 def main():
     data = json.loads(CATEGORIES_PATH.read_text())
     by_cat = {}
+    gated = {}
     for pn, cat in data.items():
-        by_cat.setdefault(cat, []).append(pn)
+        if ":" in cat:
+            cat, gate = cat.split(":", 1)
+            gated.setdefault(cat, {}).setdefault(gate, []).append(pn)
+        else:
+            by_cat.setdefault(cat, []).append(pn)
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -55,6 +70,9 @@ ALLOW_EMPTY:${{PN}} = "1"
 RDEPENDS:${{PN}} += "\\
 {rdepends_lines}"
 """
+        for gate, gnames in sorted(gated.get(cat, {}).items()):
+            cond = GATES[gate].format(names=" ".join(sorted(gnames)))
+            content += f"\n{GATE_COMMENTS[gate]}\nRDEPENDS:${{PN}} += \"${{@{cond}}}\"\n"
         out_path = OUT_DIR / f"packagegroup-autoware-{cat}.bb"
         out_path.write_text(content)
         print(f"wrote {out_path} ({len(names)} packages)")
