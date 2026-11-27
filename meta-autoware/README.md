@@ -18,6 +18,11 @@ Use the branch of each layer that matches this layer's `LAYERSERIES_COMPAT`:
 - [meta-ros](https://github.com/ros/meta-ros): `meta-ros-common`, `meta-ros2`,
   `meta-ros2-jazzy`
 
+Optional:
+
+- [meta-tegra](https://github.com/OE4T/meta-tegra) for NVIDIA Jetson machines. See
+  [NVIDIA Jetson](#nvidia-jetson).
+
 ## Usage
 
 Add the layer and its dependencies to `bblayers.conf`, then build an image:
@@ -42,6 +47,19 @@ image from the `packagegroup-autoware-*` groups.
 
 `AUTOWARE_SYSTEM_MONITOR_PLATFORM` picks the CPU monitor in `autoware-system-monitor`. Set it
 to `raspi` or `tegra`, or leave it empty for generic arm. It does nothing on x86-64.
+
+## NVIDIA Jetson
+
+With meta-tegra in `bblayers.conf`, the layer changes two things for tegra machines:
+
+- `CONFIG_KPROBES=y` in meta-tegra's kernel, from `dynamic-layers/tegra/`. ROS
+  `tracetools` pulls in `lttng-tools`, whose ptest needs `lttng-modules`, and
+  `lttng-modules` does not build without kprobes.
+- opencv is built without CUDA (`OPENCV_CUDA_SUPPORT ?= ""` in `layer.conf`). meta-tegra's
+  CUDA opencv makes every package that uses opencv require the CUDA toolkit, and
+  `cv_bridge` fails to configure. Set `OPENCV_CUDA_SUPPORT` in `local.conf` to override it.
+
+Autoware's CUDA and TensorRT packages are not built yet.
 
 ## Notes
 
