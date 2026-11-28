@@ -27,6 +27,8 @@ On each branch, CI builds `core-image-autoware` for qemuarm64 and boots it under
 - The planning simulator demo runs on a Raspberry Pi 5 with 8 GB of RAM, leaving about 4 GB
   free. See [doc/raspberrypi5.md](doc/raspberrypi5.md). It has been tested on scarthgap
   only; the wrynose Pi 5 build is not tested yet.
+- `core-image-autoware` builds for the Jetson Orin Nano developer kit on wrynose and
+  scarthgap, with CPU packages only. It has not been booted.
 
 ## Requirements
 
@@ -43,6 +45,7 @@ kas build kas/qemuarm64.yml                        # ROS 2 base image
 kas build kas/autoware.yml                         # Autoware image
 kas build kas/raspberrypi5.yml                     # Autoware image for the Pi 5
 kas build kas/raspberrypi5.yml:kas/demo.yml        # demo image for the Pi 5, meta-autoware-apps
+kas build kas/jetson-orin-nano.yml                 # Autoware image for the Jetson Orin Nano, build-tested only
 ```
 
 The path optimizer, trajectory modifier and minimum rule-based planner are left out by

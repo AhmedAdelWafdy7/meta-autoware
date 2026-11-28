@@ -26,6 +26,10 @@ local_conf_header:
     PARALLEL_MAKE:pn-autoware-behavior-path-planner ?= "-j 1"
     # 2.0.0: its compile jobs reach ~4 GB each; at -j 2 beside the path planner it OOMed 13 GB
     PARALLEL_MAKE:pn-autoware-behavior-velocity-planner ?= "-j 1"
+    # each reaches 4-5 GB per compile job; OOMed at -j 2 on a cold Jetson build
+    PARALLEL_MAKE:pn-septentrio-gnss-driver ?= "-j 1"
+    PARALLEL_MAKE:pn-autoware-behavior-velocity-crosswalk-module ?= "-j 1"
+    PARALLEL_MAKE:pn-autoware-behavior-velocity-intersection-module ?= "-j 1"
   autoware-rm-work: |
     # keeps tmp-glibc from growing to hundreds of GB; sstate still holds every result
     INHERIT += "rm_work"

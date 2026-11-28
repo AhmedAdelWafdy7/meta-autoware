@@ -1,0 +1,28 @@
+# core-image-autoware for the Jetson Orin Nano developer kit, CPU packages only.
+# Build-tested: there is no board here to boot it on. Through kas/autoware.yml it keeps
+# qemuarm64.yml's empty root password, so it is not an image to deploy.
+# Use with: kas build kas/jetson-orin-nano.yml
+header:
+  version: 14
+  includes:
+    - kas/autoware.yml
+
+machine: "jetson-orin-nano-devkit"
+
+repos:
+  meta-tegra:
+    url: "https://github.com/OE4T/meta-tegra.git"
+    branch: "scarthgap"
+    commit: "fde6672b056fd69a355fb50f6726b0fd1d718fa2"
+    path: "layers/meta-tegra"
+
+local_conf_header:
+  jetson-orin-nano: |
+    AUTOWARE_SYSTEM_MONITOR_PLATFORM = "tegra"
+    # meta-tegra skips v4l-utils on tegra without opengl, and opencv needs it; wrynose's
+    # oe-core has opengl by default, scarthgap's does not
+    DISTRO_FEATURES:append = " opengl"
+    # the public mirror has nothing for this machine or for ROS
+    SSTATE_MIRRORS = ""
+    # stop cleanly before the shared disk fills
+    BB_DISKMON_DIRS = "STOPTASKS,${TMPDIR},10G,1K HALT,${TMPDIR},2G,512 STOPTASKS,${SSTATE_DIR},10G,1K HALT,${SSTATE_DIR},2G,512 STOPTASKS,${DL_DIR},10G,1K HALT,${DL_DIR},2G,512"
