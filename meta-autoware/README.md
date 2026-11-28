@@ -57,7 +57,8 @@ With meta-tegra in `bblayers.conf`, the layer changes two things for tegra machi
   `lttng-modules` does not build without kprobes.
 - opencv is built without CUDA (`OPENCV_CUDA_SUPPORT ?= ""` in `layer.conf`). meta-tegra's
   CUDA opencv makes every package that uses opencv require the CUDA toolkit, and
-  `cv_bridge` fails to configure. Set `OPENCV_CUDA_SUPPORT` in `local.conf` to override it.
+  `cv_bridge` fails to configure. To override it, set `OPENCV_CUDA_SUPPORT = "..."` in
+  `local.conf`; `?=` there does not win over `layer.conf`.
 
 Autoware's CUDA and TensorRT packages are not built yet.
 
