@@ -37,8 +37,8 @@ jobs:
           kas shell kas/autoware.yml:kas/ci.yml -c \
             "bitbake qemu-helper-native:do_addto_recipe_sysroot && python3 $GITHUB_WORKSPACE/tools/boot-test.py qemuarm64 --image core-image-autoware"
 
-  jetson-parse:
-    # parse only: a cold Jetson build takes about 9 hours with no public sstate
+  jetson-resolve:
+    # resolve only: a cold Jetson build takes about 9 hours with no public sstate
     needs: build-and-boot-test
     if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
     runs-on: [self-hosted, Linux, ARM64]
@@ -53,10 +53,10 @@ jobs:
       - name: Stop stale bitbake server
         run: pkill -f "$GITHUB_WORKSPACE/layers/bitbake/bin/bitbake-server" || true
 
-      - name: Parse for jetson-orin-nano-devkit and list the tegra bbappends
+      - name: Resolve core-image-autoware for jetson-orin-nano-devkit and check the kernel bbappend applies
         run: |
           kas shell kas/jetson-orin-nano.yml -c \
-            "bitbake -p && bitbake-layers show-appends | grep -A2 '^linux-noble-nvidia-tegra'"
+            "bitbake -g core-image-autoware && bitbake-layers show-appends | awk '/^linux-noble-nvidia-tegra_/{f=1; next} /^[^ ]/{f=0} f' | grep -q 'dynamic-layers/tegra/'"
 
   acados-planners:
     # after the default build: same runner workspace and build/, and the host has room for one build
